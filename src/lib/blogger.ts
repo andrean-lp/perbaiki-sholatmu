@@ -21,8 +21,18 @@ function cleanExcerpt(html: string): string {
     .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "")
     .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "")
     .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&#160;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;|&apos;/gi, "'")
+    .replace(/&[a-z0-9#]+;/gi, " ")
     .replace(/\s+/g, " ")
     .trim();
+
+  // Jika teks kosong atau terlalu pendek (misal infografis tanpa teks)
+  if (plainText.length < 5) return "";
+
   return plainText.length > 160 ? `${plainText.slice(0, 157)}...` : plainText;
 }
 

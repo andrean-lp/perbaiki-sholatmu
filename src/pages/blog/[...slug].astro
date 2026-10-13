@@ -24,7 +24,10 @@ const contentHasImage = post.content ? post.content.includes('<img') : false;
 
 <Layout
   title={`${post.title} - Perbaiki Sholatmu`}
-  description={post.excerpt}
+  description={
+    post.excerpt ||
+    `Baca artikel dan panduan seputar ${post.title} dari Qata Quran di Perbaiki Sholatmu.`
+  }
   ogImage={post.thumbnail || undefined}
   ogType="article"
 >
