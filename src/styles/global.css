@@ -1,6 +1,33 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+@theme {
+  /* Qata Quran Brand Forest Green (Derived directly from Logo) */
+  --color-emerald-50: #f0f7f3;
+  --color-emerald-100: #dceee3;
+  --color-emerald-200: #bde0cc;
+  --color-emerald-300: #88c7a2;
+  --color-emerald-400: #4da875;
+  --color-emerald-500: #1b8a53;
+  --color-emerald-600: #126b40;
+  --color-emerald-700: #0e5634;
+  --color-emerald-800: #0a472c;
+  --color-emerald-900: #083823;
+  --color-emerald-950: #042114;
+
+  /* Qata Quran Regal Gold Accent (Derived directly from Logo) */
+  --color-amber-50: #fdfaf3;
+  --color-amber-100: #f9f2de;
+  --color-amber-200: #f2e1b8;
+  --color-amber-300: #e8cc89;
+  --color-amber-400: #dcb35a;
+  --color-amber-500: #c59a3f;
+  --color-amber-600: #ad8030;
+  --color-amber-700: #8d6325;
+  --color-amber-800: #744e21;
+  --color-amber-900: #60401f;
+}
+
 /* Accessibility: Skip to content link */
 .sr-only {
   position: absolute;

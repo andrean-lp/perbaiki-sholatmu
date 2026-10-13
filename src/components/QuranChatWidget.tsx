@@ -124,7 +124,7 @@ export default function QuranChatWidget({ initialOpen = false }: { initialOpen?:
           <button
             type="button"
             onClick={() => setIsOpen(true)}
-            className="hidden sm:flex items-center gap-2 bg-white text-gray-800 text-xs font-semibold py-2 px-3.5 rounded-full border border-gray-200 shadow-lg hover:border-black transition-all cursor-pointer"
+            className="hidden sm:flex items-center gap-2 bg-white text-gray-800 text-xs font-semibold py-2 px-3.5 rounded-full border border-gray-200 shadow-lg hover:border-emerald-600 hover:text-emerald-800 transition-all cursor-pointer"
           >
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             <span>Tanya Al-Quran</span>
@@ -135,7 +135,7 @@ export default function QuranChatWidget({ initialOpen = false }: { initialOpen?:
           type="button"
           onClick={() => setIsOpen(!isOpen)}
           aria-label={isOpen ? 'Tutup Tanya Al-Quran' : 'Buka Tanya Al-Quran'}
-          className="w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-black text-white hover:bg-gray-800 flex items-center justify-center shadow-2xl transition-all duration-200 active:scale-95 cursor-pointer relative"
+          className="w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-emerald-800 text-white hover:bg-emerald-900 flex items-center justify-center shadow-2xl transition-all duration-200 active:scale-95 cursor-pointer relative"
         >
           {isOpen ? (
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -147,7 +147,7 @@ export default function QuranChatWidget({ initialOpen = false }: { initialOpen?:
             </svg>
           )}
           {!isOpen && (
-            <span className="absolute top-0 right-0 w-3.5 h-3.5 bg-emerald-500 border-2 border-white rounded-full" />
+            <span className="absolute top-0 right-0 w-3.5 h-3.5 bg-amber-400 border-2 border-white rounded-full" />
           )}
         </button>
       </div>
@@ -158,7 +158,7 @@ export default function QuranChatWidget({ initialOpen = false }: { initialOpen?:
           {/* Header */}
           <div className="p-3.5 sm:p-4 bg-white border-b border-gray-100 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-black text-white flex items-center justify-center font-bold text-sm shadow-xs">
+              <div className="w-9 h-9 rounded-xl bg-emerald-800 text-white flex items-center justify-center font-bold text-sm shadow-xs">
                 <svg className="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                 </svg>
@@ -231,7 +231,7 @@ export default function QuranChatWidget({ initialOpen = false }: { initialOpen?:
               <div key={msg.id} className="space-y-1">
                 {msg.sender === 'user' ? (
                   <div className="flex justify-end">
-                    <div className="bg-black text-white rounded-2xl rounded-tr-xs px-3.5 py-2 max-w-[85%] text-xs shadow-xs leading-relaxed">
+                    <div className="bg-emerald-800 text-white rounded-2xl rounded-tr-xs px-3.5 py-2 max-w-[85%] text-xs shadow-xs leading-relaxed">
                       {msg.text}
                     </div>
                   </div>
@@ -346,12 +346,12 @@ export default function QuranChatWidget({ initialOpen = false }: { initialOpen?:
               onChange={(e) => setInput(e.target.value)}
               placeholder="Tanya ayat, tafsir, sholat, atau doa..."
               disabled={isLoading}
-              className="flex-1 px-3.5 py-2 text-xs bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black placeholder-gray-400 disabled:opacity-50"
+              className="flex-1 px-3.5 py-2 text-xs bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-700 placeholder-gray-400 disabled:opacity-50"
             />
             <button
               type="submit"
               disabled={!input.trim() || isLoading}
-              className="w-8.5 h-8.5 rounded-xl bg-black text-white hover:bg-gray-800 flex items-center justify-center transition disabled:opacity-30 cursor-pointer shrink-0"
+              className="w-8.5 h-8.5 rounded-xl bg-emerald-800 text-white hover:bg-emerald-900 flex items-center justify-center transition disabled:opacity-30 cursor-pointer shrink-0"
               title="Kirim pertanyaan"
             >
               <svg className="w-4 h-4 ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

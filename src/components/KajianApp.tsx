@@ -340,7 +340,7 @@ Sumber: Perbaiki Sholatmu via EQuran.id`;
               setSelectedCity("");
               setFilterType("all");
             }}
-            className="px-4 py-2 bg-black text-white text-xs font-semibold rounded-xl hover:bg-gray-800 transition-colors cursor-pointer"
+            className="px-4 py-2 bg-emerald-800 text-white text-xs font-semibold rounded-xl hover:bg-emerald-900 transition-colors shadow-sm cursor-pointer"
           >
             Reset Filter
           </button>

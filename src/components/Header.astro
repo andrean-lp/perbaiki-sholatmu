@@ -12,10 +12,17 @@ import { Icon } from "astro-icon/components";
   >
     <a
       href="/"
-      class="text-2xl font-bold text-gray-900 hover:text-gray-700 transition-colors"
+      class="text-xl sm:text-2xl font-bold text-gray-900 hover:text-emerald-800 transition-colors flex items-center gap-2.5"
       aria-label="Perbaiki Sholatmu - Beranda"
     >
-      Perbaiki Sholatmu
+      <img
+        src="/uploads/qata-quran-icon.png"
+        alt="Logo Qata Quran"
+        class="w-7 h-7 sm:w-8 sm:h-8 object-contain"
+        width="32"
+        height="32"
+      />
+      <span>Perbaiki Sholatmu</span>
     </a>
     
     <!-- Mobile menu button -->
@@ -35,7 +42,7 @@ import { Icon } from "astro-icon/components";
       <li>
         <a
           href="/jadwal-sholat"
-          class="text-gray-600 hover:text-gray-900 transition-colors"
+          class="text-gray-600 hover:text-emerald-800 transition-colors"
           aria-current={Astro.url.pathname === '/jadwal-sholat' ? 'page' : undefined}
         >
           Jadwal Sholat
@@ -44,7 +51,7 @@ import { Icon } from "astro-icon/components";
       <li>
         <a
           href="/quran"
-          class="text-gray-600 hover:text-gray-900 transition-colors"
+          class="text-gray-600 hover:text-emerald-800 transition-colors"
           aria-current={Astro.url.pathname.startsWith('/quran') ? 'page' : undefined}
         >
           Al-Qur'an
@@ -53,7 +60,7 @@ import { Icon } from "astro-icon/components";
       <li>
         <a
           href="/tentang"
-          class="text-gray-600 hover:text-gray-900 transition-colors"
+          class="text-gray-600 hover:text-emerald-800 transition-colors"
           aria-current={Astro.url.pathname === '/tentang' ? 'page' : undefined}
         >
           Tentang
@@ -62,7 +69,7 @@ import { Icon } from "astro-icon/components";
       <li>
         <a
           href="/artikel"
-          class="text-gray-600 hover:text-gray-900 transition-colors"
+          class="text-gray-600 hover:text-emerald-800 transition-colors"
           aria-current={Astro.url.pathname.startsWith('/artikel') ? 'page' : undefined}
         >
           Artikel
@@ -73,7 +80,7 @@ import { Icon } from "astro-icon/components";
       <li class="relative group" id="desktop-dropdown-container">
         <button
           type="button"
-          class="flex items-center gap-1.5 text-gray-600 hover:text-gray-900 transition-colors py-2 focus:outline-none cursor-pointer"
+          class="flex items-center gap-1.5 text-gray-600 hover:text-emerald-800 transition-colors py-2 focus:outline-none cursor-pointer"
           id="desktop-dropdown-button"
           aria-expanded="false"
           aria-haspopup="true"
@@ -95,14 +102,14 @@ import { Icon } from "astro-icon/components";
           <div class="bg-white rounded-xl shadow-lg border border-gray-100 py-2 ring-1 ring-black/5">
             <a
               href="/doa"
-              class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-black transition-colors"
+              class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-emerald-50 hover:text-emerald-800 transition-colors"
               role="menuitem"
             >
               Kumpulan Doa Harian
             </a>
             <a
               href="/kajian"
-              class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-black transition-colors"
+              class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-emerald-50 hover:text-emerald-800 transition-colors"
               role="menuitem"
             >
               Info Kajian Sunnah
@@ -124,7 +131,7 @@ import { Icon } from "astro-icon/components";
       <li>
         <a
           href="/jadwal-sholat"
-          class="block px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors"
+          class="block px-4 py-3 text-gray-600 hover:bg-emerald-50/50 hover:text-emerald-800 transition-colors"
           role="menuitem"
           aria-current={Astro.url.pathname === '/jadwal-sholat' ? 'page' : undefined}
         >
@@ -134,7 +141,7 @@ import { Icon } from "astro-icon/components";
       <li>
         <a
           href="/quran"
-          class="block px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors"
+          class="block px-4 py-3 text-gray-600 hover:bg-emerald-50/50 hover:text-emerald-800 transition-colors"
           role="menuitem"
           aria-current={Astro.url.pathname.startsWith('/quran') ? 'page' : undefined}
         >
@@ -144,7 +151,7 @@ import { Icon } from "astro-icon/components";
       <li>
         <a
           href="/tentang"
-          class="block px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors"
+          class="block px-4 py-3 text-gray-600 hover:bg-emerald-50/50 hover:text-emerald-800 transition-colors"
           role="menuitem"
           aria-current={Astro.url.pathname === '/tentang' ? 'page' : undefined}
         >
@@ -154,7 +161,7 @@ import { Icon } from "astro-icon/components";
       <li>
         <a
           href="/artikel"
-          class="block px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors"
+          class="block px-4 py-3 text-gray-600 hover:bg-emerald-50/50 hover:text-emerald-800 transition-colors"
           role="menuitem"
           aria-current={Astro.url.pathname.startsWith('/artikel') ? 'page' : undefined}
         >
@@ -167,7 +174,7 @@ import { Icon } from "astro-icon/components";
         <button
           type="button"
           id="mobile-dropdown-button"
-          class="w-full flex items-center justify-between px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors"
+          class="w-full flex items-center justify-between px-4 py-3 text-gray-600 hover:bg-emerald-50/50 hover:text-emerald-800 transition-colors"
           aria-expanded="false"
         >
           <span>Lainnya</span>
