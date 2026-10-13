@@ -1,0 +1,74 @@
+---
+// Lightweight zero-JS static launcher that lazily imports React on interaction
+---
+
+<div id="quran-chat-container" class="fixed bottom-6 right-6 z-50 flex items-center gap-3">
+  <!-- Helper Pill Prompt on Desktop -->
+  <button
+    type="button"
+    id="quran-chat-pill"
+    class="hidden sm:flex items-center gap-2 bg-white text-gray-800 text-xs font-semibold py-2 px-3.5 rounded-full border border-gray-200 shadow-lg hover:border-black transition-all cursor-pointer"
+  >
+    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+    <span>Tanya Al-Quran</span>
+  </button>
+
+  <!-- Round Floating Button -->
+  <button
+    type="button"
+    id="quran-chat-toggle"
+    aria-label="Buka Tanya Al-Quran"
+    class="w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-black text-white hover:bg-gray-800 flex items-center justify-center shadow-2xl transition-all duration-200 active:scale-95 cursor-pointer relative"
+  >
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+    </svg>
+    <span class="absolute top-0 right-0 w-3.5 h-3.5 bg-emerald-500 border-2 border-white rounded-full"></span>
+  </button>
+</div>
+
+<div id="quran-chat-mount"></div>
+
+<script>
+  let chatLoaded = false;
+
+  async function loadAndOpenChat() {
+    if (chatLoaded) return;
+    chatLoaded = true;
+
+    const container = document.getElementById('quran-chat-container');
+    if (container) {
+      container.style.display = 'none';
+    }
+
+    try {
+      const [{ createRoot }, React, { default: QuranChatWidget }] = await Promise.all([
+        import('react-dom/client'),
+        import('react'),
+        import('./QuranChatWidget.tsx'),
+      ]);
+
+      const mount = document.getElementById('quran-chat-mount');
+      if (mount) {
+        const root = createRoot(mount);
+        root.render(React.createElement(QuranChatWidget, { initialOpen: true }));
+      }
+    } catch (err) {
+      console.error('Gagal memuat Quran Chat Widget:', err);
+      if (container) container.style.display = 'flex';
+      chatLoaded = false;
+    }
+  }
+
+  document.getElementById('quran-chat-toggle')?.addEventListener('click', loadAndOpenChat);
+  document.getElementById('quran-chat-pill')?.addEventListener('click', loadAndOpenChat);
+
+  // Preload chunks when idle (after LCP is already rendered)
+  if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+    (window as any).requestIdleCallback(() => {
+      setTimeout(() => {
+        import('./QuranChatWidget.tsx').catch(() => {});
+      }, 3000);
+    });
+  }
+</script>

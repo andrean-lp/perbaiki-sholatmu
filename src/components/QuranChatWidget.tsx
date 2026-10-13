@@ -39,8 +39,8 @@ const QUICK_PROMPTS = [
   'Hukum bersikap sombong',
 ];
 
-export default function QuranChatWidget() {
-  const [isOpen, setIsOpen] = useState(false);
+export default function QuranChatWidget({ initialOpen = false }: { initialOpen?: boolean } = {}) {
+  const [isOpen, setIsOpen] = useState(initialOpen);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);

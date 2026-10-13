@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import { SITE } from '../config/site.mjs';
 import type { SEOProps } from '../types/seo';
-import QuranChatWidget from '../components/QuranChatWidget.tsx';
+import QuranChatWrapper from '../components/QuranChatWrapper.astro';
 
 interface Props extends SEOProps {
   lang?: string;
@@ -56,13 +56,6 @@ const robotsContent = [
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		
-		<!-- Resource Hints -->
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-		
-		<!-- Preload Critical Resources -->
-		<link rel="preload" href="/favicon.svg" as="image" type="image/svg+xml" />
-		
 		<!-- Primary Meta Tags -->
 		<title>{title}</title>
 		<meta name="title" content={title} />
@@ -100,6 +93,6 @@ const robotsContent = [
 			Skip to main content
 		</a>
 		<slot />
-		<QuranChatWidget client:idle />
+		<QuranChatWrapper />
 	</body>
 </html>
