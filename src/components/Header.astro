@@ -40,6 +40,62 @@ import { Icon } from "astro-icon/components";
 
     <!-- Desktop navigation -->
     <ul class="hidden md:flex items-center gap-6" role="list">
+      <!-- Dropdown Perbaiki Sholat -->
+      <li class="relative group" id="desktop-perbaiki-container">
+        <button
+          type="button"
+          class="flex items-center gap-1.5 text-gray-600 hover:text-emerald-800 transition-colors py-2 focus:outline-none cursor-pointer"
+          id="desktop-perbaiki-button"
+          aria-expanded="false"
+          aria-haspopup="true"
+        >
+          <span>Perbaiki Sholat</span>
+          <Icon
+            name="tabler:chevron-down"
+            class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180"
+            id="desktop-perbaiki-chevron"
+            aria-hidden="true"
+          />
+        </button>
+
+        <div
+          id="desktop-perbaiki-menu"
+          class="hidden group-hover:block group-focus-within:block absolute left-0 top-full pt-2 w-64 z-50"
+          role="menu"
+        >
+          <div data-ui class="bg-white rounded-xl shadow-lg border border-gray-100 py-2 ring-1 ring-black/5">
+            <a
+              href="#"
+              class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-emerald-50 hover:text-emerald-800 transition-colors"
+              role="menuitem"
+            >
+              Panduan Sholat Wajib & Sunnah
+            </a>
+            <a
+              href="#"
+              class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-emerald-50 hover:text-emerald-800 transition-colors"
+              role="menuitem"
+            >
+              Tata Cara Wudhu Sesuai Sunnah
+            </a>
+            <a
+              href="#"
+              class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-emerald-50 hover:text-emerald-800 transition-colors"
+              role="menuitem"
+            >
+              Bacaan & Dzikir Sholat Shahih
+            </a>
+            <a
+              href="#"
+              class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-emerald-50 hover:text-emerald-800 transition-colors"
+              role="menuitem"
+            >
+              Sujud Sahwi & Syarat Sah Sholat
+            </a>
+          </div>
+        </div>
+      </li>
+
       <li>
         <a
           href="/jadwal-sholat"
@@ -129,6 +185,53 @@ import { Icon } from "astro-icon/components";
     aria-labelledby="mobile-menu-button"
   >
     <ul class="flex flex-col py-4" role="list">
+      <!-- Mobile Dropdown Perbaiki Sholat -->
+      <li>
+        <button
+          type="button"
+          id="mobile-perbaiki-button"
+          class="w-full flex items-center justify-between px-4 py-3 text-gray-600 hover:bg-emerald-50/50 hover:text-emerald-800 transition-colors cursor-pointer"
+          aria-expanded="false"
+        >
+          <span>Perbaiki Sholat</span>
+          <Icon
+            name="tabler:chevron-down"
+            class="w-4 h-4 transition-transform duration-200"
+            id="mobile-perbaiki-chevron"
+          />
+        </button>
+        <div id="mobile-perbaiki-menu" class="hidden pl-6 py-1 bg-gray-50/80">
+          <a
+            href="#"
+            class="block py-2 text-sm text-gray-600 hover:text-gray-900 transition-colors"
+            role="menuitem"
+          >
+            Panduan Sholat Wajib & Sunnah
+          </a>
+          <a
+            href="#"
+            class="block py-2 text-sm text-gray-600 hover:text-gray-900 transition-colors"
+            role="menuitem"
+          >
+            Tata Cara Wudhu Sesuai Sunnah
+          </a>
+          <a
+            href="#"
+            class="block py-2 text-sm text-gray-600 hover:text-gray-900 transition-colors"
+            role="menuitem"
+          >
+            Bacaan & Dzikir Sholat Shahih
+          </a>
+          <a
+            href="#"
+            class="block py-2 text-sm text-gray-600 hover:text-gray-900 transition-colors"
+            role="menuitem"
+          >
+            Sujud Sahwi & Syarat Sah Sholat
+          </a>
+        </div>
+      </li>
+
       <li>
         <a
           href="/jadwal-sholat"
@@ -236,6 +339,46 @@ import { Icon } from "astro-icon/components";
         menuButton.setAttribute('aria-expanded', 'false');
         mobileMenu.classList.add('hidden');
         menuButton.focus();
+      }
+    });
+  }
+
+  // Mobile 'Perbaiki Sholat' dropdown toggle
+  const mobilePerbaikiBtn = document.getElementById('mobile-perbaiki-button');
+  const mobilePerbaikiMenu = document.getElementById('mobile-perbaiki-menu');
+  const mobilePerbaikiChevron = document.getElementById('mobile-perbaiki-chevron');
+
+  if (mobilePerbaikiBtn && mobilePerbaikiMenu && mobilePerbaikiChevron) {
+    mobilePerbaikiBtn.addEventListener('click', () => {
+      const isExpanded = mobilePerbaikiBtn.getAttribute('aria-expanded') === 'true';
+      mobilePerbaikiBtn.setAttribute('aria-expanded', String(!isExpanded));
+      mobilePerbaikiMenu.classList.toggle('hidden');
+      mobilePerbaikiChevron.classList.toggle('rotate-180');
+    });
+  }
+
+  // Desktop 'Perbaiki Sholat' dropdown click toggle (support touch & keyboard)
+  const desktopPerbaikiBtn = document.getElementById('desktop-perbaiki-button');
+  const desktopPerbaikiMenu = document.getElementById('desktop-perbaiki-menu');
+  const desktopPerbaikiContainer = document.getElementById('desktop-perbaiki-container');
+
+  if (desktopPerbaikiBtn && desktopPerbaikiMenu && desktopPerbaikiContainer) {
+    desktopPerbaikiBtn.addEventListener('click', () => {
+      const isHidden = desktopPerbaikiMenu.classList.contains('hidden');
+      if (isHidden) {
+        desktopPerbaikiMenu.classList.remove('hidden');
+        desktopPerbaikiBtn.setAttribute('aria-expanded', 'true');
+      } else {
+        desktopPerbaikiMenu.classList.add('hidden');
+        desktopPerbaikiBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Click outside to close desktop dropdown
+    document.addEventListener('click', (e) => {
+      if (!desktopPerbaikiContainer.contains(e.target as Node)) {
+        desktopPerbaikiMenu.classList.add('hidden');
+        desktopPerbaikiBtn.setAttribute('aria-expanded', 'false');
       }
     });
   }
