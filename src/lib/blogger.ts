@@ -49,6 +49,37 @@ function extractImage(entry: any): string | null {
   return null;
 }
 
+function formatPostContent(html: string): string {
+  if (!html) return "";
+
+  // Ensure all anchor tags wrapping images or pointing to images open in a new tab
+  return html.replace(/<a\b([^>]*)>/gi, (match, attrs) => {
+    const isImageLink =
+      attrs.toLowerCase().includes("imageanchor") ||
+      attrs.toLowerCase().includes("blogger.googleusercontent.com") ||
+      /\.(png|jpe?g|webp|gif|svg)/i.test(attrs);
+
+    if (isImageLink) {
+      let updated = attrs;
+      if (!/target\s*=/i.test(updated)) {
+        updated += ' target="_blank"';
+      } else {
+        updated = updated.replace(/target\s*=\s*["'][^"']*["']/i, 'target="_blank"');
+      }
+
+      if (!/rel\s*=/i.test(updated)) {
+        updated += ' rel="noopener noreferrer"';
+      } else if (!/noopener/i.test(updated)) {
+        updated = updated.replace(/rel\s*=\s*["']([^"']*)["']/i, 'rel="$1 noopener noreferrer"');
+      }
+
+      return `<a${updated}>`;
+    }
+
+    return match;
+  });
+}
+
 export async function fetchBloggerPosts(): Promise<BloggerPost[]> {
   if (cachedPosts && cachedPosts.length > 0) {
     return cachedPosts;
@@ -85,7 +116,6 @@ export async function fetchBloggerPosts(): Promise<BloggerPost[]> {
       const slugMatch = altLink.match(/\/([^/]+)\.html$/);
       let slug = slugMatch ? slugMatch[1] : "";
       if (!slug) {
-        // Fallback slugify title
         slug = cleanTitle
           .toLowerCase()
           .replace(/[^\w\s-]/g, "")
@@ -102,7 +132,7 @@ export async function fetchBloggerPosts(): Promise<BloggerPost[]> {
         id: entry.id?.$t || slug,
         title: cleanTitle,
         slug,
-        content: rawContent,
+        content: formatPostContent(rawContent),
         excerpt,
         published,
         updated,
