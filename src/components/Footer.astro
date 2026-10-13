@@ -8,14 +8,51 @@ import { Icon } from "astro-icon/components";
   role="contentinfo"
 >
   <div class="max-w-6xl mx-auto">
-    <div class="grid md:grid-cols-3 gap-8 mb-8">
-      <div>
-        <h2 class="text-lg font-semibold text-gray-900 mb-4">Perbaiki Sholatmu</h2>
-        <p class="text-gray-600">
-          Panduan dan inspirasi untuk memperbaiki kualitas dan kekhusyukan sholat kita sehari-hari.
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
+      <!-- Info Brand & Statistik mirip equran.id -->
+      <div class="md:col-span-6 lg:col-span-5 space-y-4">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-50/80 border border-emerald-100 flex items-center justify-center p-1.5 shadow-xs shrink-0">
+            <img
+              src="/uploads/qata-quran-icon.png"
+              alt="Logo Qata Quran"
+              class="w-9 h-9 object-contain"
+              width="36"
+              height="36"
+              loading="lazy"
+            />
+          </div>
+          <div>
+            <a
+              href="/"
+              class="text-xl font-bold text-gray-900 hover:text-emerald-700 transition-colors tracking-tight flex items-center gap-1.5"
+            >
+              Qata Quran
+            </a>
+            <p class="text-xs text-emerald-700 font-medium">Al-Qur'an & Panduan Sholat Digital</p>
+          </div>
+        </div>
+        <p class="text-sm text-gray-600 leading-relaxed max-w-md">
+          Platform Al-Qur'an digital dan panduan ibadah terlengkap untuk memperbaiki kualitas dan kekhusyukan sholat, dilengkapi terjemahan bahasa Indonesia, audio murottal 6 qari internasional, tafsir Kemenag, jadwal sholat presisi, dan kumpulan doa harian.
         </p>
+        <div class="flex items-center gap-6 pt-2">
+          <div>
+            <div class="text-2xl font-bold text-gray-900 tracking-tight">114</div>
+            <div class="text-xs text-gray-500 font-medium">Surat</div>
+          </div>
+          <div class="h-8 w-px bg-gray-200" aria-hidden="true"></div>
+          <div>
+            <div class="text-2xl font-bold text-gray-900 tracking-tight">6.236</div>
+            <div class="text-xs text-gray-500 font-medium">Ayat</div>
+          </div>
+          <div class="h-8 w-px bg-gray-200" aria-hidden="true"></div>
+          <div>
+            <div class="text-2xl font-bold text-gray-900 tracking-tight">6</div>
+            <div class="text-xs text-gray-500 font-medium">Qari</div>
+          </div>
+        </div>
       </div>
-      <div>
+      <div class="md:col-span-3 lg:col-span-4 lg:pl-6">
         <h2 class="text-lg font-semibold text-gray-900 mb-4">Layanan & Menu</h2>
         <ul class="space-y-2">
           <li>
@@ -62,7 +99,7 @@ import { Icon } from "astro-icon/components";
           </li>
         </ul>
       </div>
-      <div>
+      <div class="md:col-span-3 lg:col-span-3">
         <h2 class="text-lg font-semibold text-gray-900 mb-4">Media Sosial</h2>
         <ul class="space-y-2">
           <li>
