@@ -6,11 +6,11 @@ Situs ini menyajikan panduan praktis ibadah sholat, tips kekhusyukan, bacaan sho
 
 ## Dokumen Utama
 
-- [Beranda](https://perbaiki-sholatmu.andrean.web.id/): Halaman utama dan ikhtisar fitur situs.
-- [Artikel & Panduan](https://perbaiki-sholatmu.andrean.web.id/blog): Direktori artikel seputar perbaikan kualitas sholat.
-- [Tentang Kami](https://perbaiki-sholatmu.andrean.web.id/about): Informasi inisiatif dan tujuan proyek Perbaiki Sholatmu.
-- [Kontak](https://perbaiki-sholatmu.andrean.web.id/contact): Halaman pertanyaan dan saran.
+- [Beranda](https://perbaiki-sholatmu.pages.dev/): Halaman utama dan ikhtisar fitur situs.
+- [Artikel & Panduan](https://perbaiki-sholatmu.pages.dev/blog): Direktori artikel seputar perbaikan kualitas sholat.
+- [Tentang](https://perbaiki-sholatmu.pages.dev/tentang): Informasi inisiatif dan tujuan proyek Perbaiki Sholatmu.
+- [Kontak](https://perbaiki-sholatmu.pages.dev/contact): Halaman pertanyaan dan saran.
 
 ## Artikel Pilihan
 
-- [Panduan Menjaga Kekhusyukan dalam Sholat](https://perbaiki-sholatmu.andrean.web.id/blog/panduan-sholat-khusyuk): Langkah-langkah praktis dan persiapan hati agar sholat lebih tenang dan khusyuk.
+- [Panduan Menjaga Kekhusyukan dalam Sholat](https://perbaiki-sholatmu.pages.dev/blog/panduan-sholat-khusyuk): Langkah-langkah praktis dan persiapan hati agar sholat lebih tenang dan khusyuk.

@@ -118,7 +118,7 @@ A minimal, modern starter template for building fast websites with Astro. This t
 
 ## 📝 Decap CMS Integration
 
-CMS dashboard tersedia di rute `/studio/` (misalnya: `http://localhost:4321/studio/` atau `https://perbaiki-sholatmu.andrean.web.id/studio/`). Halaman ini diproteksi dengan header deindex (`noindex, nofollow`) dan diblokir dari `robots.txt` agar tidak terindeks oleh Google.
+CMS dashboard tersedia di rute `/studio/` (misalnya: `http://localhost:4321/studio/` atau `https://perbaiki-sholatmu.pages.dev/studio/`). Halaman ini diproteksi dengan header deindex (`noindex, nofollow`) dan diblokir dari `robots.txt` agar tidak terindeks oleh Google.
 
 ### Cara Menggunakan di Mode Lokal:
 1. Jalankan server lokal Decap CMS di satu terminal:

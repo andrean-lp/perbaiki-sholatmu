@@ -17,7 +17,7 @@ media_folder: "public/uploads"
 public_folder: "/uploads"
 
 # Tampilan di dashboard CMS
-site_url: "https://perbaiki-sholatmu.andrean.web.id"
+site_url: "https://perbaiki-sholatmu.pages.dev"
 display_url: "https://github.com/andrean-lp/perbaiki-sholatmu"
 
 collections:

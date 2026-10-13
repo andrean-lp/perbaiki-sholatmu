@@ -78,7 +78,7 @@ export default function DoaApp({ initialDoaList }: DoaAppProps) {
 
   const handleCopy = (item: DoaItem, e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
-    const textToCopy = `${item.nama}\n\n${item.ar}\n\nArtinya:\n"${item.idn}"\n\n(${item.tentang || 'Kumpulan Doa Harian'})\nSumber: perbaiki-sholatmu.andrean.web.id/doa`;
+    const textToCopy = `${item.nama}\n\n${item.ar}\n\nArtinya:\n"${item.idn}"\n\n(${item.tentang || 'Kumpulan Doa Harian'})\nSumber: perbaiki-sholatmu.pages.dev/doa`;
     navigator.clipboard.writeText(textToCopy).then(() => {
       setCopiedId(item.id);
       setTimeout(() => setCopiedId(null), 2000);

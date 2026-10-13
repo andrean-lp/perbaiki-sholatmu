@@ -2,23 +2,23 @@
   "specVersion": "1.0",
   "host": {
     "displayName": "Perbaiki Sholatmu",
-    "identifier": "did:web:perbaiki-sholatmu.andrean.web.id",
-    "url": "https://perbaiki-sholatmu.andrean.web.id"
+    "identifier": "did:web:perbaiki-sholatmu.pages.dev",
+    "url": "https://perbaiki-sholatmu.pages.dev"
   },
   "entries": [
     {
-      "identifier": "urn:air:perbaiki-sholatmu.andrean.web.id:docs:llms-txt",
+      "identifier": "urn:air:perbaiki-sholatmu.pages.dev:docs:llms-txt",
       "displayName": "Panduan dan Dokumentasi Perbaiki Sholatmu (llms.txt)",
       "description": "Indeks halaman dan panduan ibadah sholat dalam format Markdown terstruktur untuk agen AI.",
       "type": "text/markdown",
-      "url": "https://perbaiki-sholatmu.andrean.web.id/llms.txt"
+      "url": "https://perbaiki-sholatmu.pages.dev/llms.txt"
     },
     {
-      "identifier": "urn:air:perbaiki-sholatmu.andrean.web.id:docs:sitemap",
+      "identifier": "urn:air:perbaiki-sholatmu.pages.dev:docs:sitemap",
       "displayName": "Sitemap XML",
       "description": "Peta situs XML resmi untuk indeks pencarian dan perayapan agen.",
       "type": "application/xml",
-      "url": "https://perbaiki-sholatmu.andrean.web.id/sitemap-index.xml"
+      "url": "https://perbaiki-sholatmu.pages.dev/sitemap-index.xml"
     }
   ]
 }

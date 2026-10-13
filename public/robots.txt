@@ -3,4 +3,4 @@ Disallow: /studio/
 Disallow: /admin/
 Allow: /
 
-Sitemap: https://perbaiki-sholatmu.andrean.web.id/sitemap-index.xml
+Sitemap: https://perbaiki-sholatmu.pages.dev/sitemap-index.xml
