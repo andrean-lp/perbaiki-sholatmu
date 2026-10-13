@@ -17,6 +17,9 @@ interface Props {
 }
 
 const { post } = Astro.props;
+
+// Check if the HTML content already contains an <img> tag to avoid duplicate & cropped headers
+const contentHasImage = post.content ? post.content.includes('<img') : false;
 ---
 
 <Layout
@@ -64,19 +67,20 @@ const { post } = Astro.props;
         </div>
       </header>
 
-      {post.thumbnail && (
-        <div class="mb-10 rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 shadow-sm max-h-[500px]">
+      {/* Hanya tampilkan thumbnail jika isi artikel belum memiliki gambar apa pun */}
+      {!contentHasImage && post.thumbnail && (
+        <div class="mb-10 rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 shadow-sm">
           <img
             src={post.thumbnail}
             alt={post.title}
-            class="w-full h-auto object-cover max-h-[500px]"
+            class="w-full h-auto object-contain rounded-2xl"
           />
         </div>
       )}
 
       <!-- Konten Artikel dari Blogger -->
       <div
-        class="prose prose-lg max-w-none prose-emerald prose-headings:font-bold prose-headings:tracking-tight prose-img:rounded-2xl prose-img:shadow-sm prose-a:text-emerald-700 hover:prose-a:text-emerald-800"
+        class="prose prose-lg max-w-none prose-emerald prose-headings:font-bold prose-headings:tracking-tight prose-a:text-emerald-700 hover:prose-a:text-emerald-800"
         set:html={post.content}
       />
 
@@ -104,3 +108,30 @@ const { post } = Astro.props;
   </main>
   <Footer />
 </Layout>
+
+<style is:global>
+  /* Menjaga agar gambar infografis dan konten Blogger tampil utuh & tidak terpotong */
+  .prose .separator {
+    clear: both;
+    text-align: center;
+    margin: 2rem auto;
+  }
+  .prose .separator a {
+    display: inline-block;
+    margin: 0 auto;
+  }
+  .prose img {
+    max-width: 100% !important;
+    height: auto !important;
+    margin: 1.5rem auto !important;
+    display: block !important;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+  }
+  .prose iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 1rem;
+    margin: 1.5rem auto;
+  }
+</style>
