@@ -37,4 +37,63 @@ import { Icon } from "astro-icon/components";
       </a>
     </div>
   </ScrollReveal>
+
+  <!-- Sumber Resmi & Terpercaya (Trust Signals) -->
+  <ScrollReveal client:load delay={0.6}>
+    <div class="mt-14 sm:mt-18 pt-10 border-t border-gray-200/80 max-w-4xl mx-auto">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-100 text-[11px] font-semibold text-gray-700 mb-4 border border-gray-200">
+        <Icon name="tabler:shield-check" class="w-3.5 h-3.5 text-black" />
+        <span>Rujukan Resmi & Terverifikasi</span>
+      </div>
+      <p class="text-xs text-gray-500 mb-6 max-w-xl mx-auto">
+        Setiap ayat, terjemahan, doa, dan rekaman murottal di platform ini bersumber dari otoritas keagamaan resmi dan kitab rujukan shahih.
+      </p>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3.5 text-left">
+        <!-- 1. Kemenag RI -->
+        <div class="p-4 bg-white rounded-xl border border-gray-200/80 shadow-xs hover:border-black/30 transition-colors">
+          <div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center text-gray-900 mb-2.5">
+            <Icon name="tabler:book" class="w-4.5 h-4.5" />
+          </div>
+          <h3 class="font-bold text-gray-900 text-xs sm:text-sm">Kemenag RI</h3>
+          <p class="text-[11px] text-gray-500 mt-1 leading-relaxed">
+            Mushaf Standar Indonesia & Terjemahan Resmi Kemenag
+          </p>
+        </div>
+
+        <!-- 2. Tafsir Kemenag -->
+        <div class="p-4 bg-white rounded-xl border border-gray-200/80 shadow-xs hover:border-black/30 transition-colors">
+          <div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center text-gray-900 mb-2.5">
+            <Icon name="tabler:file-text" class="w-4.5 h-4.5" />
+          </div>
+          <h3 class="font-bold text-gray-900 text-xs sm:text-sm">Tafsir Kemenag</h3>
+          <p class="text-[11px] text-gray-500 mt-1 leading-relaxed">
+            Tafsir Wajiz & Tahlili dari pakar dan ulama Al-Quran
+          </p>
+        </div>
+
+        <!-- 3. Hadits Shahih -->
+        <div class="p-4 bg-white rounded-xl border border-gray-200/80 shadow-xs hover:border-black/30 transition-colors">
+          <div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center text-gray-900 mb-2.5">
+            <Icon name="tabler:circle-check" class="w-4.5 h-4.5" />
+          </div>
+          <h3 class="font-bold text-gray-900 text-xs sm:text-sm">Hadits Shahih</h3>
+          <p class="text-[11px] text-gray-500 mt-1 leading-relaxed">
+            Kitab Hisnul Muslim & riwayat hadits bersanad shahih
+          </p>
+        </div>
+
+        <!-- 4. EveryAyah Murottal -->
+        <div class="p-4 bg-white rounded-xl border border-gray-200/80 shadow-xs hover:border-black/30 transition-colors">
+          <div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center text-gray-900 mb-2.5">
+            <Icon name="tabler:headphones" class="w-4.5 h-4.5" />
+          </div>
+          <h3 class="font-bold text-gray-900 text-xs sm:text-sm">EveryAyah Audio</h3>
+          <p class="text-[11px] text-gray-500 mt-1 leading-relaxed">
+            Murottal qari Masjidil Haram & Nabawi berkualitas jernih
+          </p>
+        </div>
+      </div>
+    </div>
+  </ScrollReveal>
 </section>
