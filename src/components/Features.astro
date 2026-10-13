@@ -1,104 +1,98 @@
 ---
 import { Icon } from "astro-icon/components";
+
+const features = [
+  {
+    title: "Jadwal Sholat & Imsakiyah",
+    desc: "Akurasi jadwal sholat 5 waktu resmi Kemenag RI untuk seluruh kota dan kabupaten di Indonesia.",
+    href: "/jadwal-sholat",
+    icon: "tabler:clock",
+    badge: "Otomatis Sesuai Kota",
+  },
+  {
+    title: "Al-Qur'an 30 Juz Digital",
+    desc: "Teks Arab mushaf standar Indonesia, terjemahan resmi Kemenag, asbabun nuzul, dan pemutar audio murottal.",
+    href: "/quran",
+    icon: "tabler:book-2",
+    badge: "114 Surah Lengkap",
+  },
+  {
+    title: "Kumpulan Doa Harian",
+    desc: "Kompilasi doa mustajab bersumber dari hadits shahih (Hisnul Muslim) lengkap teks Arab, latin, dan artinya.",
+    href: "/doa",
+    icon: "tabler:heart-handshake",
+    badge: "Hadits Shahih",
+  },
+  {
+    title: "Info Kajian Sunnah",
+    desc: "Jadwal agenda kajian Islam ilmiah dari berbagai masjid dan majelis ilmu di kota-kota se-Indonesia.",
+    href: "/kajian",
+    icon: "tabler:calendar-event",
+    badge: "Update Berkala",
+  },
+  {
+    title: "Artikel & Panduan Sholat",
+    desc: "Panduan praktis wudhu, sifat sholat nabi, adab dzikir, dan tips menjaga kekhusyukan ibadah harian.",
+    href: "/artikel",
+    icon: "tabler:article",
+    badge: "Rujukan Terpercaya",
+  },
+  {
+    title: "Tanya Al-Qur'an Cerdas",
+    desc: "Fitur pencarian makna dan ayat Al-Qur'an berbasis semantik yang siap membantu menjawab pertanyaanmu.",
+    href: "#",
+    icon: "tabler:sparkles",
+    badge: "AI Powered",
+    isChatTrigger: true,
+  },
+];
 ---
 
-<section id="features" class="max-w-6xl mx-auto px-4 py-20">
-  <h2 class="text-4xl font-bold text-gray-900 text-center mb-12">Features</h2>
-  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-    <div
-      class="h-full p-6 bg-white rounded-lg border border-gray-200 hover:shadow-lg transition-shadow flex flex-col"
-    >
-      <div
-        class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4 shrink-0"
-      >
-        <Icon name="tabler:brand-react" class="w-6 h-6 text-gray-900" aria-hidden="true" />
-      </div>
-      <h3 class="text-xl font-semibold text-gray-900 mb-2">React</h3>
-      <p class="text-gray-600 flex-1">
-        Component-based UI library for building interactive interfaces.
-        Seamlessly integrated with Astro for dynamic components.
-      </p>
+<section id="features" class="max-w-6xl mx-auto px-4 py-16 sm:py-24">
+  <div class="text-center max-w-3xl mx-auto mb-14">
+    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 text-xs font-semibold text-emerald-800 mb-3 border border-emerald-200">
+      <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+      <span>Fitur & Layanan Ibadah</span>
     </div>
+    <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 tracking-tight">
+      Kemudahan Menjaga Ibadah Harian
+    </h2>
+    <p class="text-base sm:text-lg text-gray-600 leading-relaxed">
+      Beragam fitur islami terintegrasi untuk mendampingi langkahmu memperbaiki kualitas sholat dan memperdalam ilmu agama.
+    </p>
+  </div>
 
-    <div
-      class="h-full p-6 bg-white rounded-lg border border-gray-200 hover:shadow-lg transition-shadow flex flex-col"
-    >
-      <div
-        class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4 shrink-0"
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+    {features.map((item) => (
+      <a
+        href={item.href}
+        class={`group h-full p-6 sm:p-7 bg-white rounded-2xl border border-gray-200 hover:border-emerald-600/30 hover:shadow-xl transition-all duration-300 flex flex-col justify-between ${
+          item.isChatTrigger ? "cursor-pointer" : ""
+        }`}
+        onclick={item.isChatTrigger ? "document.getElementById('quran-chat-toggle')?.click(); return false;" : undefined}
       >
-        <Icon
-          name="tabler:brand-framer-motion"
-          class="w-6 h-6 text-gray-900"
-          aria-hidden="true"
-        />
-      </div>
-      <h3 class="text-xl font-semibold text-gray-900 mb-2">Framer Motion</h3>
-      <p class="text-gray-600 flex-1">
-        Production-ready motion library for React. Create smooth animations
-        and delightful user experiences with spring physics.
-      </p>
-    </div>
+        <div>
+          <div class="flex items-center justify-between mb-5">
+            <div class="w-12 h-12 bg-emerald-50 text-emerald-800 rounded-xl flex items-center justify-center group-hover:bg-emerald-800 group-hover:text-white transition-colors duration-200">
+              <Icon name={item.icon} class="w-6 h-6" aria-hidden="true" />
+            </div>
+            <span class="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-gray-100 text-gray-600 border border-gray-200">
+              {item.badge}
+            </span>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-800 transition-colors">
+            {item.title}
+          </h3>
+          <p class="text-gray-600 text-sm leading-relaxed mb-6">
+            {item.desc}
+          </p>
+        </div>
 
-    <div
-      class="h-full p-6 bg-white rounded-lg border border-gray-200 hover:shadow-lg transition-shadow flex flex-col"
-    >
-      <div
-        class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4 shrink-0"
-      >
-        <Icon name="tabler:brand-tailwind" class="w-6 h-6 text-gray-900" aria-hidden="true" />
-      </div>
-      <h3 class="text-xl font-semibold text-gray-900 mb-2">Tailwind CSS</h3>
-      <p class="text-gray-600 flex-1">
-        Utility-first CSS framework for rapid UI development. Build beautiful,
-        responsive designs with ease and no custom CSS needed.
-      </p>
-    </div>
-
-    <div
-      class="h-full p-6 bg-white rounded-lg border border-gray-200 hover:shadow-lg transition-shadow flex flex-col"
-    >
-      <div
-        class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4 shrink-0"
-      >
-        <Icon name="tabler:icons" class="w-6 h-6 text-gray-900" aria-hidden="true" />
-      </div>
-      <h3 class="text-xl font-semibold text-gray-900 mb-2">Astro Icons</h3>
-      <p class="text-gray-600 flex-1">
-        Beautiful icon component library for Astro. Access thousands of icons
-        from popular icon sets with zero runtime overhead and easy
-        integration.
-      </p>
-    </div>
-
-    <div
-      class="h-full p-6 bg-white rounded-lg border border-gray-200 hover:shadow-lg transition-shadow flex flex-col"
-    >
-      <div
-        class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4 shrink-0"
-      >
-        <Icon name="tabler:brand-sass" class="w-6 h-6 text-gray-900" aria-hidden="true" />
-      </div>
-      <h3 class="text-xl font-semibold text-gray-900 mb-2">Sass</h3>
-      <p class="text-gray-600 flex-1">
-        CSS preprocessor with variables, mixins, and nesting. Use Sass
-        alongside Tailwind for advanced styling needs and complex layouts.
-      </p>
-    </div>
-
-    <a
-      href="/example"
-      class="h-full block p-6 bg-white rounded-lg border border-gray-200 hover:shadow-lg transition-shadow flex flex-col"
-    >
-      <div
-        class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4 shrink-0"
-      >
-        <Icon name="tabler:markdown" class="w-6 h-6 text-gray-900" aria-hidden="true" />
-      </div>
-      <h3 class="text-xl font-semibold text-gray-900 mb-2">MDX</h3>
-      <p class="text-gray-600 flex-1">
-        Write JSX in your Markdown documents. Perfect for blog posts,
-        documentation, and content-rich pages with component support.
-      </p>
-    </a>
+        <div class="pt-4 border-t border-gray-100 flex items-center text-sm font-semibold text-gray-900 group-hover:text-emerald-700 transition-colors">
+          <span>{item.isChatTrigger ? "Mulai Bertanya" : "Buka Layanan"}</span>
+          <Icon name="tabler:arrow-right" class="w-4 h-4 ml-1.5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+        </div>
+      </a>
+    ))}
   </div>
 </section>

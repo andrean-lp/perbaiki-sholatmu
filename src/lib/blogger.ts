@@ -172,7 +172,7 @@ export async function fetchBloggerPosts(): Promise<BloggerPost[]> {
     const postCategories = posts.flatMap((p) => p.categories);
     cachedCategories = Array.from(new Set([...feedCategories, ...postCategories]))
       .filter(Boolean)
-      .sort((a, b) => a.localeCompare("id"));
+      .sort((a, b) => a.localeCompare(b, "id"));
 
     // Sort by publication date (newest first)
     posts.sort(

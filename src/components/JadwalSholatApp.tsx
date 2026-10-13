@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 
 export interface JadwalDay {
   tanggal: number;
@@ -74,7 +74,7 @@ export default function JadwalSholatApp({
   const currentYearNum = currentDate.getFullYear();
   const currentDayNum = currentDate.getDate();
 
-  const [provinces, setProvinces] = useState<string[]>(initialProvinces || []);
+  const [provinces] = useState<string[]>(initialProvinces || []);
   const [selectedProvince, setSelectedProvince] = useState<string>(
     initialSchedule?.provinsi || "DKI Jakarta"
   );
@@ -83,7 +83,7 @@ export default function JadwalSholatApp({
     initialSchedule?.kabkota || "Kota Jakarta"
   );
   const [selectedMonth, setSelectedMonth] = useState<number>(currentMonthNum);
-  const [selectedYear, setSelectedYear] = useState<number>(currentYearNum);
+  const [selectedYear] = useState<number>(currentYearNum);
 
   const [scheduleData, setScheduleData] = useState<ShalatScheduleData | null>(
     initialSchedule

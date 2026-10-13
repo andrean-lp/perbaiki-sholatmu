@@ -51,7 +51,7 @@
       const mount = document.getElementById('quran-chat-mount');
       if (mount) {
         const root = createRoot(mount);
-        root.render(React.createElement(QuranChatWidget, { initialOpen: true }));
+        root.render(React.createElement(QuranChatWidget as any, { initialOpen: true }));
       }
     } catch (err) {
       console.error('Gagal memuat Quran Chat Widget:', err);

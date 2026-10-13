@@ -13,6 +13,9 @@ export default defineConfig({
   redirects: {
     "/about": "/tentang",
     "/al-quran": "/quran",
+    "/audio-player": "/quran",
+    "/features": "/",
+    "/example": "/",
     "/blog": "/artikel",
     "/blog/[...slug]": "/artikel/[...slug]",
   },
@@ -31,13 +34,6 @@ export default defineConfig({
     plugins: [tailwindcss()],
     build: {
       cssMinify: "lightningcss",
-      minify: "terser",
-      terserOptions: {
-        compress: {
-          drop_console: true,
-          drop_debugger: true,
-        },
-      },
     },
   },
   build: {

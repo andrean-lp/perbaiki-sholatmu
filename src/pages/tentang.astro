@@ -2,181 +2,151 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import ScrollReveal from "../components/ScrollReveal.tsx";
+import { Icon } from "astro-icon/components";
 import { SITE } from "../config/site.mjs";
+
+const values = [
+  {
+    title: "Al-Qur'an & As-Sunnah",
+    desc: "Seluruh panduan ibadah disandarkan pada dalil nash Al-Qur'an dan sunnah Rasulullah shallallahu 'alaihi wa sallam dengan pemahaman yang shahih.",
+    icon: "tabler:book-2",
+  },
+  {
+    title: "Rujukan Resmi Terverifikasi",
+    desc: "Menggunakan data mushaf standar Kemenag RI, takhrij hadits mu'tabar, serta jadwal hisab/rukyat resmi kementerian.",
+    icon: "tabler:shield-check",
+  },
+  {
+    title: "Mudah & Aksesibel",
+    desc: "Didesain ringan, cepat dibuka di berbagai perangkat, tanpa iklan yang mengganggu kekhusyukan dan fokus pembaca.",
+    icon: "tabler:device-mobile",
+  },
+  {
+    title: "Inspirasi Berkelanjutan",
+    desc: "Menyediakan artikel harian, jadwal kajian ilmiah, dan doa-doa mustajab untuk terus memotivasi perbaikan diri.",
+    icon: "tabler:sparkles",
+  },
+];
 ---
 
 <Layout
-  title={`Tentang | ${SITE.title}`}
-  description="Pelajari lebih lanjut tentang Perbaiki Sholatmu, visi kami, serta panduan memperbaiki kualitas dan kekhusyukan sholat sehari-hari."
+  title={`Tentang Kami - ${SITE.title}`}
+  description="Mengenal visi, misi, dan komitmen Perbaiki Sholatmu dalam menyajikan panduan sholat, Al-Qur'an digital, jadwal sholat, dan rujukan ibadah terpercaya."
   canonicalURL={`${SITE.url}/tentang`}
 >
   <Header />
-  <main id="main-content" role="main">
-    <section class="max-w-4xl mx-auto px-4 py-20">
-      <ScrollReveal client:idle>
-        <h1 class="text-5xl font-bold text-gray-900 mb-4">Astro Base</h1>
-      </ScrollReveal>
-      <ScrollReveal client:load delay={0.1}>
-        <p class="text-xl text-gray-600 mb-12">
-          A minimal, modern starter template for building fast websites with
-          Astro. This template includes everything you need to get started with
-          a beautiful landing page, complete with animations, icons, and content
-          management capabilities.
+
+  <main id="main-content" role="main" class="max-w-5xl mx-auto px-4 py-14 sm:py-20">
+    <!-- Hero Header -->
+    <header class="text-center max-w-3xl mx-auto mb-16">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 text-xs font-semibold text-emerald-800 mb-4 border border-emerald-200">
+        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+        <span>Tentang Perbaiki Sholatmu</span>
+      </div>
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 tracking-tight mb-6 leading-tight">
+        Perbaiki Sholatmu Agar Allah Perbaiki Hidupmu
+      </h1>
+      <p class="text-lg sm:text-xl text-gray-600 leading-relaxed">
+        Platform media dakwah digital yang berikhtiar mendampingi kaum muslimin untuk meraih kekhusyukan dan kesempurnaan ibadah sholat sehari-hari sesuai tuntunan Al-Qur'an dan As-Sunnah.
+      </p>
+    </header>
+
+    <!-- Kutipan Landasan -->
+    <section class="mb-16 p-8 sm:p-10 bg-white rounded-3xl border border-gray-200 shadow-sm text-center max-w-3xl mx-auto">
+      <p class="text-lg sm:text-xl text-gray-800 italic leading-relaxed font-serif">
+        &ldquo;Sesungguhnya amal yang pertama kali dihisab pada seorang hamba pada hari kiamat adalah sholatnya. Maka, jika sholatnya baik, sungguh ia telah beruntung dan berhasil. Dan jika shalatnya rusak, sungguh ia telah gagal dan rugi.&rdquo;
+      </p>
+      <div class="mt-4 pt-4 border-t border-gray-100 text-xs sm:text-sm text-gray-500 font-medium">
+        HR. At-Tirmidzi no. 413, An-Nasa'i no. 465, dishahihkan oleh Syaikh Al-Albani
+      </div>
+    </section>
+
+    <!-- Visi & Misi -->
+    <section class="grid md:grid-cols-2 gap-8 mb-16">
+      <div class="p-8 bg-white rounded-3xl border border-gray-200 shadow-sm flex flex-col justify-between">
+        <div>
+          <div class="w-12 h-12 bg-emerald-50 text-emerald-800 rounded-2xl flex items-center justify-center mb-5">
+            <Icon name="tabler:target" class="w-6 h-6" />
+          </div>
+          <h2 class="text-2xl font-bold text-gray-900 mb-3">Visi Kami</h2>
+          <p class="text-gray-600 leading-relaxed text-base">
+            Menjadi platform panduan ibadah sholat digital terdepan yang terpercaya, menumbuhkan kesadaran umat akan urgensi sholat tepat waktu, serta menghidupkan nilai-nilai kekhusyukan dalam kehidupan sehari-hari.
+          </p>
+        </div>
+      </div>
+
+      <div class="p-8 bg-white rounded-3xl border border-gray-200 shadow-sm flex flex-col justify-between">
+        <div>
+          <div class="w-12 h-12 bg-emerald-50 text-emerald-800 rounded-2xl flex items-center justify-center mb-5">
+            <Icon name="tabler:compass" class="w-6 h-6" />
+          </div>
+          <h2 class="text-2xl font-bold text-gray-900 mb-3">Misi Kami</h2>
+          <ul class="space-y-3 text-gray-600 text-base leading-relaxed list-disc list-inside">
+            <li>Menyajikan panduan tata cara sholat praktis berdasarkan sunnah shahihah.</li>
+            <li>Menyediakan perkakas ibadah harian seperti jadwal sholat akurat dan Al-Qur'an 30 juz.</li>
+            <li>Menyebarkan artikel pengingat dan hikmah yang aplikatif untuk menjaga keistiqamahan ibadah.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nilai & Komitmen Kami -->
+    <section class="mb-16">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <h2 class="text-3xl font-bold text-gray-900 mb-3">Nilai & Komitmen Layanan</h2>
+        <p class="text-gray-600 text-base">
+          Prinsip dasar yang kami pegang teguh dalam menghadirkan setiap baris konten dan fitur.
         </p>
-      </ScrollReveal>
+      </div>
 
-      <div class="prose prose-lg max-w-none">
-        <ScrollReveal client:load delay={0.2}>
-          <h2>Features</h2>
-          <ul>
-            <li>
-              <strong>Astro</strong> - Lightning-fast static site generation
-            </li>
-            <li>
-              <strong>React</strong> - Component-based UI library for interactive
-              components
-            </li>
-            <li>
-              <strong>Tailwind CSS v4</strong> - Utility-first CSS framework for rapid
-              styling
-            </li>
-            <li>
-              <strong>Framer Motion</strong> - Smooth scroll reveal animations with
-              spring physics
-            </li>
-            <li>
-              <strong>Astro Icons</strong> - Beautiful icon component library with
-              Tabler icon set
-            </li>
-            <li><strong>MDX</strong> - Write JSX in your Markdown documents</li>
-            <li>
-              <strong>Sass</strong> - CSS preprocessor with variables, mixins, and
-              nesting
-            </li>
-            <li>
-              <strong>Tailwind Typography</strong> - Beautiful typography styles for
-              markdown content
-            </li>
-          </ul>
-        </ScrollReveal>
+      <div class="grid sm:grid-cols-2 gap-6">
+        {values.map((v) => (
+          <div class="p-6 sm:p-7 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-gray-300 transition-colors">
+            <div class="w-10 h-10 bg-gray-100 text-gray-900 rounded-xl flex items-center justify-center mb-4">
+              <Icon name={v.icon} class="w-5 h-5" />
+            </div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">{v.title}</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">{v.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
 
-        <ScrollReveal client:load delay={0.4}>
-          <h2>Getting Started</h2>
-          <h3>Installation</h3>
-          <ol>
-            <li>
-              <strong>Clone the repository</strong>
-              <pre><code>git clone https://github.com/jonnysmillie/astro-base.git
-cd astro-base</code></pre>
-            </li>
-            <li>
-              <strong>Install dependencies</strong>
-              <pre><code>npm install</code></pre>
-            </li>
-            <li>
-              <strong>Start the development server</strong>
-              <pre><code>npm run dev</code></pre>
-            </li>
-            <li>
-              <strong>Open your browser</strong> - Navigate to <code
-                >http://localhost:4321</code
-              >
-            </li>
-          </ol>
-        </ScrollReveal>
-
-        <ScrollReveal client:load delay={0.5}>
-          <h2>Available Scripts</h2>
-          <ul>
-            <li><code>npm install</code> - Installs dependencies</li>
-            <li>
-              <code>npm run dev</code> - Starts local dev server at <code
-                >localhost:4321</code
-              >
-            </li>
-            <li>
-              <code>npm run build</code> - Build your production site to <code
-                >./dist/</code
-              >
-            </li>
-            <li><code>npm run preview</code> - Preview your build locally</li>
-            <li>
-              <code>npm run astro</code> - Run CLI commands like <code
-                >astro add</code
-              >, <code>astro check</code>
-            </li>
-          </ul>
-        </ScrollReveal>
-
-        <ScrollReveal client:load delay={0.6}>
-          <h2>Styling</h2>
-
-          <h3>Tailwind CSS</h3>
-          <p>
-            This project uses Tailwind CSS v4 for styling. All components use
-            Tailwind utility classes.
-          </p>
-
-          <p><strong>Global Styles:</strong></p>
-          <ul>
-            <li>Located in <code>src/styles/global.css</code></li>
-            <li>Imports Tailwind CSS</li>
-            <li>Includes Tailwind Typography plugin for markdown styling</li>
-          </ul>
-
-          <p><strong>Configuration:</strong></p>
-          <ul>
-            <li>
-              <code>tailwind.config.mjs</code> - Tailwind configuration with Typography
-              plugin
-            </li>
-          </ul>
-
-          <h3>Sass</h3>
-          <p>
-            Sass is installed and ready to use. You can use Sass in component <code
-              >&lt;style&gt;</code
-            > blocks. See <code>src/components/SassExample.astro</code> for a complete
-            example.
-          </p>
-        </ScrollReveal>
-
-        <ScrollReveal client:load delay={0.7}>
-          <h2>Components</h2>
-
-          <h3>ScrollReveal</h3>
-          <p>
-            A React component using Framer Motion for scroll-triggered
-            animations with the following props:
-          </p>
-          <ul>
-            <li>
-              <code>delay</code> - Animation delay in seconds (default: 0)
-            </li>
-            <li>
-              <code>direction</code> - Animation direction: "up" | "down" | "left"
-              | "right" (default: "up")
-            </li>
-            <li>
-              <code>distance</code> - Distance to travel in pixels (default: 50)
-            </li>
-            <li>
-              <code>scale</code> - Enable scale animation (default: false)
-            </li>
-          </ul>
-
-          <h3>Icons</h3>
-          <p>
-            Use Tabler icons with astro-icon. Browse available icons at <a
-              href="https://tabler.io/icons"
-              target="_blank"
-              rel="noopener noreferrer">Tabler Icons</a
-            >.
-          </p>
-        </ScrollReveal>
+    <!-- Kolaborasi & Media -->
+    <section class="p-8 sm:p-10 bg-gray-900 text-white rounded-3xl text-center">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-3">Terhubung Bersama Kami</h2>
+      <p class="text-gray-300 max-w-xl mx-auto mb-8 text-sm sm:text-base leading-relaxed">
+        Ikuti konten dakwah visual dan lantunan tilawah harian kami di media sosial, atau hubungi kami untuk masukan dan saran penyempurnaan platform.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a
+          href="https://www.youtube.com/@qataquran"
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-900 rounded-xl font-semibold text-sm hover:bg-gray-100 transition-colors"
+        >
+          <Icon name="tabler:brand-youtube" class="w-5 h-5 text-red-600" />
+          <span>YouTube @qataquran</span>
+        </a>
+        <a
+          href="https://id.pinterest.com/perbaikisholatmu/"
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-white/10 text-white rounded-xl font-semibold text-sm hover:bg-white/20 transition-colors border border-white/20"
+        >
+          <Icon name="tabler:brand-pinterest" class="w-5 h-5 text-red-400" />
+          <span>Pinterest Perbaiki Sholatmu</span>
+        </a>
+        <a
+          href="/artikel"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-emerald-700 text-white rounded-xl font-semibold text-sm hover:bg-emerald-600 transition-colors"
+        >
+          <Icon name="tabler:article" class="w-5 h-5" />
+          <span>Baca Artikel & Panduan</span>
+        </a>
       </div>
     </section>
   </main>
+
   <Footer />
 </Layout>
