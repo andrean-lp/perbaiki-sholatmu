@@ -1,50 +1,96 @@
 ---
-import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import { fetchBloggerPosts } from '../../lib/blogger';
 
-const posts = (await getCollection('blog'))
-  .filter((post) => !post.data.draft)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const posts = await fetchBloggerPosts();
 ---
 
 <Layout
   title="Blog & Artikel - Perbaiki Sholatmu"
-  description="Kumpulan artikel dan panduan seputar menyempurnakan ibadah sholat."
+  description="Kumpulan artikel, hikmah, dan panduan seputar menyempurnakan ibadah sholat dan amalan harian bersumber dari Al-Quran dan Sunnah."
 >
   <Header />
-  <main id="main-content" class="max-w-5xl mx-auto px-4 py-16">
-    <div class="mb-12 text-center">
-      <h1 class="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl">Artikel & Panduan</h1>
-      <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-        Kumpulan tulisan dan pengingat untuk terus memperbaiki kualitas sholat kita sehari-hari.
+  <main id="main-content" class="max-w-6xl mx-auto px-4 py-16">
+    <div className="mb-12 text-center max-w-2xl mx-auto">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 text-xs font-semibold text-emerald-800 mb-4 border border-emerald-200">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span>Qata Quran Media</span>
+        <span class="text-emerald-300">|</span>
+        <span>{posts.length} Artikel Tersedia</span>
+      </div>
+      <h1 class="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl">
+        Artikel & Panduan
+      </h1>
+      <p class="mt-4 text-base sm:text-lg text-gray-600 leading-relaxed">
+        Kumpulan tulisan dan inspirasi harian untuk terus memperbaiki kualitas dan kekhusyukan sholat kita.
       </p>
     </div>
 
-    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-      {posts.map((post) => (
-        <a
-          href={`/blog/${post.id}`}
-          class="group block bg-white rounded-2xl border border-gray-200 p-6 hover:shadow-lg transition-all duration-200 hover:-translate-y-1"
-        >
-          <time class="text-xs font-semibold text-gray-500 uppercase tracking-wider">
-            {new Date(post.data.pubDate).toLocaleDateString('id-ID', { year: 'numeric', month: 'short', day: 'numeric' })}
-          </time>
-          <h2 class="mt-3 text-xl font-bold text-gray-900 group-hover:text-black">
-            {post.data.title}
-          </h2>
-          {post.data.description && (
-            <p class="mt-2 text-sm text-gray-600 line-clamp-3">
-              {post.data.description}
-            </p>
-          )}
-          <span class="mt-4 inline-flex items-center text-sm font-medium text-black group-hover:underline">
-            Baca selengkapnya &rarr;
-          </span>
-        </a>
-      ))}
-    </div>
+    {posts.length === 0 ? (
+      <div class="text-center py-16 bg-white rounded-2xl border border-gray-200 p-8">
+        <p class="text-gray-500">Sedang memuat artikel dari Qata Quran...</p>
+      </div>
+    ) : (
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {posts.map((post) => (
+          <article class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 flex flex-col group hover:border-gray-300">
+            {post.thumbnail && (
+              <a href={`/blog/${post.slug}`} class="block aspect-[16/10] bg-gray-100 overflow-hidden relative">
+                <img
+                  src={post.thumbnail}
+                  alt={post.title}
+                  loading="lazy"
+                  class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                />
+              </a>
+            )}
+
+            <div class="p-6 flex-1 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center gap-2 mb-2 flex-wrap">
+                  <time class="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                    {new Date(post.published).toLocaleDateString('id-ID', {
+                      year: 'numeric',
+                      month: 'short',
+                      day: 'numeric',
+                    })}
+                  </time>
+                  {post.categories.length > 0 && (
+                    <span class="px-2 py-0.5 rounded-md text-[11px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-100">
+                      {post.categories[0]}
+                    </span>
+                  )}
+                </div>
+
+                <h2 class="text-xl font-bold text-gray-900 group-hover:text-emerald-800 transition-colors line-clamp-2 leading-snug">
+                  <a href={`/blog/${post.slug}`} class="focus:outline-none">
+                    {post.title}
+                  </a>
+                </h2>
+
+                {post.excerpt && (
+                  <p class="mt-2.5 text-sm text-gray-600 line-clamp-3 leading-relaxed">
+                    {post.excerpt}
+                  </p>
+                )}
+              </div>
+
+              <div class="mt-5 pt-4 border-t border-gray-100 flex items-center justify-between">
+                <a
+                  href={`/blog/${post.slug}`}
+                  class="inline-flex items-center gap-1.5 text-sm font-semibold text-gray-900 group-hover:text-emerald-700 transition-colors"
+                >
+                  <span>Baca selengkapnya</span>
+                  <span class="transition-transform group-hover:translate-x-1">&rarr;</span>
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    )}
   </main>
   <Footer />
 </Layout>

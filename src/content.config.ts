@@ -1,15 +1,3 @@
-import { defineCollection, z } from 'astro:content';
-import { glob } from 'astro/loaders';
-
-const blog = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog' }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string().optional(),
-    pubDate: z.coerce.date(),
-    heroImage: z.string().optional(),
-    draft: z.boolean().optional().default(false),
-  }),
-});
-
-export const collections = { blog };
+// Content collections configuration
+// Blog articles are now managed headlessly via Blogger (qataquran.blogspot.com)
+export const collections = {};

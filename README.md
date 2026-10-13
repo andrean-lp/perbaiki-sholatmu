@@ -116,30 +116,16 @@ A minimal, modern starter template for building fast websites with Astro. This t
 | `npm run preview` | Preview your build locally                       |
 | `npm run astro`   | Run CLI commands like `astro add`, `astro check` |
 
-## 📝 Decap CMS Integration
+## 📝 Headless Blogger Integration (Qata Quran)
 
-CMS dashboard tersedia di rute `/studio/` (misalnya: `http://localhost:4321/studio/` atau `https://perbaiki-sholatmu.pages.dev/studio/`). Halaman ini diproteksi dengan header deindex (`noindex, nofollow`) dan diblokir dari `robots.txt` agar tidak terindeks oleh Google.
+Blog di website ini terhubung langsung secara *headless* dengan Google Blogger (**Qata Quran** - `https://qataquran.blogspot.com/`).
 
-### Cara Menggunakan di Mode Lokal:
-1. Jalankan server lokal Decap CMS di satu terminal:
-   ```bash
-   npm run cms
-   ```
-2. Jalankan Astro dev server di terminal lain:
-   ```bash
-   npm run dev
-   ```
-3. Buka browser ke `http://localhost:4321/studio/`.
-4. Anda dapat membuat dan mengedit artikel blog langsung dari browser, dan file Markdown akan otomatis tersimpan di `src/content/blog/`.
+### Cara Mengelola Artikel:
+1. Masuk ke dashboard Blogger Anda di [blogger.com](https://www.blogger.com/).
+2. Buat artikel baru, unggah gambar poster/konten, dan publikasikan.
+3. Gambar otomatis di-host di Google CDN secara gratis dan tanpa batas.
+4. Setiap build website di Cloudflare Pages akan otomatis menyinkronkan seluruh artikel baru ke rute `/blog/` dan `/blog/[slug]/` dengan desain modern website ini.
 
-### Deployment & Otentikasi Produksi:
-- **GitHub Backend:** Secara default `public/studio/config.yml` dikonfigurasi menggunakan GitHub backend (`andrean-lp/perbaiki-sholatmu`). Untuk login via GitHub di production, hubungkan OAuth client provider.
-- **Netlify Deploy:** Jika di-deploy via Netlify, aktifkan **Netlify Identity** dan **Git Gateway** di pengaturan Netlify, lalu ganti backend di `public/studio/config.yml` ke:
-  ```yaml
-  backend:
-    name: git-gateway
-    branch: main
-  ```
 
 ## 🎨 Styling
 
