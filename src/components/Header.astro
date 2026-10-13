@@ -34,6 +34,15 @@ import { Icon } from "astro-icon/components";
     <ul class="hidden md:flex items-center gap-6" role="list">
       <li>
         <a
+          href="/jadwal-sholat"
+          class="text-gray-600 hover:text-gray-900 transition-colors"
+          aria-current={Astro.url.pathname === '/jadwal-sholat' ? 'page' : undefined}
+        >
+          Jadwal Sholat
+        </a>
+      </li>
+      <li>
+        <a
           href="/about"
           class="text-gray-600 hover:text-gray-900 transition-colors"
           aria-current={Astro.url.pathname === '/about' ? 'page' : undefined}
@@ -113,6 +122,16 @@ import { Icon } from "astro-icon/components";
     aria-labelledby="mobile-menu-button"
   >
     <ul class="flex flex-col py-4" role="list">
+      <li>
+        <a
+          href="/jadwal-sholat"
+          class="block px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors"
+          role="menuitem"
+          aria-current={Astro.url.pathname === '/jadwal-sholat' ? 'page' : undefined}
+        >
+          Jadwal Sholat
+        </a>
+      </li>
       <li>
         <a
           href="/about"

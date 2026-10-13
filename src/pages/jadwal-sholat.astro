@@ -1,0 +1,80 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import JadwalSholatApp from "../components/JadwalSholatApp.tsx";
+import type { ShalatScheduleData } from "../components/JadwalSholatApp.tsx";
+
+const defaultProvinces = [
+  "Aceh", "Bali", "Banten", "Bengkulu", "D.I. Yogyakarta", "DKI Jakarta",
+  "Gorontalo", "Jambi", "Jawa Barat", "Jawa Tengah", "Jawa Timur",
+  "Kalimantan Barat", "Kalimantan Selatan", "Kalimantan Tengah", "Kalimantan Timur",
+  "Kalimantan Utara", "Kepulauan Bangka Belitung", "Kepulauan Riau", "Lampung",
+  "Maluku", "Maluku Utara", "Nusa Tenggara Barat", "Nusa Tenggara Timur",
+  "Papua", "Papua Barat", "Riau", "Sulawesi Barat", "Sulawesi Selatan",
+  "Sulawesi Tengah", "Sulawesi Tenggara", "Sulawesi Utara", "Sumatera Barat",
+  "Sumatera Selatan", "Sumatera Utara"
+];
+
+let provinces: string[] = defaultProvinces;
+let initialCities: string[] = ["Kab. Kepulauan Seribu", "Kota Jakarta"];
+let initialSchedule: ShalatScheduleData | null = null;
+
+try {
+  const provRes = await fetch("https://equran.id/api/v2/shalat/provinsi");
+  if (provRes.ok) {
+    const provJson = await provRes.json();
+    if (provJson.data && Array.isArray(provJson.data)) {
+      provinces = provJson.data;
+    }
+  }
+
+  const kabRes = await fetch("https://equran.id/api/v2/shalat/kabkota", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ provinsi: "DKI Jakarta" })
+  });
+  if (kabRes.ok) {
+    const kabJson = await kabRes.json();
+    if (kabJson.data && Array.isArray(kabJson.data)) {
+      initialCities = kabJson.data;
+    }
+  }
+
+  const now = new Date();
+  const shalatRes = await fetch("https://equran.id/api/v2/shalat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      provinsi: "DKI Jakarta",
+      kabkota: "Kota Jakarta",
+      bulan: now.getMonth() + 1,
+      tahun: now.getFullYear()
+    })
+  });
+  if (shalatRes.ok) {
+    const shalatJson = await shalatRes.json();
+    if (shalatJson.data && shalatJson.data.jadwal) {
+      initialSchedule = shalatJson.data;
+    }
+  }
+} catch (err) {
+  console.warn("Build time prayer fetch error:", err);
+}
+---
+
+<Layout
+  title="Jadwal Sholat Hari Ini dan Bulanan Seluruh Indonesia - Perbaiki Sholatmu"
+  description="Jadwal shalat hari ini dan jadwal bulanan resmi untuk 517 kabupaten dan kota di 34 provinsi seluruh Indonesia bersumber langsung dari Bimas Islam Kemenag RI via EQuran.id."
+>
+  <Header />
+  <main id="main-content" class="max-w-7xl mx-auto px-4 py-8 sm:py-12">
+    <JadwalSholatApp
+      client:load
+      initialProvinces={provinces}
+      initialCities={initialCities}
+      initialSchedule={initialSchedule}
+    />
+  </main>
+  <Footer />
+</Layout>
