@@ -1,0 +1,20 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import DoaApp from "../components/DoaApp.tsx";
+import doaRawData from "../data/doa.json";
+
+const doaList = doaRawData.data;
+---
+
+<Layout
+  title="Kumpulan Doa Harian - Perbaiki Sholatmu"
+  description="Kumpulan doa-doa harian dalam Islam lengkap dengan teks Arab, transliterasi latin, dan terjemahan bahasa Indonesia bersumber dari hadits shahih."
+>
+  <Header />
+  <main id="main-content" class="max-w-7xl mx-auto px-4 py-8 sm:py-12">
+    <DoaApp client:load initialDoaList={doaList} />
+  </main>
+  <Footer />
+</Layout>
