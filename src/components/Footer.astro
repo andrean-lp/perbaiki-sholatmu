@@ -95,7 +95,21 @@ import { Icon } from "astro-icon/components";
       </div>
     </div>
     <div class="pt-8 border-t border-gray-200 text-center text-gray-600">
-      <p>&copy; {new Date().getFullYear()} Perbaiki Sholatmu. All rights reserved.</p>
+      <p>
+        &copy; <span id="footer-year">{new Date().getFullYear()}</span> <a
+          href="https://www.youtube.com/@qataquran"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="font-bold text-gray-800 hover:text-emerald-700 transition-colors"
+        >Qata Quran</a>. All rights reserved.
+      </p>
     </div>
   </div>
 </footer>
+
+<script is:inline>
+  const yearEl = document.getElementById("footer-year");
+  if (yearEl) {
+    yearEl.textContent = new Date().getFullYear().toString();
+  }
+</script>
