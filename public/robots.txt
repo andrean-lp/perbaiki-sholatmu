@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://perbaiki-sholatmu.andrean.web.id/sitemap-index.xml

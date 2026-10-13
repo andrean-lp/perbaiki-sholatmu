@@ -82,8 +82,7 @@ const robotsContent = [
 		<meta name="twitter:url" content={siteURL.href} />
 		<meta name="twitter:title" content={twitterTitle} />
 		<meta name="twitter:description" content={twitterDescription} />
-		<!-- Netlify Identity (for Decap CMS authentication) -->
-		<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+		<meta name="twitter:image" content={fullTwitterImage} />
 	</head>
 	<body class="min-h-screen bg-gray-50">
 		<a
@@ -93,17 +92,5 @@ const robotsContent = [
 			Skip to main content
 		</a>
 		<slot />
-
-		<script is:inline>
-			if (window.netlifyIdentity) {
-				window.netlifyIdentity.on('init', (user) => {
-					if (!user) {
-						window.netlifyIdentity.on('login', () => {
-							document.location.href = '/admin/';
-						});
-					}
-				});
-			}
-		</script>
 	</body>
 </html>

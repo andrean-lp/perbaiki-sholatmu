@@ -8,6 +8,7 @@ interface ScrollRevealProps {
   distance?: number;
   duration?: number;
   scale?: boolean;
+  className?: string;
 }
 
 export default function ScrollReveal({
@@ -17,6 +18,7 @@ export default function ScrollReveal({
   distance = 50,
   duration = 0.8,
   scale = false,
+  className = "",
 }: ScrollRevealProps) {
   const variants = {
     hidden: {
@@ -43,6 +45,7 @@ export default function ScrollReveal({
 
   return (
     <motion.div
+      className={className}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-50px" }}
