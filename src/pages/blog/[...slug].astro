@@ -51,9 +51,12 @@ const contentHasImage = post.content ? post.content.includes('<img') : false;
             })}
           </time>
           {post.categories.map((cat) => (
-            <span class="text-xs font-medium text-gray-600 bg-gray-100 px-2 py-0.5 rounded-md">
+            <a
+              href={`/blog?label=${encodeURIComponent(cat)}`}
+              class="text-xs font-semibold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 px-2.5 py-0.5 rounded-md transition-colors"
+            >
               {cat}
-            </span>
+            </a>
           ))}
         </div>
 

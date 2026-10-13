@@ -13,6 +13,7 @@ export interface BloggerPost {
 }
 
 let cachedPosts: BloggerPost[] | null = null;
+let cachedCategories: string[] = [];
 
 function cleanExcerpt(html: string): string {
   if (!html) return "";
@@ -143,6 +144,15 @@ export async function fetchBloggerPosts(): Promise<BloggerPost[]> {
       };
     });
 
+    // Merge and extract categories
+    const feedCategories = (data.feed?.category || [])
+      .map((c: any) => c.term)
+      .filter(Boolean);
+    const postCategories = posts.flatMap((p) => p.categories);
+    cachedCategories = Array.from(new Set([...feedCategories, ...postCategories]))
+      .filter(Boolean)
+      .sort((a, b) => a.localeCompare("id"));
+
     // Sort by publication date (newest first)
     posts.sort(
       (a, b) => new Date(b.published).getTime() - new Date(a.published).getTime()
@@ -154,6 +164,13 @@ export async function fetchBloggerPosts(): Promise<BloggerPost[]> {
     console.error("Error fetching Blogger feed:", err);
     return [];
   }
+}
+
+export async function fetchBloggerCategories(): Promise<string[]> {
+  if (cachedCategories.length === 0) {
+    await fetchBloggerPosts();
+  }
+  return cachedCategories;
 }
 
 export async function fetchBloggerPostBySlug(
