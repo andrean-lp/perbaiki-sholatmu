@@ -1,0 +1,21 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import AudioPlayerApp from "../components/AudioPlayerApp.tsx";
+import type { SurahItem } from "../components/AudioPlayerApp.tsx";
+import suratRawData from "../data/surat.json";
+
+const suratList = suratRawData as unknown as SurahItem[];
+---
+
+<Layout
+  title="Audio Player Murottal Al-Quran 30 Juz - Perbaiki Sholatmu"
+  description="Dengarkan lantunan murottal Al-Quran 30 juz lengkap berkualitas jernih dari 6 qari internasional terbaik dunia dengan fitur pemutar audio interaktif dan pencarian surah."
+>
+  <Header />
+  <main id="main-content" class="max-w-7xl mx-auto px-4 py-8 sm:py-12">
+    <AudioPlayerApp client:load initialSuratList={suratList} />
+  </main>
+  <Footer />
+</Layout>
