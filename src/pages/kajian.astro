@@ -1,0 +1,57 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import KajianApp from "../components/KajianApp.tsx";
+import type { KajianItem, KajianPagination } from "../components/KajianApp.tsx";
+
+let initialKajianList: KajianItem[] = [];
+let initialPagination: KajianPagination = {
+  page: 1,
+  limit: 24,
+  total: 0,
+  totalPages: 1,
+};
+let initialCities: string[] = [
+  "Balikpapan", "Bekasi", "Bogor", "Gresik", "Jakarta Barat",
+  "Jakarta Timur", "Lembang", "Mamuju", "Semarang", "Sidoarjo",
+  "Sleman", "Surabaya", "Tangerang", "Tangerang Selatan", "Yogyakarta"
+];
+
+try {
+  const res = await fetch("https://equran.id/api/v2/kajian?limit=24&upcoming=1");
+  if (res.ok) {
+    const json = await res.json();
+    if (json.data && Array.isArray(json.data)) {
+      initialKajianList = json.data;
+      if (json.pagination) {
+        initialPagination = json.pagination;
+      }
+      const citiesExtracted = Array.from(
+        new Set(json.data.map((k: KajianItem) => k.kota).filter(Boolean))
+      ).sort() as string[];
+      if (citiesExtracted.length > 0) {
+        initialCities = citiesExtracted;
+      }
+    }
+  }
+} catch (err) {
+  console.warn("Build time fetch kajian error:", err);
+}
+---
+
+<Layout
+  title="Info Kajian Sunnah Seluruh Indonesia - Perbaiki Sholatmu"
+  description="Jadwal kajian sunnah terkini dari berbagai masjid dan majelis ilmu di seluruh Indonesia. Temukan kajian berdasarkan tema, pemateri asatidzah, dan kota."
+>
+  <Header />
+  <main id="main-content" class="max-w-7xl mx-auto px-4 py-8 sm:py-12">
+    <KajianApp
+      client:load
+      initialKajianList={initialKajianList}
+      initialPagination={initialPagination}
+      initialCities={initialCities}
+    />
+  </main>
+  <Footer />
+</Layout>
