@@ -12,6 +12,8 @@ export default defineConfig({
   site: SITE.url,
   redirects: {
     "/about": "/tentang",
+    "/blog": "/artikel",
+    "/blog/[...slug]": "/artikel/[...slug]",
   },
   integrations: [
     react(),

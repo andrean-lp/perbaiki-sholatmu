@@ -1,0 +1,5 @@
+# Cloudflare Pages 301 Redirects
+/about /tentang 301
+/blog /artikel 301
+/blog/ /artikel/ 301
+/blog/* /artikel/:splat 301

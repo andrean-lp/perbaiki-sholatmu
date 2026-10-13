@@ -124,7 +124,7 @@ Blog di website ini terhubung langsung secara *headless* dengan Google Blogger (
 1. Masuk ke dashboard Blogger Anda di [blogger.com](https://www.blogger.com/).
 2. Buat artikel baru, unggah gambar poster/konten, dan publikasikan.
 3. Gambar otomatis di-host di Google CDN secara gratis dan tanpa batas.
-4. Setiap build website di Cloudflare Pages akan otomatis menyinkronkan seluruh artikel baru ke rute `/blog/` dan `/blog/[slug]/` dengan desain modern website ini.
+4. Setiap build website di Cloudflare Pages akan otomatis menyinkronkan seluruh artikel baru ke rute `/artikel/` dan `/artikel/[slug]/` dengan desain modern website ini.
 
 
 ## 🎨 Styling

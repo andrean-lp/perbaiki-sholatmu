@@ -7,11 +7,11 @@ Situs ini menyajikan panduan praktis ibadah sholat, tips kekhusyukan, bacaan sho
 ## Dokumen Utama
 
 - [Beranda](https://perbaiki-sholatmu.pages.dev/): Halaman utama dan ikhtisar fitur situs.
-- [Artikel & Panduan](https://perbaiki-sholatmu.pages.dev/blog): Direktori artikel seputar perbaikan kualitas sholat.
+- [Artikel & Panduan](https://perbaiki-sholatmu.pages.dev/artikel): Direktori artikel seputar perbaikan kualitas sholat.
 - [Tentang](https://perbaiki-sholatmu.pages.dev/tentang): Informasi inisiatif dan tujuan proyek Perbaiki Sholatmu.
 - [Syarat & Ketentuan](https://perbaiki-sholatmu.pages.dev/terms): Syarat dan ketentuan penggunaan situs.
 - [Kebijakan Privasi](https://perbaiki-sholatmu.pages.dev/privacy): Kebijakan pelindungan data pribadi pengguna.
 
 ## Artikel Pilihan
 
-- [Panduan Menjaga Kekhusyukan dalam Sholat](https://perbaiki-sholatmu.pages.dev/blog/panduan-sholat-khusyuk): Langkah-langkah praktis dan persiapan hati agar sholat lebih tenang dan khusyuk.
+- [Panduan Menjaga Kekhusyukan dalam Sholat](https://perbaiki-sholatmu.pages.dev/artikel/panduan-sholat-khusyuk): Langkah-langkah praktis dan persiapan hati agar sholat lebih tenang dan khusyuk.

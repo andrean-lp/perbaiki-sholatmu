@@ -15,7 +15,7 @@ const categoryCounts = categories.reduce<Record<string, number>>((acc, cat) => {
 ---
 
 <Layout
-  title="Blog & Artikel - Perbaiki Sholatmu"
+  title="Artikel & Panduan - Perbaiki Sholatmu"
   description="Kumpulan artikel, hikmah, dan panduan seputar menyempurnakan ibadah sholat dan amalan harian bersumber dari Al-Quran dan Sunnah."
 >
   <Header />
@@ -70,7 +70,7 @@ const categoryCounts = categories.reduce<Record<string, number>>((acc, cat) => {
               data-categories={JSON.stringify(post.categories.map((c) => c.toLowerCase()))}
             >
               {post.thumbnail && (
-                <a href={`/blog/${post.slug}`} class="block aspect-[16/10] bg-gray-100 overflow-hidden relative">
+                <a href={`/artikel/${post.slug}`} class="block aspect-[16/10] bg-gray-100 overflow-hidden relative">
                   <img
                     src={post.thumbnail}
                     alt={post.title}
@@ -100,7 +100,7 @@ const categoryCounts = categories.reduce<Record<string, number>>((acc, cat) => {
                   </div>
 
                   <h2 class="text-xl font-bold text-gray-900 group-hover:text-emerald-800 transition-colors line-clamp-2 leading-snug">
-                    <a href={`/blog/${post.slug}`} class="focus:outline-none">
+                    <a href={`/artikel/${post.slug}`} class="focus:outline-none">
                       {post.title}
                     </a>
                   </h2>
@@ -114,7 +114,7 @@ const categoryCounts = categories.reduce<Record<string, number>>((acc, cat) => {
 
                 <div class="mt-5 pt-4 border-t border-gray-100 flex items-center justify-between">
                   <a
-                    href={`/blog/${post.slug}`}
+                    href={`/artikel/${post.slug}`}
                     class="inline-flex items-center gap-1.5 text-sm font-semibold text-gray-900 group-hover:text-emerald-700 transition-colors"
                   >
                     <span>Baca selengkapnya</span>
