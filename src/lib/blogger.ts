@@ -8,6 +8,7 @@ export interface BloggerPost {
   updated: string;
   author: string;
   thumbnail: string | null;
+  fullImage: string | null;
   categories: string[];
   originalUrl: string;
 }
@@ -36,12 +37,16 @@ function cleanExcerpt(html: string): string {
   return plainText.length > 160 ? `${plainText.slice(0, 157)}...` : plainText;
 }
 
-function extractImage(entry: any): string | null {
+function extractImage(entry: any, highRes: boolean = false): string | null {
   // Check media$thumbnail first
   if (entry.media$thumbnail && entry.media$thumbnail.url) {
     let url = entry.media$thumbnail.url;
-    // Upgrade Google thumbnail to high-res WebP/image
-    url = url.replace(/\/s[0-9]+(-[^/]+)?\//, "/s1600/");
+    if (highRes) {
+      url = url.replace(/\/s[0-9]+(-[^/]+)?\//, "/s1600/");
+    } else {
+      // Auto resize ke 600px dan convert ke WebP langsung oleh Google CDN
+      url = url.replace(/\/s[0-9]+(-[^/]+)?\//, "/w600-rw/");
+    }
     // Upgrade YouTube thumbnail
     if (url.includes("img.youtube.com") && url.includes("/default.jpg")) {
       url = url.replace("/default.jpg", "/hqdefault.jpg");
@@ -53,7 +58,11 @@ function extractImage(entry: any): string | null {
   if (entry.content && entry.content.$t) {
     const match = entry.content.$t.match(/<img[^>]+src=["']([^"']+)["']/i);
     if (match && match[1]) {
-      return match[1];
+      let imgUrl = match[1];
+      if (!highRes && imgUrl.includes("blogger.googleusercontent.com") && /\/s[0-9]+(-[^/]+)?\//.test(imgUrl)) {
+        imgUrl = imgUrl.replace(/\/s[0-9]+(-[^/]+)?\//, "/w600-rw/");
+      }
+      return imgUrl;
     }
   }
 
@@ -136,7 +145,8 @@ export async function fetchBloggerPosts(): Promise<BloggerPost[]> {
       const categories = entry.category
         ? entry.category.map((c: any) => c.term).filter(Boolean)
         : [];
-      const thumbnail = extractImage(entry);
+      const thumbnail = extractImage(entry, false);
+      const fullImage = extractImage(entry, true);
       const excerpt = cleanExcerpt(rawContent);
 
       return {
@@ -149,6 +159,7 @@ export async function fetchBloggerPosts(): Promise<BloggerPost[]> {
         updated,
         author,
         thumbnail,
+        fullImage,
         categories,
         originalUrl: altLink,
       };

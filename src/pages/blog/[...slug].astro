@@ -28,7 +28,7 @@ const contentHasImage = post.content ? post.content.includes('<img') : false;
     post.excerpt ||
     `Baca artikel dan panduan seputar ${post.title} dari Qata Quran di Perbaiki Sholatmu.`
   }
-  ogImage={post.thumbnail || undefined}
+  ogImage={post.fullImage || post.thumbnail || undefined}
   ogType="article"
 >
   <Header />
@@ -74,11 +74,11 @@ const contentHasImage = post.content ? post.content.includes('<img') : false;
       </header>
 
       {/* Hanya tampilkan thumbnail jika isi artikel belum memiliki gambar apa pun */}
-      {!contentHasImage && post.thumbnail && (
+      {!contentHasImage && (post.fullImage || post.thumbnail) && (
         <div class="mb-10 rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 shadow-sm">
-          <a href={post.thumbnail} target="_blank" rel="noopener noreferrer" class="block">
+          <a href={post.fullImage || post.thumbnail} target="_blank" rel="noopener noreferrer" class="block">
             <img
-              src={post.thumbnail}
+              src={post.fullImage || post.thumbnail}
               alt={post.title}
               class="w-full h-auto object-contain rounded-2xl"
             />
