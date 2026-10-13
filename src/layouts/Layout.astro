@@ -69,6 +69,10 @@ const robotsContent = [
 		<meta name="robots" content={robotsContent} />
 		<link rel="canonical" href={siteURL.href} />
 		
+		<!-- AI Agent Discovery (ARD & LLMs) -->
+		<link rel="ai-catalog" type="application/json" href="/.well-known/ai-catalog.json" />
+		<link rel="alternate" type="text/markdown" href="/llms.txt" title="LLMs Info" />
+		
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content={ogType} />
 		<meta property="og:url" content={siteURL.href} />

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://agent-resource-discovery.org/schemas/v1/ai-catalog.json",
+  "name": "Perbaiki Sholatmu",
+  "description": "Panduan dan inspirasi untuk memperbaiki kualitas dan kekhusyukan ibadah sholat.",
+  "version": "1.0.0",
+  "url": "https://perbaiki-sholatmu.andrean.web.id",
+  "resources": [
+    {
+      "name": "LLMs Guide",
+      "type": "text/markdown",
+      "url": "https://perbaiki-sholatmu.andrean.web.id/llms.txt",
+      "description": "Dokumentasi dan ringkasan konten situs untuk model bahasa besar (LLM)"
+    },
+    {
+      "name": "Sitemap",
+      "type": "application/xml",
+      "url": "https://perbaiki-sholatmu.andrean.web.id/sitemap-index.xml",
+      "description": "Peta situs lengkap untuk penjelajahan agen dan mesin pencari"
+    }
+  ],
+  "contact": {
+    "url": "https://perbaiki-sholatmu.andrean.web.id/contact"
+  }
+}
