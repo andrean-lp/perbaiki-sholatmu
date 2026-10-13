@@ -12,6 +12,7 @@ export default defineConfig({
   site: SITE.url,
   redirects: {
     "/about": "/tentang",
+    "/al-quran": "/quran",
     "/blog": "/artikel",
     "/blog/[...slug]": "/artikel/[...slug]",
   },

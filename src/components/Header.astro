@@ -43,6 +43,15 @@ import { Icon } from "astro-icon/components";
       </li>
       <li>
         <a
+          href="/quran"
+          class="text-gray-600 hover:text-gray-900 transition-colors"
+          aria-current={Astro.url.pathname.startsWith('/quran') ? 'page' : undefined}
+        >
+          Al-Qur'an
+        </a>
+      </li>
+      <li>
+        <a
           href="/tentang"
           class="text-gray-600 hover:text-gray-900 transition-colors"
           aria-current={Astro.url.pathname === '/tentang' ? 'page' : undefined}
@@ -127,6 +136,16 @@ import { Icon } from "astro-icon/components";
           aria-current={Astro.url.pathname === '/jadwal-sholat' ? 'page' : undefined}
         >
           Jadwal Sholat
+        </a>
+      </li>
+      <li>
+        <a
+          href="/quran"
+          class="block px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors"
+          role="menuitem"
+          aria-current={Astro.url.pathname.startsWith('/quran') ? 'page' : undefined}
+        >
+          Al-Qur'an
         </a>
       </li>
       <li>
