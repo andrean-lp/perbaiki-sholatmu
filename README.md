@@ -215,7 +215,6 @@ See `src/pages/example.mdx` for a complete example.
 - **/** - Homepage with hero, features, and CTA sections
 - **/features** - Features showcase page
 - **/about** - About page
-- **/contact** - Contact form page
 - **/example** - MDX example page demonstrating markdown features
 
 ## 🔧 Configuration
