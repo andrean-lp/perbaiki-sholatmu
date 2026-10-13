@@ -1,24 +1,18 @@
 {
   "specVersion": "1.0",
-  "host": {
-    "displayName": "Perbaiki Sholatmu",
-    "identifier": "did:web:perbaiki-sholatmu.pages.dev",
-    "url": "https://perbaiki-sholatmu.pages.dev"
-  },
   "entries": [
     {
-      "identifier": "urn:air:perbaiki-sholatmu.pages.dev:docs:llms-txt",
+      "identifier": "urn:air:perbaiki-sholatmu.pages.dev:skills:llms-txt",
       "displayName": "Panduan dan Dokumentasi Perbaiki Sholatmu (llms.txt)",
       "description": "Indeks halaman dan panduan ibadah sholat dalam format Markdown terstruktur untuk agen AI.",
-      "type": "text/markdown",
-      "url": "https://perbaiki-sholatmu.pages.dev/llms.txt"
-    },
-    {
-      "identifier": "urn:air:perbaiki-sholatmu.pages.dev:docs:sitemap",
-      "displayName": "Sitemap XML",
-      "description": "Peta situs XML resmi untuk indeks pencarian dan perayapan agen.",
-      "type": "application/xml",
-      "url": "https://perbaiki-sholatmu.pages.dev/sitemap-index.xml"
+      "type": "text/markdown; profile=\"urn:air:agent-skills\"",
+      "url": "https://perbaiki-sholatmu.pages.dev/llms.txt",
+      "representativeQueries": [
+        "panduan sholat lengkap sesuai sunnah",
+        "cara memperbaiki kualitas dan kekhusyukan sholat",
+        "jadwal waktu sholat harian dan doa",
+        "bacaan sholat dan artinya"
+      ]
     }
   ]
 }
