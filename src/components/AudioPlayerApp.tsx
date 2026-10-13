@@ -275,7 +275,7 @@ export default function AudioPlayerApp({ initialSuratList }: AudioPlayerAppProps
       <div className="bg-white rounded-2xl border border-gray-200 p-4 sm:p-6 mb-8 shadow-sm">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
           {/* Search bar */}
-          <div className="md:col-span-5 relative">
+          <div className="md:col-span-7 relative">
             <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -302,7 +302,7 @@ export default function AudioPlayerApp({ initialSuratList }: AudioPlayerAppProps
           </div>
 
           {/* Qari Selector */}
-          <div className="md:col-span-4">
+          <div className="md:col-span-5">
             <div className="relative">
               <label htmlFor="qari-select" className="sr-only">Pilih Qari</label>
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500">
@@ -324,12 +324,16 @@ export default function AudioPlayerApp({ initialSuratList }: AudioPlayerAppProps
               </select>
             </div>
           </div>
+        </div>
 
+        {/* Bottom Row: Category Pills & Counter */}
+        <div className="mt-4 pt-4 border-t border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           {/* Category Tabs */}
-          <div className="md:col-span-3 flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0">
+          <div className="flex items-center gap-1.5 flex-wrap">
+            <span className="text-xs font-medium text-gray-500 mr-1 hidden sm:inline">Kategori:</span>
             {[
-              { id: 'all', label: 'Semua' },
-              { id: 'juz30', label: 'Juz 30' },
+              { id: 'all', label: 'Semua Surah' },
+              { id: 'juz30', label: 'Juz 30 (Pendek)' },
               { id: 'makkiyah', label: 'Makkiyah' },
               { id: 'madaniyah', label: 'Madaniyah' },
             ].map((tab) => (
@@ -337,25 +341,26 @@ export default function AudioPlayerApp({ initialSuratList }: AudioPlayerAppProps
                 key={tab.id}
                 type="button"
                 onClick={() => setFilterType(tab.id as any)}
-                className={`px-3 py-2 text-xs font-semibold rounded-lg whitespace-nowrap transition-colors ${
+                className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer ${
                   filterType === tab.id
-                    ? 'bg-black text-white'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    ? 'bg-black text-white shadow-xs'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200 hover:text-black'
                 }`}
               >
                 {tab.label}
               </button>
             ))}
           </div>
-        </div>
 
-        {/* Counter & Status */}
-        <div className="mt-4 pt-4 border-t border-gray-100 flex flex-wrap items-center justify-between text-xs text-gray-500">
-          <div>
-            Menampilkan <span className="font-semibold text-gray-900">{filteredList.length}</span> dari {initialSuratList.length} surah
-          </div>
-          <div className="flex items-center gap-2">
-            <span>Qari aktif: <strong className="text-gray-800">{activeQariObj.name}</strong></span>
+          {/* Counter & Status */}
+          <div className="flex items-center justify-between sm:justify-end gap-3 text-xs text-gray-500">
+            <span>
+              Menampilkan <strong className="text-gray-900">{filteredList.length}</strong> dari {initialSuratList.length} surah
+            </span>
+            <span className="hidden md:inline text-gray-300">|</span>
+            <span className="hidden md:inline">
+              Qari: <strong className="text-gray-800">{activeQariObj.short}</strong>
+            </span>
           </div>
         </div>
       </div>
