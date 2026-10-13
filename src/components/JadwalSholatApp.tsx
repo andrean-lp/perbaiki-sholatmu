@@ -382,6 +382,8 @@ Sumber Data: Bimas Islam Kemenag RI via Perbaiki Sholatmu (equran.id)`;
             </label>
             <select
               id="select-provinsi"
+              name="select-provinsi"
+              aria-label="Pilih Provinsi"
               value={selectedProvince}
               onChange={handleProvinceChange}
               className="w-full px-3.5 py-2.5 bg-gray-50 hover:bg-gray-100/80 focus:bg-white border border-gray-200 rounded-xl text-gray-900 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-colors cursor-pointer"
@@ -417,6 +419,8 @@ Sumber Data: Bimas Islam Kemenag RI via Perbaiki Sholatmu (equran.id)`;
             </label>
             <select
               id="select-kabkota"
+              name="select-kabkota"
+              aria-label="Pilih Kabupaten atau Kota"
               value={selectedCity}
               onChange={handleCityChange}
               disabled={isLoadingCities || cities.length === 0}
@@ -453,6 +457,8 @@ Sumber Data: Bimas Islam Kemenag RI via Perbaiki Sholatmu (equran.id)`;
             </label>
             <select
               id="select-bulan"
+              name="select-bulan"
+              aria-label="Pilih Bulan Jadwal Sholat"
               value={selectedMonth}
               onChange={handleMonthChange}
               className="w-full px-3.5 py-2.5 bg-gray-50 hover:bg-gray-100/80 focus:bg-white border border-gray-200 rounded-xl text-gray-900 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-colors cursor-pointer"

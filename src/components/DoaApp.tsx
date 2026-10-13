@@ -134,6 +134,9 @@ export default function DoaApp({ initialDoaList }: DoaAppProps) {
             </span>
             <input
               type="text"
+              id="input-cari-doa"
+              name="input-cari-doa"
+              aria-label="Cari doa berdasarkan nama, isi, atau kategori"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Cari doa berdasarkan nama, isi, atau kategori..."
@@ -144,6 +147,7 @@ export default function DoaApp({ initialDoaList }: DoaAppProps) {
                 type="button"
                 onClick={() => setSearch('')}
                 className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-700 cursor-pointer"
+                aria-label="Hapus kata kunci pencarian doa"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -155,7 +159,13 @@ export default function DoaApp({ initialDoaList }: DoaAppProps) {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {/* Kategori Dropdown */}
             <div className="relative">
+              <label htmlFor="select-kategori-doa" className="sr-only">
+                Pilih Kategori Doa
+              </label>
               <select
+                id="select-kategori-doa"
+                name="select-kategori-doa"
+                aria-label="Pilih Kategori Doa"
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
                 className="w-full px-4 py-3 bg-gray-50 hover:bg-white focus:bg-white border border-gray-300 rounded-xl text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-black cursor-pointer pr-10 appearance-none transition-colors"
@@ -176,7 +186,13 @@ export default function DoaApp({ initialDoaList }: DoaAppProps) {
 
             {/* Tag Dropdown */}
             <div className="relative">
+              <label htmlFor="select-tag-doa" className="sr-only">
+                Pilih Tag Doa
+              </label>
               <select
+                id="select-tag-doa"
+                name="select-tag-doa"
+                aria-label="Pilih Tag Doa"
                 value={selectedTag}
                 onChange={(e) => setSelectedTag(e.target.value)}
                 className="w-full px-4 py-3 bg-gray-50 hover:bg-white focus:bg-white border border-gray-300 rounded-xl text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-black cursor-pointer pr-10 appearance-none transition-colors"

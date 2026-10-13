@@ -212,6 +212,9 @@ Sumber: Perbaiki Sholatmu via EQuran.id`;
             </svg>
             <input
               type="text"
+              id="input-cari-kajian"
+              name="input-cari-kajian"
+              aria-label="Cari kajian berdasarkan tema, pemateri, atau masjid"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Cari tema, pemateri, atau masjid..."
@@ -222,7 +225,7 @@ Sumber: Perbaiki Sholatmu via EQuran.id`;
                 type="button"
                 onClick={() => setSearchQuery("")}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 text-xs px-1.5 py-0.5 rounded cursor-pointer"
-                aria-label="Hapus pencarian"
+                aria-label="Hapus kata kunci pencarian kajian"
               >
                 ✕
               </button>
@@ -231,7 +234,13 @@ Sumber: Perbaiki Sholatmu via EQuran.id`;
 
           {/* City Dropdown */}
           <div className="w-full md:w-56 shrink-0">
+            <label htmlFor="select-kota-kajian" className="sr-only">
+              Pilih Kota Kajian
+            </label>
             <select
+              id="select-kota-kajian"
+              name="select-kota-kajian"
+              aria-label="Pilih Kota Kajian"
               value={selectedCity}
               onChange={(e) => setSelectedCity(e.target.value)}
               className="w-full px-3.5 py-2.5 bg-gray-50 hover:bg-gray-100/80 focus:bg-white border border-gray-200 rounded-xl text-sm font-medium text-gray-900 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-colors cursor-pointer"
