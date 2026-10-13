@@ -490,24 +490,24 @@ Sumber Data: Bimas Islam Kemenag RI via Perbaiki Sholatmu (equran.id)`;
       {/* Highlight Box: Waktu Shalat Hari Ini */}
       {todaySchedule && scheduleData && (
         <div className="max-w-5xl mx-auto mb-10">
-          <div className="bg-gradient-to-br from-gray-900 via-gray-900 to-black text-white rounded-3xl p-6 sm:p-8 shadow-xl border border-gray-800 relative overflow-hidden">
+          <div className="bg-white text-gray-900 rounded-3xl p-6 sm:p-8 shadow-sm border border-gray-200 relative overflow-hidden">
             {/* Background pattern decoration */}
-            <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none" />
-            <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-64 h-64 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none" />
+            <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 rounded-full bg-emerald-100/50 blur-3xl pointer-events-none" />
+            <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-64 h-64 rounded-full bg-sky-100/50 blur-3xl pointer-events-none" />
 
             <div className="relative z-10">
               {/* Header inside card */}
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-gray-800">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-gray-100">
                 <div>
                   <div className="flex items-center gap-2 mb-1.5">
-                    <span className="inline-block px-2.5 py-0.5 rounded-md text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                    <span className="inline-block px-2.5 py-0.5 rounded-md text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
                       Waktu Wilayah
                     </span>
-                    <span className="text-gray-400 text-sm">
+                    <span className="text-gray-500 text-sm">
                       {scheduleData.kabkota}, {scheduleData.provinsi}
                     </span>
                   </div>
-                  <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                  <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">
                     {todaySchedule.hari}, {todaySchedule.tanggal}{" "}
                     {scheduleData.bulan_nama} {scheduleData.tahun}
                   </h2>
@@ -515,11 +515,11 @@ Sumber Data: Bimas Islam Kemenag RI via Perbaiki Sholatmu (equran.id)`;
 
                 <div className="flex items-center gap-3">
                   {/* Digital Clock */}
-                  <div className="text-right bg-white/5 border border-white/10 rounded-xl px-4 py-2">
-                    <div className="text-xs uppercase tracking-wider text-gray-400">
+                  <div className="text-right bg-gray-50 border border-gray-200 rounded-xl px-4 py-2 shadow-2xs">
+                    <div className="text-xs uppercase tracking-wider text-gray-500 font-medium">
                       Waktu Saat Ini
                     </div>
-                    <div className="text-xl sm:text-2xl font-mono font-bold text-emerald-400">
+                    <div className="text-xl sm:text-2xl font-mono font-bold text-emerald-700">
                       {clockString}
                     </div>
                   </div>
@@ -528,13 +528,13 @@ Sumber Data: Bimas Islam Kemenag RI via Perbaiki Sholatmu (equran.id)`;
                   <button
                     type="button"
                     onClick={handleCopySchedule}
-                    className="p-3 bg-white/10 hover:bg-white/20 active:scale-95 border border-white/15 rounded-xl text-white transition-all cursor-pointer"
+                    className="p-3 bg-gray-50 hover:bg-gray-100 active:scale-95 border border-gray-200 rounded-xl text-gray-700 hover:text-gray-900 transition-all cursor-pointer shadow-2xs"
                     title="Salin Jadwal Hari Ini"
                     aria-label="Salin Jadwal Hari Ini"
                   >
                     {copySuccess ? (
                       <svg
-                        className="w-5 h-5 text-emerald-400"
+                        className="w-5 h-5 text-emerald-600"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -567,9 +567,9 @@ Sumber Data: Bimas Islam Kemenag RI via Perbaiki Sholatmu (equran.id)`;
 
               {/* Countdown Banner */}
               {prayerStatus && prayerStatus.next && (
-                <div className="my-6 p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+                <div className="my-6 p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                    <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0">
                       <svg
                         className="w-5 h-5"
                         fill="none"
@@ -585,12 +585,12 @@ Sumber Data: Bimas Islam Kemenag RI via Perbaiki Sholatmu (equran.id)`;
                       </svg>
                     </div>
                     <div>
-                      <div className="text-xs uppercase tracking-wider text-gray-400">
+                      <div className="text-xs uppercase tracking-wider text-emerald-800/80 font-bold">
                         Menuju Waktu Shalat
                       </div>
-                      <div className="text-base font-semibold text-white">
+                      <div className="text-base font-semibold text-gray-900">
                         Waktu {prayerStatus.next.name} akan tiba dalam{" "}
-                        <span className="text-emerald-400 font-bold">
+                        <span className="text-emerald-700 font-bold">
                           {prayerStatus.countdownText}
                         </span>
                       </div>
@@ -599,7 +599,7 @@ Sumber Data: Bimas Islam Kemenag RI via Perbaiki Sholatmu (equran.id)`;
                   <button
                     type="button"
                     onClick={scrollToToday}
-                    className="text-xs font-semibold px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer border border-white/10"
+                    className="text-xs font-semibold px-4 py-2 rounded-xl bg-white hover:bg-gray-50 text-gray-800 hover:text-gray-900 transition-colors cursor-pointer border border-gray-200 shadow-2xs"
                   >
                     Lihat Jadwal 1 Bulan
                   </button>
@@ -617,22 +617,34 @@ Sumber Data: Bimas Islam Kemenag RI via Perbaiki Sholatmu (equran.id)`;
                       key={p.key}
                       className={`relative rounded-2xl p-4 transition-all flex flex-col items-center text-center ${
                         isNext
-                          ? "bg-emerald-500/20 border-2 border-emerald-400 shadow-lg shadow-emerald-500/10 scale-105"
-                          : "bg-white/5 hover:bg-white/10 border border-white/10"
+                          ? "bg-emerald-50 border-2 border-emerald-600 shadow-md shadow-emerald-600/10 scale-105 ring-2 ring-emerald-500/20"
+                          : "bg-gray-50/80 hover:bg-gray-100/80 border border-gray-200 shadow-2xs"
                       }`}
                     >
                       {isNext && (
-                        <span className="absolute -top-2.5 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-500 text-black shadow-sm">
+                        <span className="absolute -top-2.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-600 text-white shadow-xs">
                           Berikutnya
                         </span>
                       )}
-                      <span className="text-xs font-medium text-gray-400 mb-1">
+                      <span
+                        className={`text-xs font-medium mb-1 ${
+                          isNext ? "text-emerald-800 font-bold" : "text-gray-500"
+                        }`}
+                      >
                         {p.label}
                       </span>
-                      <span className="text-xl sm:text-2xl font-bold font-mono text-white tracking-tight">
+                      <span
+                        className={`text-xl sm:text-2xl font-bold font-mono tracking-tight ${
+                          isNext ? "text-emerald-950" : "text-gray-900"
+                        }`}
+                      >
                         {timeVal || "--:--"}
                       </span>
-                      <span className="text-[10px] text-gray-500 mt-1 uppercase tracking-widest">
+                      <span
+                        className={`text-[10px] mt-1 uppercase tracking-widest ${
+                          isNext ? "text-emerald-700 font-bold" : "text-gray-400 font-medium"
+                        }`}
+                      >
                         {p.isFardhu ? "Fardhu" : "Sunnah"}
                       </span>
                     </div>
