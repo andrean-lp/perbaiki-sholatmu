@@ -173,22 +173,13 @@ Sumber: Perbaiki Sholatmu via EQuran.id`;
   return (
     <div className="w-full">
       {/* Header section */}
-      <div className="text-center max-w-3xl mx-auto mb-10">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 text-xs font-semibold text-emerald-800 mb-4 border border-emerald-200">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span>Jadwal Kajian Terverifikasi</span>
-          <span className="text-emerald-300">|</span>
-          <span>Seluruh Indonesia</span>
-          <span className="text-emerald-300">|</span>
-          <span>API EQuran.id</span>
-        </div>
-
+      <div className="text-left max-w-3xl mb-10">
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-4">
           Info Kajian Sunnah
         </h1>
 
         <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-          Jadwal kajian sunnah dari berbagai masjid dan majelis ilmu di Indonesia. Cari berdasarkan tema, pemateri, atau kota tempat tinggal Anda.
+          Jadwal kajian sunnah terverifikasi dari berbagai masjid dan majelis ilmu di seluruh Indonesia. Cari kajian berdasarkan tema, ustadz/pemateri, atau kota domisili Anda.
         </p>
       </div>
 

@@ -1,98 +1,149 @@
 ---
 import { Icon } from "astro-icon/components";
-
-const features = [
-  {
-    title: "Jadwal Sholat & Imsakiyah",
-    desc: "Akurasi jadwal sholat 5 waktu resmi Kemenag RI untuk seluruh kota dan kabupaten di Indonesia.",
-    href: "/jadwal-sholat",
-    icon: "tabler:clock",
-    badge: "Otomatis Sesuai Kota",
-  },
-  {
-    title: "Al-Qur'an 30 Juz Digital",
-    desc: "Teks Arab mushaf standar Indonesia, terjemahan resmi Kemenag, asbabun nuzul, dan pemutar audio murottal.",
-    href: "/quran",
-    icon: "tabler:book-2",
-    badge: "114 Surah Lengkap",
-  },
-  {
-    title: "Kumpulan Doa Harian",
-    desc: "Kompilasi doa mustajab bersumber dari hadits shahih (Hisnul Muslim) lengkap teks Arab, latin, dan artinya.",
-    href: "/doa",
-    icon: "tabler:heart-handshake",
-    badge: "Hadits Shahih",
-  },
-  {
-    title: "Info Kajian Sunnah",
-    desc: "Jadwal agenda kajian Islam ilmiah dari berbagai masjid dan majelis ilmu di kota-kota se-Indonesia.",
-    href: "/kajian",
-    icon: "tabler:calendar-event",
-    badge: "Update Berkala",
-  },
-  {
-    title: "Artikel & Panduan Sholat",
-    desc: "Panduan praktis wudhu, sifat sholat nabi, adab dzikir, dan tips menjaga kekhusyukan ibadah harian.",
-    href: "/artikel",
-    icon: "tabler:article",
-    badge: "Rujukan Terpercaya",
-  },
-  {
-    title: "Tanya Al-Qur'an Cerdas",
-    desc: "Fitur pencarian makna dan ayat Al-Qur'an berbasis semantik yang siap membantu menjawab pertanyaanmu.",
-    href: "#",
-    icon: "tabler:sparkles",
-    badge: "AI Powered",
-    isChatTrigger: true,
-  },
-];
 ---
 
 <section id="features" class="max-w-6xl mx-auto px-4 py-16 sm:py-24">
-  <div class="text-center max-w-3xl mx-auto mb-14">
-    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 text-xs font-semibold text-emerald-800 mb-3 border border-emerald-200">
-      <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-      <span>Fitur & Layanan Ibadah</span>
-    </div>
-    <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 tracking-tight">
-      Kemudahan Menjaga Ibadah Harian
+  <div class="max-w-3xl text-left mb-12 sm:mb-16">
+    <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight mb-4">
+      Layanan Utama Ibadah Harian
     </h2>
     <p class="text-base sm:text-lg text-gray-600 leading-relaxed">
-      Beragam fitur islami terintegrasi untuk mendampingi langkahmu memperbaiki kualitas sholat dan memperdalam ilmu agama.
+      Dua pilar ibadah utama kaum muslimin yang dirancang secara presisi, bebas dari iklan komersial, dan berlandaskan rujukan terpercaya.
     </p>
   </div>
 
-  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-    {features.map((item) => (
-      <a
-        href={item.href}
-        class={`group h-full p-6 sm:p-7 bg-white rounded-2xl border border-gray-200 hover:border-emerald-600/30 hover:shadow-xl transition-all duration-300 flex flex-col justify-between ${
-          item.isChatTrigger ? "cursor-pointer" : ""
-        }`}
-        onclick={item.isChatTrigger ? "document.getElementById('quran-chat-toggle')?.click(); return false;" : undefined}
-      >
-        <div>
-          <div class="flex items-center justify-between mb-5">
-            <div class="w-12 h-12 bg-emerald-50 text-emerald-800 rounded-xl flex items-center justify-center group-hover:bg-emerald-800 group-hover:text-white transition-colors duration-200">
-              <Icon name={item.icon} class="w-6 h-6" aria-hidden="true" />
-            </div>
-            <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-gray-100 text-gray-600 border border-gray-200">
-              {item.badge}
-            </span>
-          </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-800 transition-colors">
-            {item.title}
-          </h3>
-          <p class="text-gray-600 text-sm leading-relaxed mb-6">
-            {item.desc}
-          </p>
+  <!-- Primary Pillars: Asymmetrical Editorial Pair -->
+  <div class="grid lg:grid-cols-12 gap-6 sm:gap-8 mb-10">
+    <!-- Pillar 1: Jadwal Sholat (Deep Tone Anchor) -->
+    <a
+      href="/jadwal-sholat"
+      class="group lg:col-span-7 bg-emerald-800 text-white rounded-3xl p-8 sm:p-10 flex flex-col justify-between hover:bg-emerald-900 transition-colors"
+    >
+      <div class="space-y-4">
+        <div class="inline-flex items-center gap-2 text-xs font-semibold text-emerald-200">
+          <Icon name="tabler:clock" class="w-4 h-4 text-amber-300" />
+          <span>Waktu Ibadah Presisi</span>
         </div>
+        <h3 class="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+          Jadwal Sholat & Imsakiyah 500+ Kota
+        </h3>
+        <p class="text-emerald-100/90 text-sm sm:text-base leading-relaxed max-w-lg">
+          Data hisab dan rukyat resmi Kementerian Agama RI dengan deteksi lokasi otomatis, hitung mundur waktu azan berikutnya, serta pengingat sholat sunnah dhuha & syuruq.
+        </p>
+      </div>
 
-        <div class="pt-4 border-t border-gray-100 flex items-center text-sm font-semibold text-gray-900 group-hover:text-emerald-700 transition-colors">
-          <span>{item.isChatTrigger ? "Mulai Bertanya" : "Buka Layanan"}</span>
-          <Icon name="tabler:arrow-right" class="w-4 h-4 ml-1.5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+      <div class="pt-8 flex items-center text-sm font-semibold text-amber-300 group-hover:text-amber-200 transition-colors">
+        <span>Buka Jadwal Sholat Hari Ini</span>
+        <Icon name="tabler:arrow-right" class="w-4 h-4 ml-1.5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+      </div>
+    </a>
+
+    <!-- Pillar 2: Al-Qur'an 30 Juz (Tone Step Surface) -->
+    <a
+      href="/quran"
+      class="group lg:col-span-5 bg-emerald-50/70 text-gray-900 rounded-3xl p-8 sm:p-10 flex flex-col justify-between hover:bg-emerald-100/80 transition-colors"
+    >
+      <div class="space-y-4">
+        <div class="inline-flex items-center gap-2 text-xs font-semibold text-emerald-800">
+          <Icon name="tabler:book-2" class="w-4 h-4 text-emerald-700" />
+          <span>Mushaf & Murottal</span>
         </div>
-      </a>
-    ))}
+        <h3 class="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900">
+          Al-Qur'an 30 Juz & Audio
+        </h3>
+        <p class="text-gray-600 text-sm sm:text-base leading-relaxed">
+          Teks mushaf standar Indonesia, terjemahan lengkap Kemenag, asbabun nuzul, tafsir wajiz, dan lantunan murottal dari 6 qari terkemuka.
+        </p>
+      </div>
+
+      <div class="pt-8 flex items-center text-sm font-semibold text-emerald-800 group-hover:text-emerald-950 transition-colors">
+        <span>Mulai Membaca Al-Qur'an</span>
+        <Icon name="tabler:arrow-right" class="w-4 h-4 ml-1.5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+      </div>
+    </a>
+  </div>
+
+  <!-- Supporting Resources: Unboxed 4-Column Editorial Flow -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-4 text-left">
+    <!-- Doa Harian -->
+    <a
+      href="/doa"
+      class="group p-6 rounded-2xl bg-gray-50/70 hover:bg-emerald-50/60 transition-colors flex flex-col justify-between"
+    >
+      <div class="space-y-2">
+        <div class="text-xs font-semibold text-emerald-800">Hisnul Muslim</div>
+        <h4 class="text-lg font-bold text-gray-900 group-hover:text-emerald-800 transition-colors">
+          Kumpulan Doa Harian
+        </h4>
+        <p class="text-sm text-gray-600 leading-relaxed">
+          Kompilasi doa mustajab bersumber dari hadits shahih lengkap dengan teks Arab, latin, dan artinya.
+        </p>
+      </div>
+      <div class="pt-4 flex items-center text-xs font-semibold text-gray-900 group-hover:text-emerald-800 transition-colors">
+        <span>Buka Kumpulan Doa</span>
+        <Icon name="tabler:arrow-right" class="w-3.5 h-3.5 ml-1 transition-transform group-hover:translate-x-1" />
+      </div>
+    </a>
+
+    <!-- Info Kajian -->
+    <a
+      href="/kajian"
+      class="group p-6 rounded-2xl bg-gray-50/70 hover:bg-emerald-50/60 transition-colors flex flex-col justify-between"
+    >
+      <div class="space-y-2">
+        <div class="text-xs font-semibold text-emerald-800">Majelis Ilmu</div>
+        <h4 class="text-lg font-bold text-gray-900 group-hover:text-emerald-800 transition-colors">
+          Info Kajian Sunnah
+        </h4>
+        <p class="text-sm text-gray-600 leading-relaxed">
+          Jadwal agenda kajian Islam ilmiah dari berbagai masjid dan majelis ilmu di kota-kota se-Indonesia.
+        </p>
+      </div>
+      <div class="pt-4 flex items-center text-xs font-semibold text-gray-900 group-hover:text-emerald-800 transition-colors">
+        <span>Lihat Agenda Kajian</span>
+        <Icon name="tabler:arrow-right" class="w-3.5 h-3.5 ml-1 transition-transform group-hover:translate-x-1" />
+      </div>
+    </a>
+
+    <!-- Artikel & Panduan -->
+    <a
+      href="/artikel"
+      class="group p-6 rounded-2xl bg-gray-50/70 hover:bg-emerald-50/60 transition-colors flex flex-col justify-between"
+    >
+      <div class="space-y-2">
+        <div class="text-xs font-semibold text-emerald-800">Fikih & Akhlak</div>
+        <h4 class="text-lg font-bold text-gray-900 group-hover:text-emerald-800 transition-colors">
+          Artikel & Panduan Sholat
+        </h4>
+        <p class="text-sm text-gray-600 leading-relaxed">
+          Panduan praktis tata cara sholat, sifat sholat nabi, adab dzikir, dan kiat menjaga kekhusyukan.
+        </p>
+      </div>
+      <div class="pt-4 flex items-center text-xs font-semibold text-gray-900 group-hover:text-emerald-800 transition-colors">
+        <span>Baca Panduan</span>
+        <Icon name="tabler:arrow-right" class="w-3.5 h-3.5 ml-1 transition-transform group-hover:translate-x-1" />
+      </div>
+    </a>
+
+    <!-- Tanya Al-Quran -->
+    <button
+      type="button"
+      onclick="document.getElementById('quran-chat-toggle')?.click();"
+      class="group text-left p-6 rounded-2xl bg-gray-50/70 hover:bg-emerald-50/60 transition-colors flex flex-col justify-between cursor-pointer w-full"
+    >
+      <div class="space-y-2">
+        <div class="text-xs font-semibold text-emerald-800">Pencarian Tematik</div>
+        <h4 class="text-lg font-bold text-gray-900 group-hover:text-emerald-800 transition-colors">
+          Tanya Al-Qur'an & Dalil
+        </h4>
+        <p class="text-sm text-gray-600 leading-relaxed">
+          Temukan ayat, tafsir, dan doa yang relevan berdasarkan topik ibadah yang sedang kamu pelajari.
+        </p>
+      </div>
+      <div class="pt-4 flex items-center text-xs font-semibold text-gray-900 group-hover:text-emerald-800 transition-colors">
+        <span>Tanya Sekarang</span>
+        <Icon name="tabler:arrow-right" class="w-3.5 h-3.5 ml-1 transition-transform group-hover:translate-x-1" />
+      </div>
+    </button>
   </div>
 </section>

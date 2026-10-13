@@ -4,7 +4,7 @@ import { Icon } from "astro-icon/components";
 
 <footer
   id="contact"
-  class="w-full py-12 px-4 border-t border-gray-200 bg-white"
+  class="w-full py-14 px-4 bg-gray-50/90 text-gray-700"
   role="contentinfo"
 >
   <div class="max-w-6xl mx-auto">
@@ -12,7 +12,7 @@ import { Icon } from "astro-icon/components";
       <!-- Info Brand & Statistik mirip equran.id -->
       <div class="md:col-span-6 lg:col-span-5 space-y-4">
         <div class="flex items-center gap-3.5">
-          <div class="w-12 h-12 rounded-2xl bg-emerald-50/80 border border-emerald-100 flex items-center justify-center p-1.5 shadow-xs shrink-0">
+          <div class="w-12 h-12 rounded-2xl bg-white flex items-center justify-center p-1.5 shrink-0">
             <img
               src="/uploads/qata-quran-icon.png"
               alt="Logo Qata Quran"
@@ -35,17 +35,15 @@ import { Icon } from "astro-icon/components";
         <p class="text-sm text-gray-600 leading-relaxed max-w-md">
           Platform Al-Qur'an digital dan panduan ibadah terlengkap untuk memperbaiki kualitas dan kekhusyukan sholat, dilengkapi terjemahan bahasa Indonesia, audio murottal 6 qari internasional, tafsir Kemenag, jadwal sholat presisi, dan kumpulan doa harian.
         </p>
-        <div class="flex items-center gap-6 pt-2">
+        <div class="flex items-center gap-8 pt-2">
           <div>
             <div class="text-2xl font-bold text-gray-900 tracking-tight">114</div>
             <div class="text-xs text-gray-500 font-medium">Surat</div>
           </div>
-          <div class="h-8 w-px bg-gray-200" aria-hidden="true"></div>
           <div>
             <div class="text-2xl font-bold text-gray-900 tracking-tight">6.236</div>
             <div class="text-xs text-gray-500 font-medium">Ayat</div>
           </div>
-          <div class="h-8 w-px bg-gray-200" aria-hidden="true"></div>
           <div>
             <div class="text-2xl font-bold text-gray-900 tracking-tight">6</div>
             <div class="text-xs text-gray-500 font-medium">Qari</div>
@@ -158,7 +156,7 @@ import { Icon } from "astro-icon/components";
         </ul>
       </div>
     </div>
-    <div class="pt-8 border-t border-gray-200 text-center text-gray-600">
+    <div data-ui class="pt-8 border-t border-gray-200/80 text-center text-gray-500 text-xs sm:text-sm">
       <p>
         &copy; <span id="footer-year">{new Date().getFullYear()}</span> Perbaiki Sholatmu by <a
           href="https://www.youtube.com/@qataquran"

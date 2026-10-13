@@ -36,14 +36,10 @@ const values = [
 >
   <Header />
 
-  <main id="main-content" role="main" class="max-w-5xl mx-auto px-4 py-14 sm:py-20">
+  <main id="main-content" role="main" class="max-w-5xl mx-auto px-4 py-14 sm:py-20 space-y-16">
     <!-- Hero Header -->
-    <header class="text-center max-w-3xl mx-auto mb-16">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 text-xs font-semibold text-emerald-800 mb-4 border border-emerald-200">
-        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-        <span>Tentang Perbaiki Sholatmu</span>
-      </div>
-      <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 tracking-tight mb-6 leading-tight">
+    <header class="text-left max-w-3xl">
+      <h1 class="text-3xl sm:text-5xl font-extrabold text-gray-900 tracking-tight mb-6 leading-tight">
         Perbaiki Sholatmu Agar Allah Perbaiki Hidupmu
       </h1>
       <p class="text-lg sm:text-xl text-gray-600 leading-relaxed">
@@ -51,24 +47,24 @@ const values = [
       </p>
     </header>
 
-    <!-- Kutipan Landasan -->
-    <section class="mb-16 p-8 sm:p-10 bg-white rounded-3xl border border-gray-200 shadow-sm text-center">
-      <div class="max-w-3xl mx-auto">
-        <p class="text-lg sm:text-xl text-gray-800 italic leading-relaxed font-serif">
+    <!-- Kutipan Landasan Hadits -->
+    <section class="p-8 sm:p-10 bg-amber-50/70 rounded-3xl text-left">
+      <div class="max-w-3xl">
+        <blockquote class="text-lg sm:text-xl text-amber-950 font-serif italic leading-relaxed">
           &ldquo;Sesungguhnya amal yang pertama kali dihisab pada seorang hamba pada hari kiamat adalah sholatnya. Maka, jika sholatnya baik, sungguh ia telah beruntung dan berhasil. Dan jika shalatnya rusak, sungguh ia telah gagal dan rugi.&rdquo;
-        </p>
-        <div class="mt-4 pt-4 border-t border-gray-100 text-xs sm:text-sm text-gray-500 font-medium">
+        </blockquote>
+        <p class="mt-4 text-xs sm:text-sm text-amber-800 font-medium">
           HR. At-Tirmidzi no. 413, An-Nasa'i no. 465, dishahihkan oleh Syaikh Al-Albani
-        </div>
+        </p>
       </div>
     </section>
 
     <!-- Inisiatif & Pengembang: Dibuat oleh Qata Quran -->
-    <section class="mb-16 p-8 sm:p-12 bg-white rounded-3xl border border-gray-200 shadow-sm">
+    <section class="p-8 sm:p-12 bg-emerald-50/70 rounded-3xl">
       <div class="grid md:grid-cols-12 gap-8 sm:gap-10 items-center">
         <!-- Logo Qata Quran Container -->
         <div class="md:col-span-4 flex justify-center">
-          <div class="p-6 rounded-2xl bg-emerald-50/70 border border-emerald-100/80 flex items-center justify-center max-w-[240px] shadow-2xs">
+          <div class="p-6 rounded-2xl bg-white flex items-center justify-center max-w-[240px]">
             <img
               src="/uploads/qata-quran-logo.png"
               alt="Logo Resmi Qata Quran"
@@ -82,20 +78,15 @@ const values = [
 
         <!-- Uraian Hubungan & Komitmen -->
         <div class="md:col-span-8 space-y-4 text-left">
-          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 text-xs font-semibold text-emerald-800 border border-emerald-200">
-            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-            <span>Inisiatif & Pengembang</span>
-          </div>
-
           <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight leading-snug">
             Perbaiki Sholatmu Dikembangkan oleh Qata Quran
           </h2>
 
-          <p class="text-gray-600 leading-relaxed text-base">
+          <p class="text-gray-700 leading-relaxed text-base">
             Platform <strong>Perbaiki Sholatmu</strong> lahir dan dikembangkan sebagai bagian dari dedikasi dakwah digital <strong>Qata Quran</strong>. Kami berikhtiar menghadirkan sarana praktis bagi kaum muslimin untuk memperbaiki kualitas sholat, menjaga waktu ibadah, dan mendalami hikmah ayat suci Al-Qur'an dalam kehidupan sehari-hari.
           </p>
 
-          <p class="text-gray-600 leading-relaxed text-base">
+          <p class="text-gray-700 leading-relaxed text-base">
             Dengan komitmen menyajikan konten yang bersumber dari dalil shahih, rujukan resmi Kementerian Agama RI, data jadwal sholat presisi, serta lantunan murottal dari para qari internasional, Qata Quran mengelola platform ini agar senantiasa bermanfaat, menenangkan hati, dan menjadi amal jariyah yang berkesinambungan.
           </p>
 
@@ -104,7 +95,7 @@ const values = [
               href="https://www.youtube.com/@qataquran"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-800 text-white rounded-xl text-xs sm:text-sm font-semibold hover:bg-emerald-900 transition-colors shadow-sm"
+              class="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-800 text-white rounded-xl text-xs sm:text-sm font-semibold hover:bg-emerald-900 transition-colors"
             >
               <Icon name="tabler:brand-youtube" class="w-4 h-4 text-red-400" />
               <span>YouTube Channel @qataquran</span>
@@ -113,7 +104,7 @@ const values = [
               href="https://id.pinterest.com/qataquran/"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-gray-800 border border-gray-300 rounded-xl text-xs sm:text-sm font-semibold hover:bg-emerald-50 hover:text-emerald-800 hover:border-emerald-300 transition-colors"
+              class="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-gray-800 rounded-xl text-xs sm:text-sm font-semibold hover:bg-emerald-100/70 hover:text-emerald-900 transition-colors"
             >
               <Icon name="tabler:brand-pinterest" class="w-4 h-4 text-rose-500" />
               <span>Pinterest @qataquran</span>
@@ -124,26 +115,26 @@ const values = [
     </section>
 
     <!-- Visi & Misi -->
-    <section class="grid md:grid-cols-2 gap-8 mb-16">
-      <div class="p-8 bg-white rounded-3xl border border-gray-200 shadow-sm flex flex-col justify-between">
+    <section class="grid md:grid-cols-2 gap-8">
+      <div class="p-8 bg-gray-50/80 rounded-3xl flex flex-col justify-between">
         <div>
-          <div class="w-12 h-12 bg-emerald-50 text-emerald-800 rounded-2xl flex items-center justify-center mb-5">
+          <div class="w-12 h-12 bg-emerald-100 text-emerald-900 rounded-2xl flex items-center justify-center mb-5">
             <Icon name="tabler:target" class="w-6 h-6" />
           </div>
           <h2 class="text-2xl font-bold text-gray-900 mb-3">Visi Kami</h2>
-          <p class="text-gray-600 leading-relaxed text-base">
+          <p class="text-gray-700 leading-relaxed text-base">
             Menjadi platform panduan ibadah sholat digital terdepan yang terpercaya, menumbuhkan kesadaran umat akan urgensi sholat tepat waktu, serta menghidupkan nilai-nilai kekhusyukan dalam kehidupan sehari-hari.
           </p>
         </div>
       </div>
 
-      <div class="p-8 bg-white rounded-3xl border border-gray-200 shadow-sm flex flex-col justify-between">
+      <div class="p-8 bg-gray-50/80 rounded-3xl flex flex-col justify-between">
         <div>
-          <div class="w-12 h-12 bg-emerald-50 text-emerald-800 rounded-2xl flex items-center justify-center mb-5">
+          <div class="w-12 h-12 bg-emerald-100 text-emerald-900 rounded-2xl flex items-center justify-center mb-5">
             <Icon name="tabler:compass" class="w-6 h-6" />
           </div>
           <h2 class="text-2xl font-bold text-gray-900 mb-3">Misi Kami</h2>
-          <ul class="space-y-3 text-gray-600 text-base leading-relaxed list-disc list-inside">
+          <ul class="space-y-3 text-gray-700 text-base leading-relaxed list-disc list-inside">
             <li>Menyajikan panduan tata cara sholat praktis berdasarkan sunnah shahihah.</li>
             <li>Menyediakan perkakas ibadah harian seperti jadwal sholat akurat dan Al-Qur'an 30 juz.</li>
             <li>Menyebarkan artikel pengingat dan hikmah yang aplikatif untuk menjaga keistiqamahan ibadah.</li>
@@ -153,9 +144,9 @@ const values = [
     </section>
 
     <!-- Nilai & Komitmen Kami -->
-    <section class="mb-16">
-      <div class="text-center max-w-2xl mx-auto mb-10">
-        <h2 class="text-3xl font-bold text-gray-900 mb-3">Nilai & Komitmen Layanan</h2>
+    <section class="space-y-8">
+      <div class="text-left max-w-2xl">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Nilai & Komitmen Layanan</h2>
         <p class="text-gray-600 text-base">
           Prinsip dasar yang kami pegang teguh dalam menghadirkan setiap baris konten dan fitur.
         </p>
@@ -163,33 +154,31 @@ const values = [
 
       <div class="grid sm:grid-cols-2 gap-6">
         {values.map((v) => (
-          <div class="p-6 sm:p-7 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-gray-300 transition-colors">
-            <div class="w-10 h-10 bg-gray-100 text-gray-900 rounded-xl flex items-center justify-center mb-4">
+          <div class="p-6 sm:p-7 bg-gray-50/80 rounded-2xl space-y-3">
+            <div class="w-10 h-10 bg-emerald-100 text-emerald-900 rounded-xl flex items-center justify-center">
               <Icon name={v.icon} class="w-5 h-5" />
             </div>
-            <h3 class="text-lg font-bold text-gray-900 mb-2">{v.title}</h3>
+            <h3 class="text-lg font-bold text-gray-900">{v.title}</h3>
             <p class="text-sm text-gray-600 leading-relaxed">{v.desc}</p>
           </div>
         ))}
       </div>
     </section>
 
-    <!-- Kolaborasi & Media -->
-    <section class="p-8 sm:p-12 bg-white text-gray-900 rounded-3xl border border-gray-200 shadow-sm text-center">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 text-xs font-semibold text-emerald-800 mb-4 border border-emerald-200">
-        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-        <span>Media & Silaturahmi</span>
+    <!-- Kolaborasi & Media (Inverted Dark Green Surface) -->
+    <section class="p-8 sm:p-12 bg-emerald-900 text-white rounded-3xl text-left">
+      <div class="max-w-2xl">
+        <h2 class="text-2xl sm:text-3xl font-bold text-white mb-3 tracking-tight">Terhubung Bersama Kami</h2>
+        <p class="text-emerald-100/90 mb-8 text-sm sm:text-base leading-relaxed">
+          Ikuti konten dakwah visual dan lantunan tilawah harian kami di media sosial, atau hubungi kami untuk masukan dan saran penyempurnaan platform.
+        </p>
       </div>
-      <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 tracking-tight">Terhubung Bersama Kami</h2>
-      <p class="text-gray-600 max-w-xl mx-auto mb-8 text-sm sm:text-base leading-relaxed">
-        Ikuti konten dakwah visual dan lantunan tilawah harian kami di media sosial, atau hubungi kami untuk masukan dan saran penyempurnaan platform.
-      </p>
-      <div class="flex flex-wrap items-center justify-center gap-4">
+      <div class="flex flex-wrap items-center gap-4">
         <a
           href="https://www.youtube.com/@qataquran"
           target="_blank"
-          rel="noopener"
-          class="inline-flex items-center gap-2.5 px-6 py-3 bg-red-50 text-red-700 border border-red-200/80 rounded-xl font-semibold text-sm hover:bg-red-100 transition-colors shadow-2xs"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2.5 px-6 py-3 bg-white text-gray-900 rounded-xl font-semibold text-sm hover:bg-emerald-50 transition-colors"
         >
           <Icon name="tabler:brand-youtube" class="w-5 h-5 text-red-600" />
           <span>YouTube @qataquran</span>
@@ -197,15 +186,15 @@ const values = [
         <a
           href="https://id.pinterest.com/qataquran/"
           target="_blank"
-          rel="noopener"
-          class="inline-flex items-center gap-2.5 px-6 py-3 bg-rose-50 text-rose-800 border border-rose-200/80 rounded-xl font-semibold text-sm hover:bg-rose-100 transition-colors shadow-2xs"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2.5 px-6 py-3 bg-emerald-800 text-white rounded-xl font-semibold text-sm hover:bg-emerald-700 transition-colors"
         >
-          <Icon name="tabler:brand-pinterest" class="w-5 h-5 text-rose-600" />
+          <Icon name="tabler:brand-pinterest" class="w-5 h-5 text-amber-300" />
           <span>Pinterest @qataquran</span>
         </a>
         <a
           href="/artikel"
-          class="inline-flex items-center gap-2.5 px-6 py-3 bg-emerald-800 text-white rounded-xl font-semibold text-sm hover:bg-emerald-700 transition-colors shadow-2xs"
+          class="inline-flex items-center gap-2.5 px-6 py-3 bg-amber-400 text-gray-950 rounded-xl font-semibold text-sm hover:bg-amber-300 transition-colors"
         >
           <Icon name="tabler:article" class="w-5 h-5" />
           <span>Baca Artikel & Panduan</span>

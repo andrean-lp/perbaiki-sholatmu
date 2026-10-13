@@ -3,7 +3,8 @@ import { Icon } from "astro-icon/components";
 ---
 
 <header
-  class="w-full py-4 px-4 border-b border-gray-200 bg-white sticky top-0 z-50"
+  id="site-header"
+  data-ui class="w-full py-4 px-4 border-b border-gray-200 bg-white sticky top-0 z-50"
   role="banner"
 >
   <nav
@@ -99,7 +100,7 @@ import { Icon } from "astro-icon/components";
           class="hidden group-hover:block group-focus-within:block absolute right-0 top-full pt-2 w-56 z-50"
           role="menu"
         >
-          <div class="bg-white rounded-xl shadow-lg border border-gray-100 py-2 ring-1 ring-black/5">
+          <div data-ui class="bg-white rounded-xl shadow-lg border border-gray-100 py-2 ring-1 ring-black/5">
             <a
               href="/doa"
               class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-emerald-50 hover:text-emerald-800 transition-colors"
@@ -123,7 +124,7 @@ import { Icon } from "astro-icon/components";
   <!-- Mobile menu -->
   <div
     id="mobile-menu"
-    class="hidden md:hidden border-t border-gray-200 bg-white"
+    data-ui class="hidden md:hidden border-t border-gray-200 bg-white"
     role="menu"
     aria-labelledby="mobile-menu-button"
   >

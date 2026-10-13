@@ -20,28 +20,22 @@ const categoryCounts = categories.reduce<Record<string, number>>((acc, cat) => {
 >
   <Header />
   <main id="main-content" class="max-w-6xl mx-auto px-4 py-16">
-    <div class="mb-10 text-center max-w-2xl mx-auto">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 text-xs font-semibold text-emerald-800 mb-4 border border-emerald-200">
-        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-        <span>Qata Quran Media</span>
-        <span class="text-emerald-300">|</span>
-        <span>{posts.length} Artikel Tersedia</span>
-      </div>
-      <h1 class="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl">
+    <div class="mb-12 text-left max-w-3xl">
+      <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight sm:text-5xl">
         Artikel & Panduan
       </h1>
       <p class="mt-4 text-base sm:text-lg text-gray-600 leading-relaxed">
-        Kumpulan tulisan dan inspirasi harian untuk terus memperbaiki kualitas dan kekhusyukan sholat kita.
+        Kumpulan tulisan, hikmah harian, dan panduan ibadah dari Qata Quran Media untuk menjaga keistiqamahan dan kekhusyukan sholat kita.
       </p>
     </div>
 
     <!-- Filter Label / Kategori Blogger -->
     {categories.length > 0 && (
-      <div class="mb-12 flex flex-wrap items-center justify-center gap-2 max-w-3xl mx-auto">
+      <div class="mb-12 flex flex-wrap items-center gap-2 max-w-3xl">
         <button
           type="button"
           data-filter="all"
-          class="filter-btn px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all border shadow-sm cursor-pointer bg-emerald-800 text-white border-emerald-800"
+          class="filter-btn px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-colors border cursor-pointer bg-emerald-800 text-white border-emerald-800"
         >
           Semua ({posts.length})
         </button>
@@ -49,7 +43,7 @@ const categoryCounts = categories.reduce<Record<string, number>>((acc, cat) => {
           <button
             type="button"
             data-filter={cat.toLowerCase()}
-            class="filter-btn px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all border shadow-sm cursor-pointer bg-white text-gray-700 hover:text-emerald-800 hover:bg-emerald-50 border-gray-200"
+            class="filter-btn px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-colors border cursor-pointer bg-white text-gray-700 hover:text-emerald-800 hover:bg-emerald-50 border-gray-200"
           >
             {cat} {categoryCounts[cat] > 0 && <span class="opacity-75">({categoryCounts[cat]})</span>}
           </button>
@@ -58,7 +52,7 @@ const categoryCounts = categories.reduce<Record<string, number>>((acc, cat) => {
     )}
 
     {posts.length === 0 ? (
-      <div class="text-center py-16 bg-white rounded-2xl border border-gray-200 p-8">
+      <div class="text-center py-16 bg-gray-50 rounded-2xl p-8">
         <p class="text-gray-500">Sedang memuat artikel dari Qata Quran...</p>
       </div>
     ) : (
@@ -66,11 +60,11 @@ const categoryCounts = categories.reduce<Record<string, number>>((acc, cat) => {
         <div id="posts-grid" class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {posts.map((post, index) => (
             <article
-              class="post-card bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 flex flex-col group hover:border-gray-300"
+              class="post-card bg-gray-50/80 rounded-2xl overflow-hidden flex flex-col group transition-colors hover:bg-gray-100/70"
               data-categories={JSON.stringify(post.categories.map((c) => c.toLowerCase()))}
             >
               {post.thumbnail && (
-                <a href={`/artikel/${post.slug}`} class="block aspect-[16/10] bg-gray-100 overflow-hidden relative">
+                <a href={`/artikel/${post.slug}`} class="block aspect-[16/10] bg-gray-200 overflow-hidden relative">
                   <img
                     src={post.thumbnail}
                     alt={post.title}
@@ -84,8 +78,8 @@ const categoryCounts = categories.reduce<Record<string, number>>((acc, cat) => {
 
               <div class="p-6 flex-1 flex flex-col justify-between">
                 <div>
-                  <div class="flex items-center gap-2 mb-2 flex-wrap">
-                    <time class="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  <div class="flex items-center gap-2 mb-2.5 flex-wrap">
+                    <time class="text-xs font-medium text-gray-500">
                       {new Date(post.published).toLocaleDateString('id-ID', {
                         year: 'numeric',
                         month: 'short',
@@ -93,7 +87,7 @@ const categoryCounts = categories.reduce<Record<string, number>>((acc, cat) => {
                       })}
                     </time>
                     {post.categories.map((cat) => (
-                      <span class="px-2.5 py-0.5 rounded-md text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-100">
+                      <span class="px-2.5 py-0.5 rounded-md text-xs font-semibold bg-emerald-100/70 text-emerald-900">
                         {cat}
                       </span>
                     ))}
@@ -112,7 +106,7 @@ const categoryCounts = categories.reduce<Record<string, number>>((acc, cat) => {
                   )}
                 </div>
 
-                <div class="mt-5 pt-4 border-t border-gray-100 flex items-center justify-between">
+                <div class="mt-5 pt-2 flex items-center justify-between">
                   <a
                     href={`/artikel/${post.slug}`}
                     class="inline-flex items-center gap-1.5 text-sm font-semibold text-gray-900 group-hover:text-emerald-700 transition-colors"
@@ -125,12 +119,12 @@ const categoryCounts = categories.reduce<Record<string, number>>((acc, cat) => {
             </article>
           ))}
 
-          <div id="no-filter-results" class="hidden col-span-full text-center py-16 bg-white rounded-2xl border border-gray-200 p-8">
+          <div id="no-filter-results" class="hidden col-span-full text-center py-16 bg-gray-50 rounded-2xl p-8">
             <p class="text-gray-600 font-medium text-base">Belum ada artikel untuk label ini.</p>
             <button
               type="button"
               id="reset-filter-btn"
-              class="mt-4 inline-flex items-center px-4 py-2 text-sm font-semibold text-emerald-800 bg-emerald-50 rounded-lg border border-emerald-200 hover:bg-emerald-100 transition-colors cursor-pointer"
+              class="mt-4 inline-flex items-center px-4 py-2 text-sm font-semibold text-emerald-800 bg-emerald-50 rounded-lg hover:bg-emerald-100 transition-colors cursor-pointer"
             >
               Tampilkan Semua Artikel
             </button>
@@ -143,10 +137,10 @@ const categoryCounts = categories.reduce<Record<string, number>>((acc, cat) => {
             <button
               type="button"
               id="load-more-btn"
-              class="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-white border border-gray-300 hover:border-emerald-600 hover:bg-emerald-50 text-gray-800 hover:text-emerald-800 font-semibold text-sm shadow-sm hover:shadow transition-all cursor-pointer"
+              class="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-gray-100 hover:bg-emerald-100/70 text-gray-900 hover:text-emerald-900 font-semibold text-sm transition-colors cursor-pointer"
             >
               <span>Muat Lebih Banyak Artikel</span>
-              <span id="load-more-count" class="text-xs px-2 py-0.5 rounded-full bg-gray-100 text-gray-600 font-medium"></span>
+              <span id="load-more-count" class="text-xs px-2 py-0.5 rounded-full bg-white text-gray-600 font-medium"></span>
             </button>
           </div>
         )}

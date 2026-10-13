@@ -328,25 +328,13 @@ Sumber Data: Bimas Islam Kemenag RI via Perbaiki Sholatmu (equran.id)`;
   return (
     <div className="w-full">
       {/* Hero Header */}
-      <div className="text-center max-w-3xl mx-auto mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 text-xs font-semibold text-emerald-800 mb-4 border border-emerald-200">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span>Bimas Islam Kemenag RI</span>
-          <span className="text-emerald-300">|</span>
-          <span>517 Kab/Kota</span>
-          <span className="text-emerald-300">|</span>
-          <span>34 Provinsi</span>
-          <span className="text-emerald-300">|</span>
-          <span>{selectedYear}</span>
-        </div>
-
+      <div className="text-left max-w-3xl mb-10">
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-4">
           Jadwal Shalat Hari Ini
         </h1>
 
         <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-          Lihat jadwal shalat harian untuk wilayah Anda. Pilih provinsi,
-          kabupaten/kota, dan bulan untuk melihat jadwal lengkap.
+          Waktu hisab resmi Bimas Islam Kementerian Agama RI untuk 517 kabupaten dan kota di seluruh Indonesia. Pilih wilayah Anda untuk melihat jadwal shalat harian dan bulanan.
         </p>
       </div>
 

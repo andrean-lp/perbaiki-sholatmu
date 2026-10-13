@@ -126,7 +126,7 @@ export default function QuranChatWidget({ initialOpen = false }: { initialOpen?:
             onClick={() => setIsOpen(true)}
             className="hidden sm:flex items-center gap-2 bg-white text-gray-800 text-xs font-semibold py-2 px-3.5 rounded-full border border-gray-200 shadow-lg hover:border-emerald-600 hover:text-emerald-800 transition-all cursor-pointer"
           >
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-emerald-600" />
             <span>Tanya Al-Quran</span>
           </button>
         )}

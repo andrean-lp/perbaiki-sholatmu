@@ -298,7 +298,7 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
         {/* Status Counters (Pills) */}
         <div className="mt-6 flex items-center justify-center gap-3 sm:gap-4 text-xs sm:text-sm font-medium flex-wrap">
           <div className="inline-flex items-center gap-2 bg-emerald-50 text-emerald-800 border border-emerald-200 px-3.5 py-1.5 rounded-full font-semibold shadow-2xs">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span className="w-2 h-2 rounded-full bg-emerald-600"></span>
             <span>114 Surat</span>
           </div>
           <div className="inline-flex items-center gap-2 bg-sky-50 text-sky-800 border border-sky-200 px-3.5 py-1.5 rounded-full font-semibold shadow-2xs">
@@ -458,7 +458,9 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
                     >
                       {isThisPlaying ? (
                         <>
-                          <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                          <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                          </svg>
                           <span>Jeda Audio</span>
                         </>
                       ) : (
