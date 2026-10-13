@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import { SITE } from '../config/site.mjs';
 import type { SEOProps } from '../types/seo';
+import QuranChatWidget from '../components/QuranChatWidget.tsx';
 
 interface Props extends SEOProps {
   lang?: string;
@@ -96,5 +97,6 @@ const robotsContent = [
 			Skip to main content
 		</a>
 		<slot />
+		<QuranChatWidget client:idle />
 	</body>
 </html>
