@@ -1,24 +1,24 @@
 {
-  "$schema": "https://agent-resource-discovery.org/schemas/v1/ai-catalog.json",
-  "name": "Perbaiki Sholatmu",
-  "description": "Panduan dan inspirasi untuk memperbaiki kualitas dan kekhusyukan ibadah sholat.",
-  "version": "1.0.0",
-  "url": "https://perbaiki-sholatmu.andrean.web.id",
-  "resources": [
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Perbaiki Sholatmu",
+    "identifier": "did:web:perbaiki-sholatmu.andrean.web.id",
+    "url": "https://perbaiki-sholatmu.andrean.web.id"
+  },
+  "entries": [
     {
-      "name": "LLMs Guide",
+      "identifier": "urn:air:perbaiki-sholatmu.andrean.web.id:docs:llms-txt",
+      "displayName": "Panduan dan Dokumentasi Perbaiki Sholatmu (llms.txt)",
+      "description": "Indeks halaman dan panduan ibadah sholat dalam format Markdown terstruktur untuk agen AI.",
       "type": "text/markdown",
-      "url": "https://perbaiki-sholatmu.andrean.web.id/llms.txt",
-      "description": "Dokumentasi dan ringkasan konten situs untuk model bahasa besar (LLM)"
+      "url": "https://perbaiki-sholatmu.andrean.web.id/llms.txt"
     },
     {
-      "name": "Sitemap",
+      "identifier": "urn:air:perbaiki-sholatmu.andrean.web.id:docs:sitemap",
+      "displayName": "Sitemap XML",
+      "description": "Peta situs XML resmi untuk indeks pencarian dan perayapan agen.",
       "type": "application/xml",
-      "url": "https://perbaiki-sholatmu.andrean.web.id/sitemap-index.xml",
-      "description": "Peta situs lengkap untuk penjelajahan agen dan mesin pencari"
+      "url": "https://perbaiki-sholatmu.andrean.web.id/sitemap-index.xml"
     }
-  ],
-  "contact": {
-    "url": "https://perbaiki-sholatmu.andrean.web.id/contact"
-  }
+  ]
 }

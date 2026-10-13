@@ -34,6 +34,15 @@ import { Icon } from "astro-icon/components";
     <ul class="hidden md:flex items-center gap-6" role="list">
       <li>
         <a
+          href="/about"
+          class="text-gray-600 hover:text-gray-900 transition-colors"
+          aria-current={Astro.url.pathname === '/about' ? 'page' : undefined}
+        >
+          Tentang Kami
+        </a>
+      </li>
+      <li>
+        <a
           href="/blog"
           class="text-gray-600 hover:text-gray-900 transition-colors"
           aria-current={Astro.url.pathname.startsWith('/blog') ? 'page' : undefined}
@@ -42,7 +51,7 @@ import { Icon } from "astro-icon/components";
         </a>
       </li>
 
-      <!-- Dropdown Lainnya -->
+      <!-- Dropdown Lainnya (Khusus Menu Doa) -->
       <li class="relative group" id="desktop-dropdown-container">
         <button
           type="button"
@@ -62,30 +71,30 @@ import { Icon } from "astro-icon/components";
 
         <div
           id="desktop-dropdown-menu"
-          class="hidden group-hover:block group-focus-within:block absolute right-0 top-full pt-2 w-48 z-50"
+          class="hidden group-hover:block group-focus-within:block absolute right-0 top-full pt-2 w-56 z-50"
           role="menu"
         >
           <div class="bg-white rounded-xl shadow-lg border border-gray-100 py-2 ring-1 ring-black/5">
             <a
-              href="/about"
+              href="/blog/doa-iftitah"
               class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-black transition-colors"
               role="menuitem"
             >
-              Tentang Kami
+              Doa Iftitah
             </a>
             <a
-              href="/features"
+              href="/blog/doa-ruku-sujud"
               class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-black transition-colors"
               role="menuitem"
             >
-              Fitur
+              Doa Ruku' & Sujud
             </a>
             <a
-              href="/example"
+              href="/blog/doa-setelah-sholat"
               class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-black transition-colors"
               role="menuitem"
             >
-              Contoh MDX
+              Doa Setelah Sholat
             </a>
           </div>
         </div>
@@ -113,6 +122,16 @@ import { Icon } from "astro-icon/components";
     <ul class="flex flex-col py-4" role="list">
       <li>
         <a
+          href="/about"
+          class="block px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors"
+          role="menuitem"
+          aria-current={Astro.url.pathname === '/about' ? 'page' : undefined}
+        >
+          Tentang Kami
+        </a>
+      </li>
+      <li>
+        <a
           href="/blog"
           class="block px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors"
           role="menuitem"
@@ -122,7 +141,7 @@ import { Icon } from "astro-icon/components";
         </a>
       </li>
 
-      <!-- Mobile Dropdown Lainnya -->
+      <!-- Mobile Dropdown Lainnya (Khusus Menu Doa) -->
       <li>
         <button
           type="button"
@@ -139,25 +158,25 @@ import { Icon } from "astro-icon/components";
         </button>
         <div id="mobile-dropdown-menu" class="hidden pl-6 py-1 bg-gray-50/80">
           <a
-            href="/about"
+            href="/blog/doa-iftitah"
             class="block py-2 text-sm text-gray-600 hover:text-gray-900 transition-colors"
             role="menuitem"
           >
-            Tentang Kami
+            Doa Iftitah
           </a>
           <a
-            href="/features"
+            href="/blog/doa-ruku-sujud"
             class="block py-2 text-sm text-gray-600 hover:text-gray-900 transition-colors"
             role="menuitem"
           >
-            Fitur
+            Doa Ruku' & Sujud
           </a>
           <a
-            href="/example"
+            href="/blog/doa-setelah-sholat"
             class="block py-2 text-sm text-gray-600 hover:text-gray-900 transition-colors"
             role="menuitem"
           >
-            Contoh MDX
+            Doa Setelah Sholat
           </a>
         </div>
       </li>
