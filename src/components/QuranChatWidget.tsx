@@ -169,7 +169,7 @@ export default function QuranChatWidget({ initialOpen = false }: { initialOpen?:
                 </h3>
                 <div className="flex items-center gap-1.5 mt-0.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                  <span className="text-[11px] text-gray-500">Sesuai Al-Quran & Sunnah Shahih</span>
+                  <span className="text-xs text-gray-500">Sesuai Al-Quran & Sunnah Shahih</span>
                 </div>
               </div>
             </div>
@@ -209,14 +209,14 @@ export default function QuranChatWidget({ initialOpen = false }: { initialOpen?:
               </p>
               {messages.length === 0 && (
                 <div className="pt-2 border-t border-gray-100">
-                  <p className="text-[11px] text-gray-500 mb-1.5 font-medium">Contoh pertanyaan:</p>
+                  <p className="text-xs text-gray-500 mb-1.5 font-medium">Contoh pertanyaan:</p>
                   <div className="flex flex-wrap gap-1.5">
                     {QUICK_PROMPTS.map((prompt, idx) => (
                       <button
                         key={idx}
                         type="button"
                         onClick={() => handleSend(prompt)}
-                        className="text-[11px] bg-gray-100 hover:bg-gray-200 text-gray-700 px-2.5 py-1 rounded-full transition text-left cursor-pointer"
+                        className="text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 px-2.5 py-1 rounded-full transition text-left cursor-pointer"
                       >
                         {prompt}
                       </button>
@@ -250,7 +250,7 @@ export default function QuranChatWidget({ initialOpen = false }: { initialOpen?:
 
                       {msg.results && msg.results.length > 0 && (
                         <div className="space-y-3">
-                          <p className="text-[11px] font-semibold text-gray-500 uppercase tracking-wider">
+                          <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
                             Rujukan Ditemukan ({msg.results.length}):
                           </p>
                           {msg.results.map((item, idx) => {
@@ -265,13 +265,13 @@ export default function QuranChatWidget({ initialOpen = false }: { initialOpen?:
                                 className="bg-gray-50 rounded-xl p-3 border border-gray-100 space-y-2"
                               >
                                 {/* Badge & Source Header */}
-                                <div className="flex items-center justify-between text-[11px]">
+                                <div className="flex items-center justify-between text-xs">
                                   <span className="font-bold text-gray-900">
                                     {isDoa
                                       ? d.judul || 'Doa Harian'
                                       : `Surah ${d.nama_surat || ''} [${d.id_surat || ''}:${d.nomor_ayat || ''}]`}
                                   </span>
-                                  <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-gray-200 text-gray-700 capitalize">
+                                  <span className="px-1.5 py-0.5 rounded text-xs font-medium bg-gray-200 text-gray-700 capitalize">
                                     {isAyat ? 'Ayat Al-Quran' : isTafsir ? 'Tafsir Kemenag' : 'Doa'}
                                   </span>
                                 </div>
@@ -285,7 +285,7 @@ export default function QuranChatWidget({ initialOpen = false }: { initialOpen?:
 
                                 {/* Latin Transliteration */}
                                 {d.teks_latin && (
-                                  <p className="text-[11px] text-gray-500 italic">
+                                  <p className="text-xs text-gray-500 italic">
                                     {d.teks_latin}
                                   </p>
                                 )}
@@ -299,7 +299,7 @@ export default function QuranChatWidget({ initialOpen = false }: { initialOpen?:
 
                                 {/* Hadith Notes if Doa */}
                                 {d.catatan && (
-                                  <div className="text-[10px] text-gray-500 border-t border-gray-200/60 pt-1 line-clamp-2">
+                                  <div className="text-xs text-gray-500 border-t border-gray-200/60 pt-1 line-clamp-2">
                                     {d.catatan}
                                   </div>
                                 )}
@@ -323,7 +323,7 @@ export default function QuranChatWidget({ initialOpen = false }: { initialOpen?:
                     <span className="w-1.5 h-1.5 rounded-full bg-gray-400 animate-bounce [animation-delay:0.2s]" />
                     <span className="w-1.5 h-1.5 rounded-full bg-gray-400 animate-bounce [animation-delay:0.4s]" />
                   </div>
-                  <span className="text-[11px] text-gray-500">Mencari dalil & tafsir...</span>
+                  <span className="text-xs text-gray-500">Mencari dalil & tafsir...</span>
                 </div>
               </div>
             )}

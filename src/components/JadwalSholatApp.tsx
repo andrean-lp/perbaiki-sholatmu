@@ -628,7 +628,7 @@ Sumber Data: Bimas Islam Kemenag RI via Perbaiki Sholatmu (equran.id)`;
                       }`}
                     >
                       {isNext && (
-                        <span className="absolute -top-2.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-600 text-white shadow-xs">
+                        <span className="absolute -top-2.5 px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-600 text-white shadow-xs">
                           Berikutnya
                         </span>
                       )}
@@ -647,7 +647,7 @@ Sumber Data: Bimas Islam Kemenag RI via Perbaiki Sholatmu (equran.id)`;
                         {timeVal || "--:--"}
                       </span>
                       <span
-                        className={`text-[10px] mt-1 uppercase tracking-widest ${
+                        className={`text-xs mt-1 uppercase tracking-wider ${
                           isNext ? "text-emerald-700 font-bold" : "text-gray-400 font-medium"
                         }`}
                       >
@@ -752,7 +752,7 @@ Sumber Data: Bimas Islam Kemenag RI via Perbaiki Sholatmu (equran.id)`;
                           <div className="flex items-center gap-2">
                             <span>{item.tanggal_lengkap}</span>
                             {isToday && (
-                              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase bg-emerald-600 text-white font-sans">
+                              <span className="px-2 py-0.5 rounded-full text-xs font-bold uppercase bg-emerald-600 text-white font-sans">
                                 Hari Ini
                               </span>
                             )}

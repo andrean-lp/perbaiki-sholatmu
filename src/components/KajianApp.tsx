@@ -484,7 +484,7 @@ Sumber: Perbaiki Sholatmu via EQuran.id`;
             {/* Modal Header */}
             <div className="p-5 sm:p-6 border-b border-gray-100 flex items-start justify-between gap-4 sticky top-0 bg-white z-10">
               <div>
-                <span className="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800 mb-2">
+                <span className="inline-block px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 mb-2">
                   Detail Kajian Sunnah
                 </span>
                 <h2 className="text-lg sm:text-xl font-bold text-gray-900 leading-snug">
