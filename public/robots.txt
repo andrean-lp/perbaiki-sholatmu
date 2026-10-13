@@ -1,4 +1,6 @@
 User-agent: *
+Disallow: /studio/
+Disallow: /admin/
 Allow: /
 
 Sitemap: https://perbaiki-sholatmu.andrean.web.id/sitemap-index.xml

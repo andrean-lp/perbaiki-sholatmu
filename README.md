@@ -118,7 +118,7 @@ A minimal, modern starter template for building fast websites with Astro. This t
 
 ## 📝 Decap CMS Integration
 
-CMS dashboard tersedia di rute `/admin/` (misalnya: `http://localhost:4321/admin/`).
+CMS dashboard tersedia di rute `/studio/` (misalnya: `http://localhost:4321/studio/` atau `https://perbaiki-sholatmu.andrean.web.id/studio/`). Halaman ini diproteksi dengan header deindex (`noindex, nofollow`) dan diblokir dari `robots.txt` agar tidak terindeks oleh Google.
 
 ### Cara Menggunakan di Mode Lokal:
 1. Jalankan server lokal Decap CMS di satu terminal:
@@ -129,12 +129,12 @@ CMS dashboard tersedia di rute `/admin/` (misalnya: `http://localhost:4321/admin
    ```bash
    npm run dev
    ```
-3. Buka browser ke `http://localhost:4321/admin/`.
+3. Buka browser ke `http://localhost:4321/studio/`.
 4. Anda dapat membuat dan mengedit artikel blog langsung dari browser, dan file Markdown akan otomatis tersimpan di `src/content/blog/`.
 
 ### Deployment & Otentikasi Produksi:
-- **GitHub Backend:** Secara default `public/admin/config.yml` dikonfigurasi menggunakan GitHub backend (`andrean-lp/perbaiki-sholatmu`). Untuk login via GitHub di production, hubungkan OAuth client provider.
-- **Netlify Deploy:** Jika di-deploy via Netlify, aktifkan **Netlify Identity** dan **Git Gateway** di pengaturan Netlify, lalu ganti backend di `public/admin/config.yml` ke:
+- **GitHub Backend:** Secara default `public/studio/config.yml` dikonfigurasi menggunakan GitHub backend (`andrean-lp/perbaiki-sholatmu`). Untuk login via GitHub di production, hubungkan OAuth client provider.
+- **Netlify Deploy:** Jika di-deploy via Netlify, aktifkan **Netlify Identity** dan **Git Gateway** di pengaturan Netlify, lalu ganti backend di `public/studio/config.yml` ke:
   ```yaml
   backend:
     name: git-gateway
