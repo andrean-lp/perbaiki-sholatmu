@@ -120,6 +120,7 @@ export default function JadwalSholatApp({
         }
       }
     } catch (_) {}
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Fetch cities for a province and optionally fetch schedule

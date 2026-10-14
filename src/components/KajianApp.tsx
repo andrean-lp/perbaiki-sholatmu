@@ -124,6 +124,7 @@ export default function KajianApp({
     }, 400);
 
     return () => clearTimeout(handler);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery, selectedCity, filterType]);
 
   // Pagination navigation

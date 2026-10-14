@@ -234,11 +234,16 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
     }
   };
 
+  const playSurahRef = useRef(playSurah);
+  useEffect(() => {
+    playSurahRef.current = playSurah;
+  });
+
   const playNextSurah = useCallback(() => {
     if (!currentSurah) return;
     const currentIndex = initialSuratList.findIndex((s) => s.nomor === currentSurah.nomor);
     const nextIndex = (currentIndex + 1) % initialSuratList.length;
-    playSurah(initialSuratList[nextIndex]);
+    playSurahRef.current(initialSuratList[nextIndex]);
   }, [currentSurah, initialSuratList]);
 
   const playPrevSurah = () => {
@@ -462,31 +467,50 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
     };
   };
 
-  // Copy verse to clipboard
-  const copyAyat = (ayat: AyatItem, surahName: string) => {
-    const text = `${ayat.teksArab}\n\n${ayat.teksLatin}\n"${ayat.teksIndonesia}"\n\n(QS. ${surahName}: ${ayat.nomorAyat})`;
+  // Robust clipboard copy with fallback for older browsers or restricted iframes
+  const copyToClipboard = async (text: string): Promise<boolean> => {
     if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
-      navigator.clipboard
-        .writeText(text)
-        .then(() => {
-          setCopiedAyat(ayat.nomorAyat);
-          setTimeout(() => setCopiedAyat(null), 2000);
-        })
-        .catch(() => {});
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch {
+        // Fallback to execCommand if clipboard API is denied or unavailable
+      }
+    }
+    try {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.left = '-9999px';
+      textarea.style.top = '-9999px';
+      textarea.setAttribute('readonly', '');
+      document.body.appendChild(textarea);
+      textarea.select();
+      const success = (document as any).execCommand('copy');
+      document.body.removeChild(textarea);
+      return success;
+    } catch {
+      return false;
+    }
+  };
+
+  // Copy verse to clipboard
+  const copyAyat = async (ayat: AyatItem, surahName: string) => {
+    const text = `${ayat.teksArab}\n\n${ayat.teksLatin}\n"${ayat.teksIndonesia}"\n\n(QS. ${surahName}: ${ayat.nomorAyat})`;
+    const ok = await copyToClipboard(text);
+    if (ok) {
+      setCopiedAyat(ayat.nomorAyat);
+      setTimeout(() => setCopiedAyat(null), 2000);
     }
   };
 
   // Copy tafsir text to clipboard
-  const copyTafsir = (ayatNumber: number, surahName: string, tafsirText: string) => {
+  const copyTafsir = async (ayatNumber: number, surahName: string, tafsirText: string) => {
     const text = `Tafsir Kemenag RI - QS. ${surahName}: ${ayatNumber}\n\n${tafsirText}`;
-    if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
-      navigator.clipboard
-        .writeText(text)
-        .then(() => {
-          setCopiedTafsirAyat(ayatNumber);
-          setTimeout(() => setCopiedTafsirAyat(null), 2000);
-        })
-        .catch(() => {});
+    const ok = await copyToClipboard(text);
+    if (ok) {
+      setCopiedTafsirAyat(ayatNumber);
+      setTimeout(() => setCopiedTafsirAyat(null), 2000);
     }
   };
 
