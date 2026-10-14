@@ -28,6 +28,30 @@
   --color-amber-900: #60401f;
 }
 
+/* Self-hosted Arabic Typography: Amiri (Regular & Bold) */
+@font-face {
+  font-family: 'Amiri';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/amiri-regular-arabic.woff2') format('woff2');
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-0891, U+0897-08E1, U+08E3-08FF, U+FB50-FDFF, U+FE70-FEFC;
+}
+
+@font-face {
+  font-family: 'Amiri';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/amiri-bold-arabic.woff2') format('woff2');
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-0891, U+0897-08E1, U+08E3-08FF, U+FB50-FDFF, U+FE70-FEFC;
+}
+
+.font-arabic {
+  font-family: 'Amiri', 'Traditional Arabic', 'Scheherazade New', serif;
+  font-feature-settings: "cv01", "cv02";
+}
+
 /* Accessibility: Skip to content link */
 .sr-only {
   position: absolute;

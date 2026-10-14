@@ -427,7 +427,7 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
 
                     {/* Arabic Calligraphy Name in Emerald */}
                     <div className="text-right shrink-0">
-                      <div className="text-2xl sm:text-3xl font-serif text-emerald-800 font-medium group-hover:text-emerald-950 transition-colors">
+                      <div className="text-2xl sm:text-3xl font-arabic text-emerald-800 font-medium group-hover:text-emerald-950 transition-colors">
                         {surah.nama}
                       </div>
                     </div>
