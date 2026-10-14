@@ -1,0 +1,557 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import { Icon } from "astro-icon/components";
+import { SITE } from "../../config/site.mjs";
+
+const pageTitle = "Panduan Tata Cara Wudhu Sesuai Sunnah - Bab 1 Perbaiki Sholatmu";
+const pageDescription = "Panduan lengkap tata cara wudhu sesuai sunnah Nabi SAW dan rujukan 4 mazhab. Dilengkapi bacaan doa tiap gerakan, teks Arab berharakat, dan manfaat medis.";
+const pageUrl = `${SITE.url}/perbaiki-sholat/wudhu`;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Panduan Tata Cara Wudhu Sesuai Sunnah Nabi dan 4 Mazhab",
+      "description": pageDescription,
+      "inLanguage": "id-ID",
+      "mainEntityOfPage": pageUrl,
+      "publisher": {
+        "@type": "Organization",
+        "name": "Qata Quran",
+        "logo": {
+          "@type": "ImageObject",
+          "url": `${SITE.url}/uploads/qata-quran-logo.png`
+        }
+      }
+    },
+    {
+      "@type": "HowTo",
+      "name": "Tata Cara Wudhu Sesuai Sunnah",
+      "description": "Langkah-langkah berwudhu yang benar sesuai tuntunan Rasulullah shallallahu 'alaihi wa sallam.",
+      "step": [
+        { "@type": "HowToStep", "position": 1, "name": "Membaca Basmalah (Tasmiyyah)" },
+        { "@type": "HowToStep", "position": 2, "name": "Membasuh Kedua Telapak Tangan" },
+        { "@type": "HowToStep", "position": 3, "name": "Berkumur-kumur (Madhmadhoh)" },
+        { "@type": "HowToStep", "position": 4, "name": "Mencuci Lubang Hidung (Istinsyaq)" },
+        { "@type": "HowToStep", "position": 5, "name": "Membasuh Wajah dan Berniat" },
+        { "@type": "HowToStep", "position": 6, "name": "Membasuh Kedua Tangan Hingga Siku" },
+        { "@type": "HowToStep", "position": 7, "name": "Mengusap Kepala" },
+        { "@type": "HowToStep", "position": 8, "name": "Mengusap Kedua Telinga" },
+        { "@type": "HowToStep", "position": 9, "name": "Membasuh Kedua Kaki Sampai Mata Kaki" }
+      ]
+    }
+  ]
+};
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalURL={pageUrl}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <Header />
+
+  <main id="main-content" role="main" class="max-w-4xl mx-auto px-4 py-12 sm:py-16 space-y-12">
+    <!-- Breadcrumb Navigasi -->
+    <nav aria-label="Breadcrumb" class="text-xs sm:text-sm text-gray-500">
+      <ol class="flex items-center gap-2 flex-wrap">
+        <li>
+          <a href="/" class="hover:text-emerald-800 transition-colors">Beranda</a>
+        </li>
+        <li aria-hidden="true">/</li>
+        <li>
+          <span class="text-gray-700">Perbaiki Sholat</span>
+        </li>
+        <li aria-hidden="true">/</li>
+        <li class="font-semibold text-emerald-900" aria-current="page">
+          Bab 1 : Wudhu
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Header Artikel & H1 -->
+    <header class="space-y-4 text-left">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-xs font-semibold text-emerald-800 border border-emerald-200">
+        <span>Modul Fikih &bull; Bab 1</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight leading-tight">
+        Panduan Tata Cara Wudhu Sesuai Sunnah Nabi dan 4 Mazhab
+      </h1>
+      <p class="text-base sm:text-lg text-gray-600 leading-relaxed">
+        Menyelami makna, rukun, doa di setiap basuhan, serta rahasia kesehatan di balik wudhu sebagai syarat mutlak sahnya sholat kita.
+      </p>
+    </header>
+
+    <!-- Key Takeaways / TL;DR (GEO & AEO Optimization) -->
+    <section class="p-6 sm:p-8 bg-emerald-50/70 rounded-3xl space-y-4 text-left">
+      <h2 class="text-lg font-bold text-emerald-950 flex items-center gap-2">
+        <Icon name="tabler:sparkles" class="w-5 h-5 text-emerald-800" aria-hidden="true" />
+        <span>Poin Inti Wudhu Sesuai Sunnah (TL;DR)</span>
+      </h2>
+      <ul class="space-y-2 text-sm sm:text-base text-gray-700 leading-relaxed list-disc list-inside">
+        <li><strong>Syarat Sah Sholat:</strong> Sholat tidak akan diterima tanpa bersuci dari hadats kecil melalui wudhu.</li>
+        <li><strong>Hemat Air:</strong> Sunnah Nabi SAW berwudhu dengan 1 mud air (sekitar 675 ml) dan tidak berlebih-lebihan.</li>
+        <li><strong>Rukun Pokok (QS. Al-Maidah: 6):</strong> Niat, membasuh wajah, membasuh kedua tangan hingga siku, mengusap kepala, membasuh kaki hingga mata kaki, dan tertib.</li>
+        <li><strong>Doa Pensucian:</strong> Setiap tetesan air wudhu menggugurkan dosa-dosa kecil dari anggota tubuh yang dibasuh.</li>
+      </ul>
+    </section>
+
+    <!-- Konten 1: Arti dan Hakikat Wudhu -->
+    <section class="space-y-4 text-left">
+      <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
+        Arti dan Hakikat Wudhu dalam Ibadah Sholat
+      </h2>
+      <p class="text-base text-gray-700 leading-relaxed">
+        Secara bahasa, wudhu berasal dari kata <em>al-wadha'ah</em> yang bermakna kebersihan, kecerahan, dan keindahan. Secara syariat, wudhu adalah menyucikan anggota tubuh tertentu dengan air suci menyucikan untuk menghilangkan hadats kecil sebagai syarat sahnya sholat.
+      </p>
+      <p class="text-base text-gray-700 leading-relaxed">
+        Rasulullah shallallahu 'alaihi wa sallam mengajarkan kita untuk selalu bijak dan tidak boros menggunakan air saat berwudhu, meskipun kita berada di sungai yang mengalir deras. Sahabat Anas bin Malik radhiyallahu 'anhu meriwayatkan:
+      </p>
+
+      <div class="p-6 bg-gray-50/80 rounded-2xl space-y-3">
+        <p dir="rtl" class="font-arabic text-xl sm:text-2xl leading-loose text-right text-emerald-950">
+          كَانَ النَّبِيُّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ يَتَوَضَّأُ بِالْمُدِّ، وَيَغْتَسِلُ بِالصَّاعِ إِلَى خَمْسَةِ أَمْدَادٍ
+        </p>
+        <p class="text-sm text-gray-700 italic leading-relaxed">
+          &ldquo;Nabi shallallahu 'alaihi wa sallam berwudhu dengan air satu mud (sekitar 675 ml) dan mandi dengan air satu sha' hingga lima mud.&rdquo;
+        </p>
+        <p class="text-xs font-semibold text-emerald-800">
+          HR. Muslim no. 325
+        </p>
+      </div>
+    </section>
+
+    <!-- Konten 2: 9 Tahapan Tata Cara Wudhu -->
+    <section class="space-y-8 text-left">
+      <div class="space-y-2">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
+          9 Tahapan Tata Cara Wudhu Sesuai Sunnah dan Doanya
+        </h2>
+        <p class="text-base text-gray-600 leading-relaxed">
+          Berikut adalah urutan lengkap tata cara wudhu dari awal hingga akhir, dilengkapi dengan perbedaan pandangan mazhab dan faedah medisnya.
+        </p>
+      </div>
+
+      <!-- Langkah 1: Tasmiyyah -->
+      <article class="p-6 sm:p-8 bg-gray-50/80 rounded-3xl space-y-4">
+        <h3 class="text-xl sm:text-2xl font-bold text-gray-900">
+          1. Tasmiyyah - Membaca Basmalah Sebelum Wudhu
+        </h3>
+        <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
+          Para ulama sepakat disyariatkannya membaca basmalah sebelum berwudhu berdasarkan sabda Rasulullah shallallahu 'alaihi wa sallam: <em>&ldquo;Berwudhulah dengan nama Allah.&rdquo;</em> (HR. Al-Baihaqi). Terkait status hukumnya:
+        </p>
+        <ul class="space-y-1.5 text-sm sm:text-base text-gray-700 list-disc list-inside pl-2">
+          <li><strong>Jumhur Ulama (Hanafi, Maliki, Syafi'i, dan satu riwayat Hanbali):</strong> Hukumnya sunnah muakkadah. Jika lupa membaca basmalah, wudhunya tetap sah.</li>
+          <li><strong>Satu Riwayat Mazhab Hanbali:</strong> Hukumnya wajib jika ingat, berdasarkan hadits: <em>&ldquo;Tidak sah sholat bagi yang tidak berwudhu, dan tidak sah wudhu bagi yang tidak membaca nama Allah.&rdquo;</em> (HR. Ahmad, Abu Dawud, dan Ibnu Majah).</li>
+        </ul>
+
+        <div class="p-5 bg-white rounded-2xl space-y-2 border border-emerald-100">
+          <p class="text-xs font-semibold text-emerald-800">Lafadz Basmalah:</p>
+          <p dir="rtl" class="font-arabic text-2xl sm:text-3xl leading-loose text-right text-gray-900">
+            بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+          </p>
+          <p class="text-xs sm:text-sm text-gray-600 italic">
+            Bismillâhir-rahmânir-rahîm
+          </p>
+          <p class="text-xs sm:text-sm text-gray-800 font-medium">
+            Artinya: &ldquo;Dengan menyebut nama Allah Yang Maha Pengasih lagi Maha Penyayang.&rdquo;
+          </p>
+        </div>
+      </article>
+
+      <!-- Langkah 2: Membasuh Telapak Tangan -->
+      <article class="p-6 sm:p-8 bg-gray-50/80 rounded-3xl space-y-4">
+        <h3 class="text-xl sm:text-2xl font-bold text-gray-900">
+          2. Membasuh Kedua Telapak Tangan
+        </h3>
+        <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
+          Disyariatkan mencuci kedua telapak tangan hingga ke pergelangan sebanyak tiga kali sebelum memasukkan tangan ke wadah air. Sahabat Utsman bin Affan radhiyallahu 'anhu mencontohkan wudhu Nabi SAW dengan membasuh kedua telapak tangannya 3 kali (HR. Bukhari dan Muslim).
+        </p>
+        <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
+          Mayoritas ulama (Hanafi, Maliki, Syafi'i) menghukumi amalan ini sunnah secara mutlak. Sementara mazhab Hanbali mewajibkannya khusus bagi orang yang baru bangun dari tidur malam.
+        </p>
+
+        <div class="p-5 bg-white rounded-2xl space-y-2 border border-emerald-100">
+          <p class="text-xs font-semibold text-emerald-800">Doa Membasuh Telapak Tangan:</p>
+          <p dir="rtl" class="font-arabic text-2xl sm:text-3xl leading-loose text-right text-gray-900">
+            اللَّهُمَّ احْفَظْ يَدَيَّ مِنْ مَعَاصِيكَ كُلِّهَا
+          </p>
+          <p class="text-xs sm:text-sm text-gray-600 italic">
+            Allâhummahfadh yadayya min ma'âshîka kullihâ
+          </p>
+          <p class="text-xs sm:text-sm text-gray-800 font-medium">
+            Artinya: &ldquo;Ya Allah, peliharalah kedua tanganku dari semua perbuatan maksiat.&rdquo;
+          </p>
+        </div>
+
+        <div class="p-4 bg-amber-50/70 rounded-2xl text-xs sm:text-sm text-amber-950 space-y-1">
+          <p class="font-semibold text-amber-900">Manfaat Medis:</p>
+          <p>Membasuh telapak tangan merangsang titik-titik saraf refleksologi tangan serta melenyapkan kuman penyakit sebelum menyentuh wajah dan mulut.</p>
+        </div>
+      </article>
+
+      <!-- Langkah 3: Berkumur-kumur -->
+      <article class="p-6 sm:p-8 bg-gray-50/80 rounded-3xl space-y-4">
+        <h3 class="text-xl sm:text-2xl font-bold text-gray-900">
+          3. Berkumur-kumur (Madhmadhoh)
+        </h3>
+        <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
+          Memasukkan air ke dalam mulut lalu memutar-mutarnya dan mengeluarkannya kembali sebanyak tiga kali. Sunnah dilakukan secara bersungguh-sungguh kecuali bagi orang yang sedang menjalankan ibadah puasa.
+        </p>
+
+        <div class="p-5 bg-white rounded-2xl space-y-2 border border-emerald-100">
+          <p class="text-xs font-semibold text-emerald-800">Doa Ketika Berkumur:</p>
+          <p dir="rtl" class="font-arabic text-2xl sm:text-3xl leading-loose text-right text-gray-900">
+            اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ وَشُكْرِكَ وَحُسْنِ عِبَادَتِكَ
+          </p>
+          <p class="text-xs sm:text-sm text-gray-600 italic">
+            Allâhumma a'innî 'alâ dzikrika wa syukrika wa husni 'ibâdatika
+          </p>
+          <p class="text-xs sm:text-sm text-gray-800 font-medium">
+            Artinya: &ldquo;Ya Allah, tolonglah aku untuk senantiasa mengingat-Mu, bersyukur kepada-Mu, dan memperbaiki ibadah kepada-Mu.&rdquo;
+          </p>
+        </div>
+
+        <div class="p-4 bg-amber-50/70 rounded-2xl text-xs sm:text-sm text-amber-950 space-y-1">
+          <p class="font-semibold text-amber-900">Manfaat Medis:</p>
+          <p>Membersihkan sisa-sisa makanan, mencegah peradangan mukosa mulut dan tenggorokan, serta menjaga kesehatan gusi dan gigi dari karies.</p>
+        </div>
+      </article>
+
+      <!-- Langkah 4: Mencuci Lubang Hidung -->
+      <article class="p-6 sm:p-8 bg-gray-50/80 rounded-3xl space-y-4">
+        <h3 class="text-xl sm:text-2xl font-bold text-gray-900">
+          4. Menghirup Air ke Lubang Hidung (Istinsyaq & Istintsar)
+        </h3>
+        <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
+          Menghirup air ke dalam hidung dengan tangan kanan (istinsyaq) kemudian menghembuskannya keluar dengan bantuan tangan kiri (istintsar) sebanyak tiga kali. Sebagaimana hadits Abdullah bin Zaid RA: <em>&ldquo;Lalu beliau berkumur 3 kali dan menghirup air dengan hidung 3 kali.&rdquo;</em> (HR. Bukhari).
+        </p>
+
+        <div class="p-5 bg-white rounded-2xl space-y-2 border border-emerald-100">
+          <p class="text-xs font-semibold text-emerald-800">Doa Ketika Mencuci Lubang Hidung:</p>
+          <p dir="rtl" class="font-arabic text-2xl sm:text-3xl leading-loose text-right text-gray-900">
+            اللَّهُمَّ أَرِحْنِي رَائِحَةَ الْجَنَّةِ وَأَنْتَ عَنِّي رَاضٍ
+          </p>
+          <p class="text-xs sm:text-sm text-gray-600 italic">
+            Allâhumma arihnî râ-ihatal jannati wa anta 'annî râdhin
+          </p>
+          <p class="text-xs sm:text-sm text-gray-800 font-medium">
+            Artinya: &ldquo;Ya Allah, karuniakanlah kepadaku wewangian surga dalam keadaan Engkau ridha kepadaku.&rdquo;
+          </p>
+        </div>
+
+        <div class="p-4 bg-amber-50/70 rounded-2xl text-xs sm:text-sm text-amber-950 space-y-1">
+          <p class="font-semibold text-amber-900">Manfaat Medis:</p>
+          <p>Membersihkan selaput lendir hidung dari partikel polusi udara dan alergen, serta efektif mencegah infeksi saluran pernapasan atas (ISPA).</p>
+        </div>
+      </article>
+
+      <!-- Langkah 5: Membasuh Wajah & Niat -->
+      <article class="p-6 sm:p-8 bg-gray-50/80 rounded-3xl space-y-4">
+        <h3 class="text-xl sm:text-2xl font-bold text-gray-900">
+          5. Membasuh Seluruh Wajah dan Berniat
+        </h3>
+        <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
+          Membasuh wajah adalah rukun pokok wudhu berdasarkan firman Allah dalam QS. Al-Maidah ayat 6: <em>&ldquo;Maka basuhlah wajahmu...&rdquo;</em>. Batasan wajah secara vertikal adalah dari tempat tumbuhnya rambut kepala hingga dagu, dan secara horizontal dari pangkal telinga kanan hingga telinga kiri.
+        </p>
+        <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
+          Nabi shallallahu 'alaihi wa sallam bersabda bahwa ketika seorang muslim membasuh mukanya, maka keluarlah dosa-dosa yang pernah diperbuat oleh matanya bersama tetesan air wudhu yang terakhir (HR. Muslim). Niat dihadirkan di dalam hati berbarengan dengan basuhan pertama pada wajah.
+        </p>
+
+        <div class="p-5 bg-white rounded-2xl space-y-2 border border-emerald-100">
+          <p class="text-xs font-semibold text-emerald-800">Lafadz Niat Wudhu:</p>
+          <p dir="rtl" class="font-arabic text-2xl sm:text-3xl leading-loose text-right text-gray-900">
+            نَوَيْتُ الْوُضُوءَ لِرَفْعِ الْحَدَثِ الْأَصْغَرِ فَرْضًا لِلَّهِ تَعَالَى
+          </p>
+          <p class="text-xs sm:text-sm text-gray-600 italic">
+            Nawaitul wudhû-a li raf'il hadatsil ashghari fardhal lillâhi ta'âlâ
+          </p>
+          <p class="text-xs sm:text-sm text-gray-800 font-medium">
+            Artinya: &ldquo;Aku niat berwudhu untuk menghilangkan hadats kecil, fardhu karena Allah Ta'ala.&rdquo;
+          </p>
+        </div>
+
+        <div class="p-5 bg-white rounded-2xl space-y-2 border border-emerald-100">
+          <p class="text-xs font-semibold text-emerald-800">Doa Membasuh Wajah:</p>
+          <p dir="rtl" class="font-arabic text-2xl sm:text-3xl leading-loose text-right text-gray-900">
+            اللَّهُمَّ بَيِّضْ وَجْهِي يَوْمَ تَبْيَضُّ وُجُوهٌ وَتَسْوَدُّ وُجُوهٌ
+          </p>
+          <p class="text-xs sm:text-sm text-gray-600 italic">
+            Allâhumma bayyidh wajhî yawma tabyadh-dhu wujûhun wa taswaddu wujûh
+          </p>
+          <p class="text-xs sm:text-sm text-gray-800 font-medium">
+            Artinya: &ldquo;Ya Allah, putihkanlah wajahku pada hari ketika wajah-wajah menjadi putih berseri dan wajah-wajah menjadi hitam legam.&rdquo;
+          </p>
+        </div>
+
+        <div class="p-4 bg-amber-50/70 rounded-2xl text-xs sm:text-sm text-amber-950 space-y-1">
+          <p class="font-semibold text-amber-900">Manfaat Medis:</p>
+          <p>Meningkatkan kelembapan kulit wajah, membersihkan pori-pori dari sebum berlebih penyebab jerawat, serta merelaksasi otot mata dari kelelahan layar.</p>
+        </div>
+      </article>
+
+      <!-- Langkah 6: Membasuh Tangan Hingga Siku -->
+      <article class="p-6 sm:p-8 bg-gray-50/80 rounded-3xl space-y-4">
+        <h3 class="text-xl sm:text-2xl font-bold text-gray-900">
+          6. Membasuh Kedua Tangan Hingga Siku
+        </h3>
+        <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
+          Membasuh tangan dari ujung jari jemari hingga melewati kedua siku sebanyak tiga kali. Jumhur 4 mazhab bersepakat bahwa siku wajib ikut terbasuh secara sempurna. Dahulukan tangan kanan, kemudian tangan kiri.
+        </p>
+
+        <div class="p-5 bg-white rounded-2xl space-y-2 border border-emerald-100">
+          <p class="text-xs font-semibold text-emerald-800">Doa Membasuh Tangan Kanan:</p>
+          <p dir="rtl" class="font-arabic text-2xl sm:text-3xl leading-loose text-right text-gray-900">
+            اللَّهُمَّ أَعْطِنِي كِتَابِي بِيَمِينِي وَحَاسِبْنِي حِسَابًا يَسِيرًا
+          </p>
+          <p class="text-xs sm:text-sm text-gray-600 italic">
+            Allâhumma a'thinî kitâbî biyamînî wa hâsibnî hisâban yasîran
+          </p>
+          <p class="text-xs sm:text-sm text-gray-800 font-medium">
+            Artinya: &ldquo;Ya Allah, berikanlah kitab amalku kelak di tangan kananku, dan hisablah aku dengan hisab yang ringan.&rdquo;
+          </p>
+        </div>
+
+        <div class="p-5 bg-white rounded-2xl space-y-2 border border-emerald-100">
+          <p class="text-xs font-semibold text-emerald-800">Doa Membasuh Tangan Kiri:</p>
+          <p dir="rtl" class="font-arabic text-2xl sm:text-3xl leading-loose text-right text-gray-900">
+            اللَّهُمَّ لَا تُعْطِنِي كِتَابِي بِشِمَالِي وَلَا مِنْ وَرَاءِ ظَهْرِي
+          </p>
+          <p class="text-xs sm:text-sm text-gray-600 italic">
+            Allâhumma lâ tu'thinî kitâbî bisyimâlî wa lâ min warâ-i zhahrî
+          </p>
+          <p class="text-xs sm:text-sm text-gray-800 font-medium">
+            Artinya: &ldquo;Ya Allah, janganlah Engkau berikan kitab amalku dari tangan kiriku dan jangan pula dari balik punggungku.&rdquo;
+          </p>
+        </div>
+
+        <div class="p-4 bg-amber-50/70 rounded-2xl text-xs sm:text-sm text-amber-950 space-y-1">
+          <p class="font-semibold text-amber-900">Manfaat Medis:</p>
+          <p>Membasuh lengan dan siku melancarkan sirkulasi pembuluh darah perifer dan merangsang kelenjar getah bening di sekitar lengan.</p>
+        </div>
+      </article>
+
+      <!-- Langkah 7: Mengusap Kepala -->
+      <article class="p-6 sm:p-8 bg-gray-50/80 rounded-3xl space-y-4">
+        <h3 class="text-xl sm:text-2xl font-bold text-gray-900">
+          7. Mengusap Sebagian Rambut Kepala
+        </h3>
+        <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
+          Mengusap kepala adalah rukun wudhu yang disepakati para ulama, namun terdapat rincian batas minimal usapan antar mazhab:
+        </p>
+        <ul class="space-y-1.5 text-sm sm:text-base text-gray-700 list-disc list-inside pl-2">
+          <li><strong>Mazhab Maliki & Hanbali:</strong> Wajib mengusap seluruh bagian kepala dari depan ke tengkuk lalu kembali ke depan.</li>
+          <li><strong>Mazhab Hanafi:</strong> Wajib mengusap seperempat bagian kepala (sekitar ubun-ubun).</li>
+          <li><strong>Mazhab Syafi'i:</strong> Wajib mengusap sebagian kepala, meskipun hanya beberapa helai rambut yang berada di batas kepala. Sedangkan mengusap seluruh kepala hukumnya sunnah.</li>
+        </ul>
+
+        <div class="p-5 bg-white rounded-2xl space-y-2 border border-emerald-100">
+          <p class="text-xs font-semibold text-emerald-800">Doa Mengusap Kepala:</p>
+          <p dir="rtl" class="font-arabic text-2xl sm:text-3xl leading-loose text-right text-gray-900">
+            اللَّهُمَّ حَرِّمْ شَعْرِي وَبَشَرِي عَلَى النَّارِ
+          </p>
+          <p class="text-xs sm:text-sm text-gray-600 italic">
+            Allâhumma harrim sya'rî wa basyarî 'alan-nâr
+          </p>
+          <p class="text-xs sm:text-sm text-gray-800 font-medium">
+            Artinya: &ldquo;Ya Allah, haramkanlah rambutku dan kulit kepalaku dari sentuhan api neraka.&rdquo;
+          </p>
+        </div>
+
+        <div class="p-4 bg-amber-50/70 rounded-2xl text-xs sm:text-sm text-amber-950 space-y-1">
+          <p class="font-semibold text-amber-900">Manfaat Medis:</p>
+          <p>Memberikan efek penenangan pada sistem saraf pusat otak, meredakan stres, menurunkan tekanan darah tinggi, dan menyegarkan kepala dari rasa pening.</p>
+        </div>
+      </article>
+
+      <!-- Langkah 8: Mengusap Kedua Telinga -->
+      <article class="p-6 sm:p-8 bg-gray-50/80 rounded-3xl space-y-4">
+        <h3 class="text-xl sm:text-2xl font-bold text-gray-900">
+          8. Mengusap Kedua Belah Telinga
+        </h3>
+        <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
+          Mengusap telinga luar dan dalam disunnahkan dilakukan bersamaan dengan air baru atau sisa air kepala. Caranya dengan memasukkan jari telunjuk ke liang telinga dan mengusap lekukan dalamnya, sementara ibu jari mengusap bagian luar daun telinga (HR. Ibnu Majah dari Ibnu Abbas RA).
+        </p>
+
+        <div class="p-5 bg-white rounded-2xl space-y-2 border border-emerald-100">
+          <p class="text-xs font-semibold text-emerald-800">Doa Mengusap Telinga:</p>
+          <p dir="rtl" class="font-arabic text-2xl sm:text-3xl leading-loose text-right text-gray-900">
+            اللَّهُمَّ اجْعَلْنِي مِنَ الَّذِينَ يَسْتَمِعُونَ الْقَوْلَ فَيَتَّبِعُونَ أَحْسَنَهُ
+          </p>
+          <p class="text-xs sm:text-sm text-gray-600 italic">
+            Allâhummaj'alnî minalladzîna yastami'ûnal qawla fa yattabi'ûna ahsanahu
+          </p>
+          <p class="text-xs sm:text-sm text-gray-800 font-medium">
+            Artinya: &ldquo;Ya Allah, jadikanlah aku termasuk golongan orang-orang yang mendengarkan perkataan baik lalu mengikuti yang terbaik darinya.&rdquo;
+          </p>
+        </div>
+
+        <div class="p-4 bg-amber-50/70 rounded-2xl text-xs sm:text-sm text-amber-950 space-y-1">
+          <p class="font-semibold text-amber-900">Manfaat Medis:</p>
+          <p>Menghilangkan debu dan kotoran yang menempel pada daun telinga serta mencegah risiko radang telinga luar.</p>
+        </div>
+      </article>
+
+      <!-- Langkah 9: Membasuh Kedua Kaki -->
+      <article class="p-6 sm:p-8 bg-gray-50/80 rounded-3xl space-y-4">
+        <h3 class="text-xl sm:text-2xl font-bold text-gray-900">
+          9. Membasuh Kedua Kaki Sampai Mata Kaki
+        </h3>
+        <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
+          Rukun wudhu terakhir adalah membasuh kaki hingga meliputi kedua mata kaki sebanyak tiga kali. Disunnahkan menyela-nyela jari kaki dengan jari kelingking tangan kiri.
+        </p>
+
+        <div class="p-5 bg-white rounded-2xl space-y-2 border border-emerald-100">
+          <p class="text-xs font-semibold text-emerald-800">Doa Membasuh Kaki Kanan:</p>
+          <p dir="rtl" class="font-arabic text-2xl sm:text-3xl leading-loose text-right text-gray-900">
+            اللَّهُمَّ ثَبِّتْ قَدَمَيَّ عَلَى الصِّرَاطِ يَوْمَ تَثْبُتُ فِيهِ أَقْدَامُ عِبَادِكَ الصَّالِحِينَ
+          </p>
+          <p class="text-xs sm:text-sm text-gray-600 italic">
+            Allâhumma tsabbit qadamayya 'alash-shirâthi yawma tatsbutu fîhi aqdâmu 'ibâdikas-shâlihîn
+          </p>
+          <p class="text-xs sm:text-sm text-gray-800 font-medium">
+            Artinya: &ldquo;Ya Allah, kokohkanlah kedua kakiku di atas titian (shirat) pada hari di mana Engkau meneguhkan kaki-kaki hamba-Mu yang sholeh.&rdquo;
+          </p>
+        </div>
+
+        <div class="p-5 bg-white rounded-2xl space-y-2 border border-emerald-100">
+          <p class="text-xs font-semibold text-emerald-800">Doa Membasuh Kaki Kiri:</p>
+          <p dir="rtl" class="font-arabic text-2xl sm:text-3xl leading-loose text-right text-gray-900">
+            اللَّهُمَّ لَا تَزِلَّ قَدَمَيَّ عَلَى الصِّرَاطِ فِي النَّارِ يَوْمَ تَزِلُّ فِيهِ أَقْدَامُ الْمُنَافِقِينَ وَالْمُشْرِكِينَ
+          </p>
+          <p class="text-xs sm:text-sm text-gray-600 italic">
+            Allâhumma lâ tazilla qadamayya 'alash-shirâthi fin-nâri yawma tazillu fîhi aqdâmul munâfiqîna wal musyrikîn
+          </p>
+          <p class="text-xs sm:text-sm text-gray-800 font-medium">
+            Artinya: &ldquo;Ya Allah, janganlah Engkau gelincirkan kakiku di atas titian ke dalam neraka pada hari tergelincirnya kaki orang-orang munafik dan musyrik.&rdquo;
+          </p>
+        </div>
+
+        <div class="p-4 bg-amber-50/70 rounded-2xl text-xs sm:text-sm text-amber-950 space-y-1">
+          <p class="font-semibold text-amber-900">Manfaat Medis:</p>
+          <p>Mencegah timbulnya jamur sela jari kaki (athlete's foot), menghilangkan bau kaki, dan melancarkan aliran darah kembali dari kaki menuju jantung.</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- Konten 3: Adab Penting dan Sunnah Penyempurna -->
+    <section class="p-8 sm:p-10 bg-emerald-50/70 rounded-3xl space-y-6 text-left">
+      <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
+        Adab Penting dan Sunnah Penyempurna Wudhu
+      </h2>
+
+      <div class="space-y-3">
+        <h3 class="text-lg font-bold text-emerald-950">
+          Mendahulukan Anggota Tubuh Bagian Kanan (Tayammun)
+        </h3>
+        <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
+          Para ulama sepakat disunnahkannya mendahulukan anggota kanan dalam setiap basuhan wudhu (tangan dan kaki). Dari Abu Hurairah radhiyallahu 'anhu, Rasulullah SAW bersabda: <em>&ldquo;Bila kalian berpakaian dan berwudhu, maka mulailah dari bagian-bagian kananmu.&rdquo;</em> (HR. Ahmad, Abu Dawud, dan Ibnu Majah). Namun jika seseorang tidak sengaja membasuh yang kiri terlebih dahulu, wudhunya tetap sah dan tidak wajib diulang.
+        </p>
+      </div>
+
+      <div class="space-y-3">
+        <h3 class="text-lg font-bold text-emerald-950">
+          Membasuh Sebanyak Tiga Kali (Tatslits)
+        </h3>
+        <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
+          Batas minimal sahnya basuhan adalah satu kali yang merata, sedangkan membasuh dua dan tiga kali adalah sunnah yang melipatgandakan pahala (HR. Daruquthni dari Ibnu Umar RA). Adapun untuk mengusap kepala, sunnah yang tsabit adalah mengusapnya satu kali saja (HR. An-Nasa'i dari Ali bin Abi Thalib RA).
+        </p>
+      </div>
+    </section>
+
+    <!-- Konten 4: Doa Setelah Wudhu -->
+    <section class="space-y-4 text-left">
+      <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
+        Doa Setelah Wudhu Lengkap dan Keutamaannya
+      </h2>
+      <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
+        Setelah selesai menyempurnakan seluruh basuhan wudhu, disunnahkan menghadap kiblat dan mengangkat tangan sambil melafadzkan doa syahadat berikut:
+      </p>
+
+      <div class="p-6 sm:p-8 bg-gray-50/80 rounded-3xl space-y-4">
+        <p dir="rtl" class="font-arabic text-2xl sm:text-3xl leading-loose text-right text-gray-900">
+          أَشْهَدُ أَنْ لَا إِلٰهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ، اللَّهُمَّ اجْعَلْنِي مِنَ التَّوَّابِينَ وَاجْعَلْنِي مِنَ الْمُتَطَهِّرِينَ، وَاجْعَلْنِي مِنْ عِبَادِكَ الصَّالِحِينَ
+        </p>
+        <p class="text-sm text-gray-700 italic leading-relaxed">
+          Asyhadu allâ ilâha illallâhu wahdahû lâ syarîka lah, wa asyhadu anna Muhammadan 'abduhû wa rasûluh. Allâhummaj'alnî minat-tawwâbîna waj'alnî minal-mutathahhirîn, waj'alnî min 'ibâdikas-shâlihîn.
+        </p>
+        <div class="pt-2 border-t border-gray-200/60">
+          <p class="text-sm text-gray-800 font-medium leading-relaxed">
+            <strong>Artinya:</strong> &ldquo;Aku bersaksi bahwa tiada sesembahan yang berhak disembah selain Allah Yang Maha Esa, tiada sekutu bagi-Nya. Dan aku bersaksi bahwa Nabi Muhammad adalah hamba dan utusan-Nya. Ya Allah, jadikanlah aku termasuk golongan orang-orang yang bertaubat, jadikanlah aku termasuk golongan orang-orang yang suci, dan jadikanlah aku termasuk golongan hamba-hamba-Mu yang sholeh.&rdquo;
+          </p>
+        </div>
+      </div>
+
+      <p class="text-sm text-gray-600 leading-relaxed">
+        Rasulullah shallallahu 'alaihi wa sallam bersabda bahwa siapa saja yang menyempurnakan wudhunya kemudian membaca doa ini, maka akan dibukakan baginya delapan pintu surga dan ia dipersilakan masuk dari pintu mana pun yang ia kehendaki (HR. Muslim no. 234 & Tirmidzi no. 55).
+      </p>
+    </section>
+
+    <!-- Konten 5: FAQ Seputar Wudhu -->
+    <section class="space-y-6 text-left">
+      <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
+        Tanya Jawab Seputar Wudhu (FAQ)
+      </h2>
+
+      <div class="space-y-4">
+        <div class="p-6 bg-gray-50/80 rounded-2xl space-y-2">
+          <h3 class="text-base sm:text-lg font-bold text-gray-900">
+            Apakah wudhu sah jika lupa membaca basmalah?
+          </h3>
+          <p class="text-sm text-gray-700 leading-relaxed">
+            Menurut jumhur ulama (Hanafi, Maliki, Syafi'i), wudhunya tetap sah karena basmalah berstatus sunnah. Bagi yang meyakini wajib pun dimaafkan apabila dalam keadaan lupa.
+          </p>
+        </div>
+
+        <div class="p-6 bg-gray-50/80 rounded-2xl space-y-2">
+          <h3 class="text-base sm:text-lg font-bold text-gray-900">
+            Bolehkah membasuh anggota wudhu hanya 1 kali saja?
+          </h3>
+          <p class="text-sm text-gray-700 leading-relaxed">
+            Boleh dan wudhunya sah secara ijma' ulama, asalkan air membasahi seluruh permukaan anggota wajib secara merata dan sempurna. Membasuh 3 kali adalah sunnah utama.
+          </p>
+        </div>
+
+        <div class="p-6 bg-gray-50/80 rounded-2xl space-y-2">
+          <h3 class="text-base sm:text-lg font-bold text-gray-900">
+            Apakah membaca doa di setiap gerakan wudhu itu wajib?
+          </h3>
+          <p class="text-sm text-gray-700 leading-relaxed">
+            Tidak wajib. Doa-doa di setiap anggota tubuh tersebut dianjurkan oleh sebagian ulama sebagai doa pengingat hati, namun yang paling utama dan bersumber dari hadits shahih marfu' adalah doa setelah selesai wudhu.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigasi Modul Selanjutnya -->
+    <section class="p-8 sm:p-10 bg-emerald-900 text-white rounded-3xl text-left space-y-4">
+      <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">
+        Lanjut ke Bab Selanjutnya
+      </h2>
+      <p class="text-emerald-100 text-sm sm:text-base leading-relaxed max-w-2xl">
+        Setelah menyempurnakan wudhu, langkah berikutnya adalah mempelajari rukun, syarat sah, dan bacaan sholat pada modul Bab 2.
+      </p>
+      <div class="pt-2 flex flex-wrap items-center gap-4">
+        <a
+          href="/jadwal-sholat"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-amber-400 text-gray-950 rounded-xl font-semibold text-sm hover:bg-amber-300 transition-colors"
+        >
+          <span>Cek Waktu Sholat Hari Ini</span>
+          <Icon name="tabler:arrow-right" class="w-4 h-4" />
+        </a>
+        <a
+          href="/"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-emerald-800 text-white rounded-xl font-semibold text-sm hover:bg-emerald-700 transition-colors"
+        >
+          <span>Kembali ke Beranda</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
