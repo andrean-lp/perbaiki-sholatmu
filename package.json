@@ -26,6 +26,7 @@
 		"@tailwindcss/vite": "^4.1.18",
 		"astro": "^6.0.4",
 		"astro-icon": "^1.1.5",
+		"equran": "^1.0.0",
 		"framer-motion": "^12.24.7",
 		"react": "^19.2.3",
 		"react-dom": "^19.2.3",

@@ -56,10 +56,12 @@ Proyek **Perbaiki Sholatmu** hadir dengan arsitektur web modern berbasis **Astro
 - **Hitung Mundur Waktu Azan**: Indikator real-time yang menghitung sisa waktu menuju waktu sholat berikutnya (Subuh, Terbit/Syuruq, Dzuhur, Ashar, Maghrib, Isya).
 - **Jadwal Sholat Sunnah**: Informasi waktu Syuruq dan Dhuha untuk mengoptimalkan ibadah sholat sunnah.
 
-### 5. Al-Qur'an Digital 30 Juz dan Audio Murottal (`/quran`)
+### 5. Al-Qur'an Digital 30 Juz, Tafsir Lengkap Kemenag RI, dan Audio Murottal (`/quran`)
+- **Official SDK equran (`npm i equran`)**: Terintegrasi penuh dengan Official Node.js & TypeScript SDK dari [EQuran.id](https://equran.id/) dengan built-in memory caching LRU otomatis.
 - **Mushaf Standar Indonesia**: Teks ayat Al-Qur'an berstandar resmi Lajnah Pentashihan Mushaf Al-Qur'an Kementerian Agama RI.
-- **Terjemahan dan Tafsir Ringkas**: Terjemahan resmi bahasa Indonesia serta tafsir wajiz untuk memperdalam pemahaman ayat.
-- **Audio Murottal 6 Qari Internasional**: Integrasi pemutar audio berkualitas tinggi dari EveryAyah Project (Misyari Rasyid Al-Afasy, Saad Al-Ghamdi, Abdurrahman As-Sudais, dll) per ayat.
+- **Tafsir Lengkap Kemenag RI**: Tersedia mode tab Tafsir Lengkap komprehensif dan inline accordion tafsir per ayat.
+- **Ayat Inspirasi Hari Ini**: Fitur tadabbur ayat harian otomatis via `equran.getRandomAyat()` lengkap dengan audio murottal instan dan tombol loncat ke surat.
+- **Audio Murottal 6 Qari Internasional**: Integrasi pemutar audio berkualitas tinggi dari 6 qari terkemuka (Misyari Rasyid Al-Afasi, Abdurrahman As-Sudais, dll) per ayat dan per surat penuh.
 
 ### 6. Kumpulan Doa Harian Shahih Hisnul Muslim (`/doa`)
 - **Kompilasi Kitab Hisnul Muslim**: Kumpulan doa harian karya Syaikh Said bin Ali Wahf al-Qahthani.
@@ -106,6 +108,7 @@ Proyek ini dibangun menggunakan teknologi mutakhir untuk menjamin kecepatan pemu
 | **Ikon UI** | [Tabler Icons](https://tabler.io/icons) | Ikon SVG clean via `astro-icon` dan `@iconify-json/tabler` |
 | **Animasi** | [Framer Motion](https://www.framer.com/motion/) | Transisi halus dan scroll reveal yang ringan |
 | **Tipografi Arab** | Font Amiri Lokal (WOFF2) | Font Arab lokal tersimpan di `/fonts/` tanpa membebani CDN eksternal |
+| **Al-Qur'an SDK** | [`equran`](https://www.npmjs.com/package/equran) | Official Node.js & TypeScript SDK for EQuran.id API v2 |
 | **Peta Situs & RSS** | `@astrojs/sitemap` & RSS | Peta situs XML dinamis (`sitemap-index.xml`) dan RSS Feed (`rss.xml`) |
 | **Deployment** | [Cloudflare Pages](https://pages.cloudflare.com) | Hosting CDN edge server global dengan latency ultra rendah |
 
@@ -207,7 +210,7 @@ Halaman Al-Qur'an dan doa dirancang secara statis sehingga dapat dibuka dengan s
 
 Kami mengucapkan terima kasih dan apresiasi yang setinggi-tingginya kepada seluruh pihak dan komunitas yang telah mendukung terwujudnya platform ini, khususnya:
 
-- **[EQuran.id](https://equran.id/)** - Terima kasih sebesar-besarnya kepada tim dan pengembang [EQuran.id](https://equran.id/) yang telah dengan ikhlas menyediakan layanan **API Publik Gratis** ([https://equran.id/](https://equran.id/)). Berkat API Al-Qur'an dan hisab sholat yang cepat, akurat, dan stabil dari EQuran.id, platform Perbaiki Sholatmu dapat menyajikan jadwal sholat 500+ kota se-Indonesia, audio murottal berkualitas tinggi, serta agenda kajian sunnah tanpa membebani biaya apa pun kepada masyarakat. Semoga menjadi amal jariyah yang terus mengalir pahalanya bagi segenap tim EQuran.id.
+- **[EQuran.id](https://equran.id/)** - Terima kasih sebesar-besarnya kepada tim dan pengembang [EQuran.id](https://equran.id/) yang telah dengan ikhlas menyediakan layanan **API Publik Gratis** ([https://equran.id/](https://equran.id/)) serta **Official SDK NPM (`equran`)** ([https://www.npmjs.com/package/equran](https://www.npmjs.com/package/equran)). Berkat API Al-Qur'an, Tafsir Kemenag RI, hisab sholat, dan SDK resmi yang cepat, akurat, dan stabil dari EQuran.id, platform Perbaiki Sholatmu dapat menyajikan jadwal sholat 500+ kota se-Indonesia, audio murottal 6 qari internasional, tafsir ilmiah Kemenag RI, serta ayat inspirasi harian tanpa membebani biaya apa pun kepada masyarakat. Semoga menjadi amal jariyah yang terus mengalir pahalanya bagi segenap tim EQuran.id.
 - **Kementerian Agama Republik Indonesia (Kemenag RI)** atas standarisasi Mushaf Al-Qur'an Indonesia dan hisab waktu ibadah resmi.
 - **EveryAyah Project** atas ketersediaan basis data audio murottal internasional.
 

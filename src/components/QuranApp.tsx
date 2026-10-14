@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useRef, useEffect, useCallback } from 'react';
+import { equran, type RandomAyat } from '../lib/equran';
 
 export interface AudioFull {
   '01': string;
@@ -120,9 +121,27 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
   const [expandedTafsirAyat, setExpandedTafsirAyat] = useState<Record<number, boolean>>({});
   const [copiedTafsirAyat, setCopiedTafsirAyat] = useState<number | null>(null);
 
-  // Cache & Refs
-  const surahCache = useRef<Record<number, SurahDetailData>>({});
-  const tafsirCache = useRef<Record<number, SurahTafsirData>>({});
+  // Featured Random Ayat (Tadabbur Harian via Official SDK equran.getRandomAyat)
+  const [randomAyatData, setRandomAyatData] = useState<RandomAyat | null>(null);
+  const [isLoadingRandomAyat, setIsLoadingRandomAyat] = useState(false);
+
+  const fetchRandomAyat = useCallback(async () => {
+    setIsLoadingRandomAyat(true);
+    try {
+      const data = await equran.getRandomAyat();
+      setRandomAyatData(data);
+    } catch {
+      // silently keep previous
+    } finally {
+      setIsLoadingRandomAyat(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchRandomAyat();
+  }, [fetchRandomAyat]);
+
+  // Audio Refs
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const ayatAudioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -319,29 +338,14 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
     };
   }, [currentSurah, isLoop, playNextSurah]);
 
-  // Fetch Tafsir from GET /api/v2/tafsir/{nomor}
+  // Fetch Tafsir via Official SDK (GET /api/v2/tafsir/{nomor})
   const fetchTafsir = useCallback(async (nomor: number) => {
-    if (tafsirCache.current[nomor]) {
-      setTafsirData(tafsirCache.current[nomor]);
-      setTafsirError(null);
-      return;
-    }
-
     setIsLoadingTafsir(true);
     setTafsirError(null);
 
     try {
-      const res = await fetch(`https://equran.id/api/v2/tafsir/${nomor}`);
-      if (!res.ok) {
-        throw new Error(`Gagal memuat tafsir (Status: ${res.status})`);
-      }
-      const json = await res.json();
-      if (json.code === 200 && json.data) {
-        tafsirCache.current[nomor] = json.data;
-        setTafsirData(json.data);
-      } else {
-        throw new Error(json.message || 'Format data tafsir tidak valid dari server');
-      }
+      const data = await equran.getTafsir(nomor);
+      setTafsirData(data as unknown as SurahTafsirData);
     } catch (err: any) {
       setTafsirError(err.message || 'Gagal mengambil tafsir Al-Qur\'an. Periksa koneksi internet Anda.');
     } finally {
@@ -349,7 +353,7 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
     }
   }, []);
 
-  // Open & Fetch Detail Ayat per Ayat
+  // Open & Fetch Detail Ayat per Ayat via Official SDK (GET /api/v2/surat/{nomor})
   const openSurahDetail = useCallback(async (nomor: number, tab: 'ayat' | 'tafsir' = 'ayat') => {
     if (ayatAudioRef.current) {
       ayatAudioRef.current.pause();
@@ -364,40 +368,18 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
       fetchTafsir(nomor);
     }
 
-    // Check memory cache for surah detail
-    if (surahCache.current[nomor]) {
-      setActiveSurahDetail(surahCache.current[nomor]);
-      setDetailError(null);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      const url = new URL(window.location.href);
-      url.searchParams.set('surat', nomor.toString());
-      if (tab === 'tafsir') url.searchParams.set('tab', 'tafsir');
-      else url.searchParams.delete('tab');
-      window.history.pushState({ surat: nomor, tab }, '', url);
-      return;
-    }
-
     setIsLoadingDetail(true);
     setDetailError(null);
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     try {
-      const res = await fetch(`https://equran.id/api/v2/surat/${nomor}`);
-      if (!res.ok) {
-        throw new Error(`Gagal memuat data surat (Status: ${res.status})`);
-      }
-      const json = await res.json();
-      if (json.code === 200 && json.data) {
-        surahCache.current[nomor] = json.data;
-        setActiveSurahDetail(json.data);
-        const url = new URL(window.location.href);
-        url.searchParams.set('surat', nomor.toString());
-        if (tab === 'tafsir') url.searchParams.set('tab', 'tafsir');
-        else url.searchParams.delete('tab');
-        window.history.pushState({ surat: nomor, tab }, '', url);
-      } else {
-        throw new Error(json.message || 'Format data surat tidak valid dari server');
-      }
+      const data = await equran.getSurat(nomor);
+      setActiveSurahDetail(data as unknown as SurahDetailData);
+      const url = new URL(window.location.href);
+      url.searchParams.set('surat', nomor.toString());
+      if (tab === 'tafsir') url.searchParams.set('tab', 'tafsir');
+      else url.searchParams.delete('tab');
+      window.history.pushState({ surat: nomor, tab }, '', url);
     } catch (err: any) {
       setDetailError(err.message || 'Terjadi gangguan saat mengambil data ayat. Periksa koneksi internet Anda.');
     } finally {
@@ -428,7 +410,7 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
       [ayatNumber]: !prev[ayatNumber],
     }));
 
-    if (!tafsirCache.current[surahNumber]) {
+    if (!tafsirData || tafsirData.nomor !== surahNumber) {
       await fetchTafsir(surahNumber);
     }
   };
@@ -1122,6 +1104,90 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
                 <span>30 Juz</span>
               </div>
             </div>
+
+            {/* Featured: Ayat Inspirasi Hari Ini (Official SDK equran.getRandomAyat) */}
+            {randomAyatData && (
+              <div className="mt-8 max-w-4xl mx-auto text-left">
+                <div className="bg-white rounded-3xl border border-emerald-100 shadow-sm p-6 sm:p-7 relative overflow-hidden transition-all hover:border-emerald-200">
+                  <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold uppercase tracking-wider">
+                      <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+                      Ayat Inspirasi Hari Ini
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={fetchRandomAyat}
+                        disabled={isLoadingRandomAyat}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gray-50 hover:bg-gray-100 text-gray-600 hover:text-gray-900 text-xs font-medium transition cursor-pointer disabled:opacity-50"
+                        title="Dapatkan ayat acak lainnya"
+                      >
+                        <svg className={`w-3.5 h-3.5 ${isLoadingRandomAyat ? 'animate-spin' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                        </svg>
+                        <span>{isLoadingRandomAyat ? 'Memuat...' : 'Acak Ayat Lain'}</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="mb-4">
+                    <p dir="rtl" className="font-arabic text-2xl sm:text-3xl text-right text-gray-900 leading-loose mb-3 font-normal">
+                      {randomAyatData.ayat.teksArab}
+                    </p>
+                    <p className="text-xs sm:text-sm text-emerald-800 font-medium mb-1.5">
+                      {randomAyatData.ayat.teksLatin}
+                    </p>
+                    <p className="text-sm sm:text-base text-gray-700 leading-relaxed italic">
+                      &ldquo;{randomAyatData.ayat.teksIndonesia}&rdquo;
+                    </p>
+                  </div>
+
+                  <div className="pt-4 border-t border-gray-100 flex flex-wrap items-center justify-between gap-3">
+                    <span className="text-xs sm:text-sm font-bold text-gray-800">
+                      QS. {randomAyatData.suratNamaLatin} : Ayat {randomAyatData.ayat.nomorAyat}
+                    </span>
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => togglePlayAyat(randomAyatData.ayat as unknown as AyatItem)}
+                        className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold transition cursor-pointer ${
+                          playingAyatNumber === randomAyatData.ayat.nomorAyat
+                            ? 'bg-amber-500 text-white shadow-xs'
+                            : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-800'
+                        }`}
+                      >
+                        {playingAyatNumber === randomAyatData.ayat.nomorAyat ? (
+                          <>
+                            <svg className="w-3.5 h-3.5 animate-pulse" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                            </svg>
+                            <span>Jeda Murottal</span>
+                          </>
+                        ) : (
+                          <>
+                            <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M8 5v14l11-7z" />
+                            </svg>
+                            <span>Dengarkan Ayat</span>
+                          </>
+                        )}
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => openSurahDetail(randomAyatData.suratNomor, 'ayat')}
+                        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-emerald-800 hover:bg-emerald-700 text-white text-xs font-semibold transition cursor-pointer shadow-xs"
+                      >
+                        <span>Buka Surat {randomAyatData.suratNamaLatin}</span>
+                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Filter and Qari Selector Controls */}
