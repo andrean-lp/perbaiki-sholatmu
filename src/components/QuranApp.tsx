@@ -347,7 +347,10 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
       const data = await equran.getTafsir(nomor);
       setTafsirData(data as unknown as SurahTafsirData);
     } catch (err: any) {
-      setTafsirError(err.message || 'Gagal mengambil tafsir Al-Qur\'an. Periksa koneksi internet Anda.');
+      const msg = err?.message === 'Failed to fetch'
+        ? 'Koneksi terputus atau gagal menghubungi server equran.id. Periksa koneksi internet Anda.'
+        : (err?.message || 'Gagal mengambil tafsir Al-Qur\'an. Periksa koneksi internet Anda.');
+      setTafsirError(msg);
     } finally {
       setIsLoadingTafsir(false);
     }
@@ -381,7 +384,10 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
       else url.searchParams.delete('tab');
       window.history.pushState({ surat: nomor, tab }, '', url);
     } catch (err: any) {
-      setDetailError(err.message || 'Terjadi gangguan saat mengambil data ayat. Periksa koneksi internet Anda.');
+      const msg = err?.message === 'Failed to fetch'
+        ? 'Koneksi terputus atau gagal menghubungi server equran.id. Periksa koneksi internet Anda.'
+        : (err?.message || 'Terjadi gangguan saat mengambil data ayat. Periksa koneksi internet Anda.');
+      setDetailError(msg);
     } finally {
       setIsLoadingDetail(false);
     }
