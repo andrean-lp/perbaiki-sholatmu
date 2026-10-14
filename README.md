@@ -219,5 +219,5 @@ Proyek ini bersifat open-source di bawah naungan lisensi **MIT License**. Jika A
 
 ---
 
-Dikelola dengan penuh dedikasi oleh [Perbaiki Sholatmu Team](https://perbaiki-sholatmu.pages.dev).  
+Dikelola dengan penuh dedikasi oleh [Qata Quran](https://www.youtube.com/@qataquran).  
 Semoga Allah Subhanahu wa Ta'ala menerima amal ibadah kita semua dan menjadikannya amal jariyah yang bermanfaat. Aamiin.
