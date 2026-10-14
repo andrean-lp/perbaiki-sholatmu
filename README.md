@@ -89,6 +89,7 @@ Platform ini dibangun dengan memegang teguh standar **E-E-A-T (Experience, Exper
 3. **Kitab Hisnul Muslim (Syaikh Said bin Ali Wahf al-Qahthani)**: Rujukan primer doa dan zikir harian dengan takhrij sanad shahih.
 4. **Kutubus Sittah**: Rujukan matan hadits dari Shahih Al-Bukhari, Shahih Muslim, Sunan Abi Dawud, Jami' At-Tirmidzi, Sunan An-Nasa'i, dan Sunan Ibni Majah.
 5. **EveryAyah Project**: Penyedia repositori rekaman audio murottal berkualitas tinggi dari para imam dan qari dunia.
+6. **EQuran.id API ([https://equran.id/](https://equran.id/))**: Penyedia layanan API publik Al-Qur'an dan jadwal sholat terkemuka yang memfasilitasi integrasi data jadwal sholat Kemenag RI, audio murottal, dan agenda kajian Islam.
 
 ---
 
@@ -199,6 +200,16 @@ Dalam penulisan di website ini, kata "sholat" dipilih untuk menjaga keseragaman 
 
 ### Apakah audio murottal dan teks Al-Qur'an membutuhkan koneksi internet?
 Halaman Al-Qur'an dan doa dirancang secara statis sehingga dapat dibuka dengan sangat cepat. Pemutaran streaming audio murottal memerlukan koneksi internet untuk mengunduh berkas audio dari peladen EveryAyah.
+
+---
+
+## Ucapan Terima Kasih dan Apresiasi
+
+Kami mengucapkan terima kasih dan apresiasi yang setinggi-tingginya kepada seluruh pihak dan komunitas yang telah mendukung terwujudnya platform ini, khususnya:
+
+- **[EQuran.id](https://equran.id/)** - Terima kasih sebesar-besarnya kepada tim dan pengembang [EQuran.id](https://equran.id/) yang telah dengan ikhlas menyediakan layanan **API Publik Gratis** ([https://equran.id/](https://equran.id/)). Berkat API Al-Qur'an dan hisab sholat yang cepat, akurat, dan stabil dari EQuran.id, platform Perbaiki Sholatmu dapat menyajikan jadwal sholat 500+ kota se-Indonesia, audio murottal berkualitas tinggi, serta agenda kajian sunnah tanpa membebani biaya apa pun kepada masyarakat. Semoga menjadi amal jariyah yang terus mengalir pahalanya bagi segenap tim EQuran.id.
+- **Kementerian Agama Republik Indonesia (Kemenag RI)** atas standarisasi Mushaf Al-Qur'an Indonesia dan hisab waktu ibadah resmi.
+- **EveryAyah Project** atas ketersediaan basis data audio murottal internasional.
 
 ---
 
