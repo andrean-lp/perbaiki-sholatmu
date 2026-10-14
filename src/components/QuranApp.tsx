@@ -369,6 +369,8 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
     // If opening tafsir tab directly, trigger tafsir fetch
     if (tab === 'tafsir') {
       fetchTafsir(nomor);
+    } else {
+      setTafsirData((prev) => (prev && prev.nomor === nomor ? prev : null));
     }
 
     setIsLoadingDetail(true);
@@ -463,19 +465,29 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
   // Copy verse to clipboard
   const copyAyat = (ayat: AyatItem, surahName: string) => {
     const text = `${ayat.teksArab}\n\n${ayat.teksLatin}\n"${ayat.teksIndonesia}"\n\n(QS. ${surahName}: ${ayat.nomorAyat})`;
-    navigator.clipboard.writeText(text).then(() => {
-      setCopiedAyat(ayat.nomorAyat);
-      setTimeout(() => setCopiedAyat(null), 2000);
-    });
+    if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
+      navigator.clipboard
+        .writeText(text)
+        .then(() => {
+          setCopiedAyat(ayat.nomorAyat);
+          setTimeout(() => setCopiedAyat(null), 2000);
+        })
+        .catch(() => {});
+    }
   };
 
   // Copy tafsir text to clipboard
   const copyTafsir = (ayatNumber: number, surahName: string, tafsirText: string) => {
     const text = `Tafsir Kemenag RI - QS. ${surahName}: ${ayatNumber}\n\n${tafsirText}`;
-    navigator.clipboard.writeText(text).then(() => {
-      setCopiedTafsirAyat(ayatNumber);
-      setTimeout(() => setCopiedTafsirAyat(null), 2000);
-    });
+    if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
+      navigator.clipboard
+        .writeText(text)
+        .then(() => {
+          setCopiedTafsirAyat(ayatNumber);
+          setTimeout(() => setCopiedTafsirAyat(null), 2000);
+        })
+        .catch(() => {});
+    }
   };
 
   // URL query sync & popstate
@@ -725,7 +737,8 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
                 const isAyatPlaying = playingAyatNumber === ayat.nomorAyat;
                 const isJustCopied = copiedAyat === ayat.nomorAyat;
                 const isTafsirOpen = Boolean(expandedTafsirAyat[ayat.nomorAyat]);
-                const ayatTafsirItem = tafsirData?.tafsir.find((t) => t.ayat === ayat.nomorAyat);
+                const isTafsirForCurrentSurah = Boolean(tafsirData && tafsirData.nomor === activeSurahDetail.nomor);
+                const ayatTafsirItem = isTafsirForCurrentSurah ? tafsirData?.tafsir.find((t) => t.ayat === ayat.nomorAyat) : null;
 
                 return (
                   <article
@@ -860,7 +873,7 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
                             </button>
                           </div>
 
-                          {isLoadingTafsir && !tafsirData ? (
+                          {isLoadingTafsir || !isTafsirForCurrentSurah ? (
                             <div className="animate-pulse space-y-2 py-2">
                               <div className="h-4 bg-emerald-100/60 rounded w-full"></div>
                               <div className="h-4 bg-emerald-100/60 rounded w-4/5"></div>
@@ -933,7 +946,7 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
                     Muat Ulang Tafsir
                   </button>
                 </div>
-              ) : tafsirData ? (
+              ) : (tafsirData && tafsirData.nomor === activeSurahDetail.nomor) ? (
                 <div className="space-y-6">
                   {tafsirData.tafsir.map((tItem) => {
                     const matchedAyat = activeSurahDetail.ayat.find((a) => a.nomorAyat === tItem.ayat);

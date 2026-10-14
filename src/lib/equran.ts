@@ -65,6 +65,10 @@ export class BrowserSafeEQuran {
     }
 
     if (cacheKey) {
+      if (this.cache.size >= 300) {
+        const oldestKey = this.cache.keys().next().value;
+        if (oldestKey) this.cache.delete(oldestKey);
+      }
       this.cache.set(cacheKey, { data: json.data, expiry: now + this.ttl });
     }
 

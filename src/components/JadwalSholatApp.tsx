@@ -134,7 +134,7 @@ export default function JadwalSholatApp({
     try {
       const res = await fetch("https://equran.id/api/v2/shalat/kabkota", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "text/plain" },
         body: JSON.stringify({ provinsi: prov }),
       });
       const json = await res.json();
@@ -168,7 +168,7 @@ export default function JadwalSholatApp({
     try {
       const res = await fetch("https://equran.id/api/v2/shalat", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "text/plain" },
         body: JSON.stringify({
           provinsi: prov,
           kabkota: city,
