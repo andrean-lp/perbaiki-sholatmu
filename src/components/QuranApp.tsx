@@ -29,6 +29,11 @@ export interface AyatItem {
   audio: Record<string, string>;
 }
 
+export interface TafsirItem {
+  ayat: number;
+  teks: string;
+}
+
 export interface SurahNavInfo {
   nomor: number;
   nama: string;
@@ -48,6 +53,17 @@ export interface SurahDetailData {
   ayat: AyatItem[];
   suratSebelumnya: SurahNavInfo | false;
   suratSelanjutnya: SurahNavInfo | false;
+}
+
+export interface SurahTafsirData {
+  nomor: number;
+  nama: string;
+  namaLatin: string;
+  jumlahAyat: number;
+  tempatTurun: string;
+  arti: string;
+  deskripsi: string;
+  tafsir: TafsirItem[];
 }
 
 interface QuranAppProps {
@@ -96,8 +112,17 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
   const [playingAyatNumber, setPlayingAyatNumber] = useState<number | null>(null);
   const [copiedAyat, setCopiedAyat] = useState<number | null>(null);
 
+  // Tafsir Lengkap state (GET /api/v2/tafsir/{nomor})
+  const [activeTab, setActiveTab] = useState<'ayat' | 'tafsir'>('ayat');
+  const [tafsirData, setTafsirData] = useState<SurahTafsirData | null>(null);
+  const [isLoadingTafsir, setIsLoadingTafsir] = useState(false);
+  const [tafsirError, setTafsirError] = useState<string | null>(null);
+  const [expandedTafsirAyat, setExpandedTafsirAyat] = useState<Record<number, boolean>>({});
+  const [copiedTafsirAyat, setCopiedTafsirAyat] = useState<number | null>(null);
+
   // Cache & Refs
   const surahCache = useRef<Record<number, SurahDetailData>>({});
+  const tafsirCache = useRef<Record<number, SurahTafsirData>>({});
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const ayatAudioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -122,7 +147,6 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
 
   // Play a specific full surah
   const playSurah = (surah: SurahItem) => {
-    // If verse audio is currently playing, pause it
     if (ayatAudioRef.current) {
       ayatAudioRef.current.pause();
       setPlayingAyatNumber(null);
@@ -295,22 +319,61 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
     };
   }, [currentSurah, isLoop, playNextSurah]);
 
+  // Fetch Tafsir from GET /api/v2/tafsir/{nomor}
+  const fetchTafsir = useCallback(async (nomor: number) => {
+    if (tafsirCache.current[nomor]) {
+      setTafsirData(tafsirCache.current[nomor]);
+      setTafsirError(null);
+      return;
+    }
+
+    setIsLoadingTafsir(true);
+    setTafsirError(null);
+
+    try {
+      const res = await fetch(`https://equran.id/api/v2/tafsir/${nomor}`);
+      if (!res.ok) {
+        throw new Error(`Gagal memuat tafsir (Status: ${res.status})`);
+      }
+      const json = await res.json();
+      if (json.code === 200 && json.data) {
+        tafsirCache.current[nomor] = json.data;
+        setTafsirData(json.data);
+      } else {
+        throw new Error(json.message || 'Format data tafsir tidak valid dari server');
+      }
+    } catch (err: any) {
+      setTafsirError(err.message || 'Gagal mengambil tafsir Al-Qur\'an. Periksa koneksi internet Anda.');
+    } finally {
+      setIsLoadingTafsir(false);
+    }
+  }, []);
+
   // Open & Fetch Detail Ayat per Ayat
-  const openSurahDetail = useCallback(async (nomor: number) => {
-    // Stop verse audio if playing
+  const openSurahDetail = useCallback(async (nomor: number, tab: 'ayat' | 'tafsir' = 'ayat') => {
     if (ayatAudioRef.current) {
       ayatAudioRef.current.pause();
       setPlayingAyatNumber(null);
     }
 
-    // Check memory cache
+    setActiveTab(tab);
+    setExpandedTafsirAyat({});
+
+    // If opening tafsir tab directly, trigger tafsir fetch
+    if (tab === 'tafsir') {
+      fetchTafsir(nomor);
+    }
+
+    // Check memory cache for surah detail
     if (surahCache.current[nomor]) {
       setActiveSurahDetail(surahCache.current[nomor]);
       setDetailError(null);
       window.scrollTo({ top: 0, behavior: 'smooth' });
       const url = new URL(window.location.href);
       url.searchParams.set('surat', nomor.toString());
-      window.history.pushState({ surat: nomor }, '', url);
+      if (tab === 'tafsir') url.searchParams.set('tab', 'tafsir');
+      else url.searchParams.delete('tab');
+      window.history.pushState({ surat: nomor, tab }, '', url);
       return;
     }
 
@@ -329,7 +392,9 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
         setActiveSurahDetail(json.data);
         const url = new URL(window.location.href);
         url.searchParams.set('surat', nomor.toString());
-        window.history.pushState({ surat: nomor }, '', url);
+        if (tab === 'tafsir') url.searchParams.set('tab', 'tafsir');
+        else url.searchParams.delete('tab');
+        window.history.pushState({ surat: nomor, tab }, '', url);
       } else {
         throw new Error(json.message || 'Format data surat tidak valid dari server');
       }
@@ -338,7 +403,7 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
     } finally {
       setIsLoadingDetail(false);
     }
-  }, []);
+  }, [fetchTafsir]);
 
   const closeSurahDetail = () => {
     if (ayatAudioRef.current) {
@@ -347,10 +412,25 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
     }
     setActiveSurahDetail(null);
     setDetailError(null);
+    setActiveTab('ayat');
+    setExpandedTafsirAyat({});
     const url = new URL(window.location.href);
     url.searchParams.delete('surat');
+    url.searchParams.delete('tab');
     window.history.pushState({}, '', url);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Toggle inline tafsir accordion in verse card
+  const toggleTafsirAyat = async (ayatNumber: number, surahNumber: number) => {
+    setExpandedTafsirAyat((prev) => ({
+      ...prev,
+      [ayatNumber]: !prev[ayatNumber],
+    }));
+
+    if (!tafsirCache.current[surahNumber]) {
+      await fetchTafsir(surahNumber);
+    }
   };
 
   // Play individual verse audio
@@ -360,14 +440,12 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
     }
     const audio = ayatAudioRef.current;
 
-    // If this verse is already playing, pause it
     if (playingAyatNumber === ayat.nomorAyat) {
       audio.pause();
       setPlayingAyatNumber(null);
       return;
     }
 
-    // Pause full surah player if running
     if (isPlaying && audioRef.current) {
       audioRef.current.pause();
       setIsPlaying(false);
@@ -403,28 +481,38 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
     });
   };
 
+  // Copy tafsir text to clipboard
+  const copyTafsir = (ayatNumber: number, surahName: string, tafsirText: string) => {
+    const text = `Tafsir Kemenag RI - QS. ${surahName}: ${ayatNumber}\n\n${tafsirText}`;
+    navigator.clipboard.writeText(text).then(() => {
+      setCopiedTafsirAyat(ayatNumber);
+      setTimeout(() => setCopiedTafsirAyat(null), 2000);
+    });
+  };
+
   // URL query sync & popstate
   useEffect(() => {
     const onPopState = () => {
       const params = new URLSearchParams(window.location.search);
       const s = params.get('surat');
+      const t = params.get('tab') === 'tafsir' ? 'tafsir' : 'ayat';
       if (s) {
         const num = parseInt(s, 10);
         if (!isNaN(num) && num >= 1 && num <= 114) {
-          openSurahDetail(num);
+          openSurahDetail(num, t);
           return;
         }
       }
       setActiveSurahDetail(null);
     };
 
-    // Check query params on mount
     const params = new URLSearchParams(window.location.search);
     const s = params.get('surat');
+    const t = params.get('tab') === 'tafsir' ? 'tafsir' : 'ayat';
     if (s) {
       const num = parseInt(s, 10);
       if (!isNaN(num) && num >= 1 && num <= 114) {
-        openSurahDetail(num);
+        openSurahDetail(num, t);
       }
     }
 
@@ -442,7 +530,7 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
       <audio ref={audioRef} preload="metadata" />
 
       {/* ========================================================
-          VIEW 1: DETAIL AYAT PER AYAT READER
+          VIEW 1: DETAIL AYAT & TAFSIR READER
       ======================================================== */}
       {isLoadingDetail ? (
         <div className="max-w-4xl mx-auto px-4 py-8">
@@ -452,7 +540,7 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
             <div className="h-8 w-64 bg-gray-200 rounded-lg"></div>
             <div className="h-4 w-48 bg-gray-100 rounded-md"></div>
           </div>
-          {/* Skeleton Ayat Cards */}
+          {/* Skeleton Cards */}
           <div className="space-y-4">
             {[1, 2, 3, 4].map((i) => (
               <div key={i} className="animate-pulse bg-white rounded-2xl p-6 border border-gray-100 shadow-sm space-y-4">
@@ -488,7 +576,7 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
                 onClick={() => {
                   const params = new URLSearchParams(window.location.search);
                   const s = params.get('surat');
-                  if (s) openSurahDetail(parseInt(s, 10));
+                  if (s) openSurahDetail(parseInt(s, 10), activeTab);
                 }}
                 className="px-5 py-2 text-xs font-semibold rounded-xl bg-emerald-800 hover:bg-emerald-700 text-white transition cursor-pointer"
               >
@@ -594,118 +682,346 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
             )}
           </div>
 
-          {/* List Ayat */}
-          <div className="space-y-5">
-            {activeSurahDetail.ayat.map((ayat) => {
-              const isAyatPlaying = playingAyatNumber === ayat.nomorAyat;
-              const isJustCopied = copiedAyat === ayat.nomorAyat;
+          {/* TAB SWITCHER: AYAT & MUROTTAL VS TAFSIR LENGKAP KEMENAG */}
+          <div className="flex items-center justify-center mb-8">
+            <div className="bg-gray-100 p-1.5 rounded-2xl flex items-center gap-1 border border-gray-200/80 shadow-2xs">
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveTab('ayat');
+                  const url = new URL(window.location.href);
+                  url.searchParams.delete('tab');
+                  window.history.pushState({ surat: activeSurahDetail.nomor, tab: 'ayat' }, '', url);
+                }}
+                className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+                  activeTab === 'ayat'
+                    ? 'bg-white text-emerald-950 shadow-xs'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                <svg className="w-4 h-4 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+                <span>Ayat &amp; Murottal ({activeSurahDetail.jumlahAyat})</span>
+              </button>
 
-              return (
-                <article
-                  key={ayat.nomorAyat}
-                  id={`ayat-${ayat.nomorAyat}`}
-                  className={`bg-white rounded-2xl p-5 sm:p-7 border transition-all duration-200 shadow-sm ${
-                    isAyatPlaying
-                      ? 'border-emerald-500 ring-2 ring-emerald-200/80 bg-emerald-50/15'
-                      : 'border-gray-100 hover:border-gray-200'
-                  }`}
-                >
-                  {/* Top Bar Ayat: Nomor & Action Buttons */}
-                  <div className="flex items-center justify-between pb-3 border-b border-gray-100/80 mb-4">
-                    {/* Circle Ayat Badge */}
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-900 font-bold text-xs flex items-center justify-center shrink-0 shadow-2xs">
-                        {ayat.nomorAyat}
-                      </div>
-                      <span className="text-xs text-gray-400 font-medium">
-                        Ayat {ayat.nomorAyat}
-                      </span>
-                    </div>
-
-                    {/* Action Buttons: Play Audio Ayat & Copy */}
-                    <div className="flex items-center gap-1.5">
-                      {/* Play Audio Ayat */}
-                      <button
-                        type="button"
-                        onClick={() => togglePlayAyat(ayat)}
-                        className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${
-                          isAyatPlaying
-                            ? 'bg-emerald-800 text-white font-bold shadow-xs'
-                            : 'bg-gray-100 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800'
-                        }`}
-                        title="Putar Murottal Ayat Ini"
-                      >
-                        {isAyatPlaying ? (
-                          <>
-                            <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
-                            </svg>
-                            <span>Jeda</span>
-                          </>
-                        ) : (
-                          <>
-                            <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M8 5v14l11-7z" />
-                            </svg>
-                            <span>Dengarkan</span>
-                          </>
-                        )}
-                      </button>
-
-                      {/* Copy Ayat */}
-                      <button
-                        type="button"
-                        onClick={() => copyAyat(ayat, activeSurahDetail.namaLatin)}
-                        className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-medium bg-gray-50 hover:bg-gray-100 text-gray-600 hover:text-gray-900 transition cursor-pointer border border-gray-200"
-                        title="Salin Ayat ke Clipboard"
-                      >
-                        {isJustCopied ? (
-                          <>
-                            <svg className="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                            </svg>
-                            <span className="text-emerald-700 font-semibold">Tersalin!</span>
-                          </>
-                        ) : (
-                          <>
-                            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                            </svg>
-                            <span>Salin</span>
-                          </>
-                        )}
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Teks Arab Ayat */}
-                  <p
-                    dir="rtl"
-                    className="font-arabic text-2xl sm:text-3xl lg:text-4xl leading-[2.2] sm:leading-[2.4] lg:leading-[2.5] text-right text-gray-900 my-4 select-text font-normal"
-                  >
-                    {ayat.teksArab}
-                  </p>
-
-                  {/* Teks Transliterasi Latin */}
-                  <p className="text-xs sm:text-sm text-emerald-800 font-medium leading-relaxed mb-2 select-text">
-                    {ayat.teksLatin}
-                  </p>
-
-                  {/* Teks Terjemahan Indonesia */}
-                  <p className="text-sm sm:text-base text-gray-700 leading-relaxed select-text font-normal">
-                    {ayat.teksIndonesia}
-                  </p>
-                </article>
-              );
-            })}
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveTab('tafsir');
+                  fetchTafsir(activeSurahDetail.nomor);
+                  const url = new URL(window.location.href);
+                  url.searchParams.set('tab', 'tafsir');
+                  window.history.pushState({ surat: activeSurahDetail.nomor, tab: 'tafsir' }, '', url);
+                }}
+                className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+                  activeTab === 'tafsir'
+                    ? 'bg-white text-emerald-950 shadow-xs'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                <svg className="w-4 h-4 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <span>Tafsir Lengkap Kemenag RI</span>
+              </button>
+            </div>
           </div>
+
+          {/* ========================================================
+              TAB CONTENT 1: AYAT & MUROTTAL
+          ======================================================== */}
+          {activeTab === 'ayat' && (
+            <div className="space-y-5">
+              {activeSurahDetail.ayat.map((ayat) => {
+                const isAyatPlaying = playingAyatNumber === ayat.nomorAyat;
+                const isJustCopied = copiedAyat === ayat.nomorAyat;
+                const isTafsirOpen = Boolean(expandedTafsirAyat[ayat.nomorAyat]);
+                const ayatTafsirItem = tafsirData?.tafsir.find((t) => t.ayat === ayat.nomorAyat);
+
+                return (
+                  <article
+                    key={ayat.nomorAyat}
+                    id={`ayat-${ayat.nomorAyat}`}
+                    className={`bg-white rounded-2xl p-5 sm:p-7 border transition-all duration-200 shadow-sm ${
+                      isAyatPlaying
+                        ? 'border-emerald-500 ring-2 ring-emerald-200/80 bg-emerald-50/15'
+                        : 'border-gray-100 hover:border-gray-200'
+                    }`}
+                  >
+                    {/* Top Bar Ayat: Nomor & Action Buttons */}
+                    <div className="flex items-center justify-between pb-3 border-b border-gray-100/80 mb-4">
+                      {/* Circle Ayat Badge */}
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-900 font-bold text-xs flex items-center justify-center shrink-0 shadow-2xs">
+                          {ayat.nomorAyat}
+                        </div>
+                        <span className="text-xs text-gray-400 font-medium">
+                          Ayat {ayat.nomorAyat}
+                        </span>
+                      </div>
+
+                      {/* Action Buttons: Play Audio, Tafsir Toggle & Copy */}
+                      <div className="flex items-center gap-1.5 flex-wrap">
+                        {/* Play Audio Ayat */}
+                        <button
+                          type="button"
+                          onClick={() => togglePlayAyat(ayat)}
+                          className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${
+                            isAyatPlaying
+                              ? 'bg-emerald-800 text-white font-bold shadow-xs'
+                              : 'bg-gray-100 hover:bg-emerald-50 text-gray-700 hover:text-emerald-800'
+                          }`}
+                          title="Putar Murottal Ayat Ini"
+                        >
+                          {isAyatPlaying ? (
+                            <>
+                              <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                              </svg>
+                              <span>Jeda</span>
+                            </>
+                          ) : (
+                            <>
+                              <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z" />
+                              </svg>
+                              <span>Dengarkan</span>
+                            </>
+                          )}
+                        </button>
+
+                        {/* Inline Tafsir Toggle */}
+                        <button
+                          type="button"
+                          onClick={() => toggleTafsirAyat(ayat.nomorAyat, activeSurahDetail.nomor)}
+                          className={`inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer border ${
+                            isTafsirOpen
+                              ? 'bg-emerald-800 text-white border-emerald-800 shadow-xs'
+                              : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border-emerald-200'
+                          }`}
+                          title="Lihat Tafsir Kemenag untuk ayat ini"
+                        >
+                          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                          </svg>
+                          <span>{isTafsirOpen ? 'Tutup Tafsir' : 'Tafsir'}</span>
+                        </button>
+
+                        {/* Copy Ayat */}
+                        <button
+                          type="button"
+                          onClick={() => copyAyat(ayat, activeSurahDetail.namaLatin)}
+                          className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-medium bg-gray-50 hover:bg-gray-100 text-gray-600 hover:text-gray-900 transition cursor-pointer border border-gray-200"
+                          title="Salin Ayat ke Clipboard"
+                        >
+                          {isJustCopied ? (
+                            <>
+                              <svg className="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                              </svg>
+                              <span className="text-emerald-700 font-semibold">Tersalin!</span>
+                            </>
+                          ) : (
+                            <>
+                              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                              </svg>
+                              <span>Salin</span>
+                            </>
+                          )}
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Teks Arab Ayat */}
+                    <p
+                      dir="rtl"
+                      className="font-arabic text-2xl sm:text-3xl lg:text-4xl leading-[2.2] sm:leading-[2.4] lg:leading-[2.5] text-right text-gray-900 my-4 select-text font-normal"
+                    >
+                      {ayat.teksArab}
+                    </p>
+
+                    {/* Teks Transliterasi Latin */}
+                    <p className="text-xs sm:text-sm text-emerald-800 font-medium leading-relaxed mb-2 select-text">
+                      {ayat.teksLatin}
+                    </p>
+
+                    {/* Teks Terjemahan Indonesia */}
+                    <p className="text-sm sm:text-base text-gray-700 leading-relaxed select-text font-normal">
+                      {ayat.teksIndonesia}
+                    </p>
+
+                    {/* Inline Accordion Tafsir Ayat */}
+                    {isTafsirOpen && (
+                      <div className="mt-5 pt-4 border-t border-emerald-100/80">
+                        <div className="bg-emerald-50/40 rounded-2xl p-5 border border-emerald-100 text-gray-800">
+                          <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-emerald-200/60">
+                            <span className="text-xs font-bold text-emerald-900 uppercase tracking-wider flex items-center gap-1.5">
+                              <svg className="w-4 h-4 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                              </svg>
+                              Tafsir Kemenag RI &bull; Ayat {ayat.nomorAyat}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => toggleTafsirAyat(ayat.nomorAyat, activeSurahDetail.nomor)}
+                              className="text-xs text-gray-500 hover:text-gray-800 font-semibold cursor-pointer"
+                            >
+                              &times; Tutup
+                            </button>
+                          </div>
+
+                          {isLoadingTafsir && !tafsirData ? (
+                            <div className="animate-pulse space-y-2 py-2">
+                              <div className="h-4 bg-emerald-100/60 rounded w-full"></div>
+                              <div className="h-4 bg-emerald-100/60 rounded w-4/5"></div>
+                              <div className="h-4 bg-emerald-100/60 rounded w-5/6"></div>
+                            </div>
+                          ) : (
+                            <div className="text-sm sm:text-base text-gray-800 leading-relaxed whitespace-pre-line select-text font-normal">
+                              {ayatTafsirItem?.teks || 'Tafsir untuk ayat ini sedang diproses...'}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </article>
+                );
+              })}
+            </div>
+          )}
+
+          {/* ========================================================
+              TAB CONTENT 2: TAFSIR LENGKAP KEMENAG RI
+          ======================================================== */}
+          {activeTab === 'tafsir' && (
+            <div className="space-y-6">
+              {/* Quick Jump Bar */}
+              <div className="bg-white rounded-2xl p-4 border border-gray-200 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-3">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-semibold text-gray-700">Loncat ke Tafsir Ayat:</span>
+                  <select
+                    id="tafsir-jump-select"
+                    aria-label="Loncat ke Tafsir Ayat"
+                    onChange={(e) => {
+                      const el = document.getElementById(`tafsir-card-${e.target.value}`);
+                      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }}
+                    className="bg-gray-50 border border-gray-200 text-xs rounded-xl px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-emerald-600 font-medium cursor-pointer"
+                  >
+                    {Array.from({ length: activeSurahDetail.jumlahAyat }, (_, i) => i + 1).map((n) => (
+                      <option key={n} value={n}>
+                        Ayat {n}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="text-xs text-gray-500 font-medium">
+                  Sumber: <strong className="text-emerald-800 font-semibold">Tafsir Kemenag RI (via EQuran.id)</strong>
+                </div>
+              </div>
+
+              {isLoadingTafsir ? (
+                <div className="space-y-4">
+                  {[1, 2, 3].map((i) => (
+                    <div key={i} className="animate-pulse bg-white rounded-2xl p-6 border border-gray-100 shadow-sm space-y-3">
+                      <div className="h-6 w-32 bg-gray-200 rounded-md"></div>
+                      <div className="h-4 bg-gray-100 rounded w-full"></div>
+                      <div className="h-4 bg-gray-100 rounded w-4/5"></div>
+                      <div className="h-4 bg-gray-100 rounded w-3/4"></div>
+                    </div>
+                  ))}
+                </div>
+              ) : tafsirError ? (
+                <div className="bg-white rounded-3xl p-8 border border-rose-100 shadow-sm text-center space-y-3">
+                  <p className="text-sm text-rose-600">{tafsirError}</p>
+                  <button
+                    type="button"
+                    onClick={() => fetchTafsir(activeSurahDetail.nomor)}
+                    className="px-4 py-2 bg-emerald-800 text-white text-xs font-semibold rounded-xl hover:bg-emerald-700 transition cursor-pointer"
+                  >
+                    Muat Ulang Tafsir
+                  </button>
+                </div>
+              ) : tafsirData ? (
+                <div className="space-y-6">
+                  {tafsirData.tafsir.map((tItem) => {
+                    const matchedAyat = activeSurahDetail.ayat.find((a) => a.nomorAyat === tItem.ayat);
+                    const isJustCopied = copiedTafsirAyat === tItem.ayat;
+
+                    return (
+                      <article
+                        key={tItem.ayat}
+                        id={`tafsir-card-${tItem.ayat}`}
+                        className="bg-white rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm hover:border-gray-200 transition-all text-left"
+                      >
+                        {/* Header Tafsir Ayat */}
+                        <div className="flex items-center justify-between pb-3.5 border-b border-gray-100 mb-4">
+                          <div className="flex items-center gap-2.5">
+                            <div className="w-8 h-8 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-900 font-bold text-xs flex items-center justify-center shrink-0 shadow-2xs">
+                              {tItem.ayat}
+                            </div>
+                            <h3 className="font-bold text-gray-900 text-base">
+                              Tafsir Ayat ke-{tItem.ayat}
+                            </h3>
+                          </div>
+
+                          <button
+                            type="button"
+                            onClick={() => copyTafsir(tItem.ayat, activeSurahDetail.namaLatin, tItem.teks)}
+                            className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium bg-gray-50 hover:bg-gray-100 text-gray-600 hover:text-gray-900 transition cursor-pointer border border-gray-200"
+                            title="Salin teks tafsir ayat ini"
+                          >
+                            {isJustCopied ? (
+                              <>
+                                <svg className="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span className="text-emerald-700 font-semibold">Tersalin!</span>
+                              </>
+                            ) : (
+                              <>
+                                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                                </svg>
+                                <span>Salin Tafsir</span>
+                              </>
+                            )}
+                          </button>
+                        </div>
+
+                        {/* Rujukan Ayat Singkat */}
+                        {matchedAyat && (
+                          <div className="bg-gray-50/80 rounded-xl p-4 mb-4 border border-gray-100">
+                            <p dir="rtl" className="font-arabic text-xl sm:text-2xl text-right text-gray-900 mb-2 leading-loose">
+                              {matchedAyat.teksArab}
+                            </p>
+                            <p className="text-xs sm:text-sm text-gray-600 italic">
+                              &ldquo;{matchedAyat.teksIndonesia}&rdquo;
+                            </p>
+                          </div>
+                        )}
+
+                        {/* Isi Teks Tafsir Kemenag */}
+                        <div className="text-sm sm:text-base text-gray-800 leading-relaxed whitespace-pre-line select-text font-normal">
+                          {tItem.teks}
+                        </div>
+                      </article>
+                    );
+                  })}
+                </div>
+              ) : null}
+            </div>
+          )}
 
           {/* Bottom Navigation: Prev & Next Surah */}
           <div className="mt-12 pt-8 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
             {activeSurahDetail.suratSebelumnya ? (
               <button
                 type="button"
-                onClick={() => openSurahDetail((activeSurahDetail.suratSebelumnya as SurahNavInfo).nomor)}
+                onClick={() => openSurahDetail((activeSurahDetail.suratSebelumnya as SurahNavInfo).nomor, activeTab)}
                 className="w-full sm:w-auto inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-white hover:bg-emerald-50 text-gray-800 hover:text-emerald-900 border border-gray-200 shadow-sm text-xs sm:text-sm font-semibold transition cursor-pointer"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -728,7 +1044,7 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
             {activeSurahDetail.suratSelanjutnya ? (
               <button
                 type="button"
-                onClick={() => openSurahDetail((activeSurahDetail.suratSelanjutnya as SurahNavInfo).nomor)}
+                onClick={() => openSurahDetail((activeSurahDetail.suratSelanjutnya as SurahNavInfo).nomor, activeTab)}
                 className="w-full sm:w-auto inline-flex items-center justify-end gap-2 px-5 py-3 rounded-2xl bg-white hover:bg-emerald-50 text-gray-800 hover:text-emerald-900 border border-gray-200 shadow-sm text-xs sm:text-sm font-semibold transition cursor-pointer"
               >
                 <span>Surat Selanjutnya: {(activeSurahDetail.suratSelanjutnya as SurahNavInfo).namaLatin}</span>
@@ -752,7 +1068,7 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
               Jelajahi <span className="text-emerald-700">114 Surat</span> Al-Quran
             </h1>
             <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Baca ayat per ayat lengkap dengan terjemahan Kemenag RI dan lantunan murottal dari 6 qari internasional
+              Baca ayat per ayat, tadabbur tafsir resmi Kemenag RI, dan dengarkan murottal dari 6 qari internasional
             </p>
 
             {/* Search Bar */}
@@ -888,7 +1204,7 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
                       <div className="flex items-start justify-between gap-3">
                         <div
                           className="flex items-center gap-3.5 min-w-0 cursor-pointer flex-1"
-                          onClick={() => openSurahDetail(surah.nomor)}
+                          onClick={() => openSurahDetail(surah.nomor, 'ayat')}
                         >
                           {/* Circle Number Badge */}
                           <div className="w-10 h-10 rounded-full border-2 border-amber-400 bg-amber-50 text-amber-800 flex items-center justify-center font-bold text-xs shrink-0 shadow-2xs group-hover:bg-amber-100 transition-colors">
@@ -927,7 +1243,7 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
                         {/* Arabic Calligraphy Name in Emerald */}
                         <div
                           className="text-right shrink-0 cursor-pointer"
-                          onClick={() => openSurahDetail(surah.nomor)}
+                          onClick={() => openSurahDetail(surah.nomor, 'ayat')}
                         >
                           <div className="text-2xl sm:text-3xl font-arabic text-emerald-800 font-medium group-hover:text-emerald-950 transition-colors">
                             {surah.nama}
@@ -936,11 +1252,11 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
                       </div>
 
                       {/* Bottom Action Buttons */}
-                      <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between gap-2">
+                      <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between gap-1.5 flex-wrap">
                         {/* Baca Ayat Button */}
                         <button
                           type="button"
-                          onClick={() => openSurahDetail(surah.nomor)}
+                          onClick={() => openSurahDetail(surah.nomor, 'ayat')}
                           className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-800 hover:bg-emerald-700 text-white transition cursor-pointer shadow-xs"
                           title={`Baca ${surah.jumlahAyat} ayat surat ${surah.namaLatin}`}
                         >
@@ -951,7 +1267,20 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
                         </button>
 
                         <div className="flex items-center gap-1.5">
-                          {/* Info & Tafsir Modal Button */}
+                          {/* Tafsir Button */}
+                          <button
+                            type="button"
+                            onClick={() => openSurahDetail(surah.nomor, 'tafsir')}
+                            className="text-xs text-emerald-900 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 inline-flex items-center gap-1 py-1.5 px-2 rounded-lg transition cursor-pointer font-semibold"
+                            title="Baca tafsir lengkap Kemenag RI"
+                          >
+                            <svg className="w-3.5 h-3.5 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                            <span>Tafsir</span>
+                          </button>
+
+                          {/* Info Modal Button */}
                           <button
                             type="button"
                             onClick={() => setDetailSurah(surah)}
@@ -1170,7 +1499,7 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
       )}
 
       {/* ========================================================
-          INFO & TAFSIR SURAT MODAL (Light Theme)
+          INFO & SEJARAH SURAT MODAL (Light Theme)
       ======================================================== */}
       {detailSurah && (
         <div
@@ -1204,7 +1533,7 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
             {/* Modal Body: Tafsir / Deskripsi */}
             <div className="space-y-4 text-sm text-gray-700 leading-relaxed">
               <h4 className="font-semibold text-gray-900 text-xs uppercase tracking-wider">
-                Kandungan & Sejarah Surat
+                Kandungan &amp; Sejarah Surat
               </h4>
               <div
                 className="prose prose-sm max-w-none text-gray-700 prose-headings:text-gray-900"
@@ -1214,20 +1543,37 @@ export default function QuranApp({ initialSuratList }: QuranAppProps) {
 
             {/* Modal Footer */}
             <div className="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-2 flex-wrap">
-              <button
-                type="button"
-                onClick={() => {
-                  const num = detailSurah.nomor;
-                  setDetailSurah(null);
-                  openSurahDetail(num);
-                }}
-                className="inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-800 hover:bg-emerald-700 text-white text-xs font-semibold rounded-xl transition cursor-pointer"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
-                <span>Baca Ayat per Ayat</span>
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    const num = detailSurah.nomor;
+                    setDetailSurah(null);
+                    openSurahDetail(num, 'ayat');
+                  }}
+                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-800 hover:bg-emerald-700 text-white text-xs font-semibold rounded-xl transition cursor-pointer"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                  <span>Baca Ayat</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    const num = detailSurah.nomor;
+                    setDetailSurah(null);
+                    openSurahDetail(num, 'tafsir');
+                  }}
+                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-200 text-xs font-semibold rounded-xl transition cursor-pointer"
+                >
+                  <svg className="w-4 h-4 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  <span>Buka Tafsir</span>
+                </button>
+              </div>
 
               <button
                 type="button"
