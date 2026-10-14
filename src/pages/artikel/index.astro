@@ -186,7 +186,6 @@ const categoryCounts = categories.reduce<Record<string, number>>((acc, cat) => {
       });
 
       let totalMatching = 0;
-      let displayedCount = 0;
 
       // Filter articles
       postCards.forEach((card) => {
@@ -205,13 +204,11 @@ const categoryCounts = categories.reduce<Record<string, number>>((acc, cat) => {
           if (currentFilter === 'all') {
             if (totalMatching <= visibleLimit) {
               card.classList.remove('hidden');
-              displayedCount++;
             } else {
               card.classList.add('hidden');
             }
           } else {
             card.classList.remove('hidden');
-            displayedCount++;
           }
         } else {
           card.classList.add('hidden');

@@ -1,3 +1,11 @@
+import dns from "node:dns";
+import fs from "node:fs";
+import path from "node:path";
+
+if (typeof dns.setDefaultResultOrder === "function") {
+  dns.setDefaultResultOrder("ipv4first");
+}
+
 export interface BloggerPost {
   id: string;
   title: string;
@@ -115,76 +123,95 @@ export async function fetchBloggerPosts(): Promise<BloggerPost[]> {
     });
 
     if (!res.ok) {
-      console.error(`Failed to fetch Blogger posts: ${res.status} ${res.statusText}`);
-      return [];
+      throw new Error(`Failed to fetch Blogger posts: ${res.status} ${res.statusText}`);
     }
 
     const data = await res.json();
-    const entries = data.feed?.entry || [];
+    try {
+      const rawBackupPath = path.resolve(process.cwd(), "src/data/blogger-raw.json");
+      fs.writeFileSync(rawBackupPath, JSON.stringify(data), "utf-8");
+    } catch {}
 
-    const posts: BloggerPost[] = entries.map((entry: any) => {
-      const rawTitle = entry.title?.$t || "Tanpa Judul";
-      const cleanTitle = rawTitle.trim();
-      const rawContent = entry.content?.$t || "";
-      const published = entry.published?.$t || new Date().toISOString();
-      const updated = entry.updated?.$t || published;
-      const author = entry.author?.[0]?.name?.$t || "Qata Quran";
-
-      const altLink =
-        entry.link?.find((l: any) => l.rel === "alternate")?.href || "";
-      // Extract slug from URL: e.g. https://qataquran.blogspot.com/2026/10/ar-ridha-bil-qalil.html -> ar-ridha-bil-qalil
-      const slugMatch = altLink.match(/\/([^/]+)\.html$/);
-      let slug = slugMatch ? slugMatch[1] : "";
-      if (!slug) {
-        slug = cleanTitle
-          .toLowerCase()
-          .replace(/[^\w\s-]/g, "")
-          .replace(/\s+/g, "-");
-      }
-
-      const categories = entry.category
-        ? entry.category.map((c: any) => c.term).filter(Boolean)
-        : [];
-      const thumbnail = extractImage(entry, false);
-      const fullImage = extractImage(entry, true);
-      const excerpt = cleanExcerpt(rawContent);
-
-      return {
-        id: entry.id?.$t || slug,
-        title: cleanTitle,
-        slug,
-        content: formatPostContent(rawContent),
-        excerpt,
-        published,
-        updated,
-        author,
-        thumbnail,
-        fullImage,
-        categories,
-        originalUrl: altLink,
-      };
-    });
-
-    // Merge and extract categories
-    const feedCategories = (data.feed?.category || [])
-      .map((c: any) => c.term)
-      .filter(Boolean);
-    const postCategories = posts.flatMap((p) => p.categories);
-    cachedCategories = Array.from(new Set([...feedCategories, ...postCategories]))
-      .filter(Boolean)
-      .sort((a, b) => a.localeCompare(b, "id"));
-
-    // Sort by publication date (newest first)
-    posts.sort(
-      (a, b) => new Date(b.published).getTime() - new Date(a.published).getTime()
-    );
-
+    const posts = parseFeedData(data);
     cachedPosts = posts;
     return posts;
   } catch (err) {
+    console.warn("Notice: Live Blogger feed fetch error, checking local fallback cache...");
+    try {
+      const rawBackupPath = path.resolve(process.cwd(), "src/data/blogger-raw.json");
+      if (fs.existsSync(rawBackupPath)) {
+        const rawContent = fs.readFileSync(rawBackupPath, "utf-8");
+        const data = JSON.parse(rawContent);
+        const posts = parseFeedData(data);
+        cachedPosts = posts;
+        return posts;
+      }
+    } catch {}
     console.error("Error fetching Blogger feed:", err);
     return [];
   }
+}
+
+function parseFeedData(data: any): BloggerPost[] {
+  const entries = data.feed?.entry || [];
+
+  const posts: BloggerPost[] = entries.map((entry: any) => {
+    const rawTitle = entry.title?.$t || "Tanpa Judul";
+    const cleanTitle = rawTitle.trim();
+    const rawContent = entry.content?.$t || "";
+    const published = entry.published?.$t || new Date().toISOString();
+    const updated = entry.updated?.$t || published;
+    const author = entry.author?.[0]?.name?.$t || "Qata Quran";
+
+    const altLink =
+      entry.link?.find((l: any) => l.rel === "alternate")?.href || "";
+    const slugMatch = altLink.match(/\/([^/]+)\.html$/);
+    let slug = slugMatch ? slugMatch[1] : "";
+    if (!slug) {
+      slug = cleanTitle
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, "")
+        .replace(/\s+/g, "-");
+    }
+
+    const categories = entry.category
+      ? entry.category.map((c: any) => c.term).filter(Boolean)
+      : [];
+    const thumbnail = extractImage(entry, false);
+    const fullImage = extractImage(entry, true);
+    const excerpt = cleanExcerpt(rawContent);
+
+    return {
+      id: entry.id?.$t || slug,
+      title: cleanTitle,
+      slug,
+      content: formatPostContent(rawContent),
+      excerpt,
+      published,
+      updated,
+      author,
+      thumbnail,
+      fullImage,
+      categories,
+      originalUrl: altLink,
+    };
+  });
+
+  // Merge and extract categories
+  const feedCategories = (data.feed?.category || [])
+    .map((c: any) => c.term)
+    .filter(Boolean);
+  const postCategories = posts.flatMap((p) => p.categories);
+  cachedCategories = Array.from(new Set([...feedCategories, ...postCategories]))
+    .filter(Boolean)
+    .sort((a, b) => a.localeCompare(b, "id"));
+
+  // Sort by publication date (newest first)
+  posts.sort(
+    (a, b) => new Date(b.published).getTime() - new Date(a.published).getTime()
+  );
+
+  return posts;
 }
 
 export async function fetchBloggerCategories(): Promise<string[]> {

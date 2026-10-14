@@ -14,8 +14,6 @@ export default defineConfig({
     "/about": "/tentang",
     "/al-quran": "/quran",
     "/audio-player": "/quran",
-    "/features": "/",
-    "/example": "/",
     "/blog": "/artikel",
     "/blog/[...slug]": "/artikel/[...slug]",
   },

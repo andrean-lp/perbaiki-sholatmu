@@ -3,10 +3,6 @@
 /al-quran /quran 301
 /audio-player /quran 301
 /audio-player/* /quran 301
-/features / 301
-/features/* / 301
-/example / 301
-/example/* / 301
 /blog /artikel 301
 /blog/ /artikel/ 301
 /blog/* /artikel/:splat 301
