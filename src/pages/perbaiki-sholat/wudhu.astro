@@ -2,12 +2,47 @@
 import Layout from "../../layouts/Layout.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
+import TableOfContents, { type TocItem } from "../../components/TableOfContents.astro";
 import { Icon } from "astro-icon/components";
 import { SITE } from "../../config/site.mjs";
 
 const pageTitle = "Panduan Tata Cara Wudhu Sesuai Sunnah - Bab 1 Perbaiki Sholatmu";
 const pageDescription = "Panduan lengkap tata cara wudhu sesuai sunnah Nabi SAW dan rujukan 4 mazhab. Dilengkapi bacaan doa tiap gerakan, teks Arab berharakat, dan manfaat medis.";
 const pageUrl = `${SITE.url}/perbaiki-sholat/wudhu`;
+
+const tocItems: TocItem[] = [
+  {
+    title: "Arti dan Hakikat Wudhu dalam Ibadah Sholat",
+    href: "#arti-hakikat-wudhu",
+  },
+  {
+    title: "9 Tahapan Tata Cara Wudhu Sesuai Sunnah dan Doanya",
+    href: "#tahapan-tata-cara-wudhu",
+    children: [
+      { title: "1. Tasmiyyah - Membaca Basmalah", href: "#langkah-1-tasmiyyah" },
+      { title: "2. Membasuh Kedua Telapak Tangan", href: "#langkah-2-telapak-tangan" },
+      { title: "3. Berkumur-kumur (Madhmadhoh)", href: "#langkah-3-berkumur" },
+      { title: "4. Menghirup Air ke Hidung (Istinsyaq)", href: "#langkah-4-istinsyaq" },
+      { title: "5. Membasuh Seluruh Wajah dan Berniat", href: "#langkah-5-wajah-niat" },
+      { title: "6. Membasuh Kedua Tangan Hingga Siku", href: "#langkah-6-tangan-siku" },
+      { title: "7. Mengusap Sebagian Rambut Kepala", href: "#langkah-7-mengusap-kepala" },
+      { title: "8. Mengusap Kedua Belah Telinga", href: "#langkah-8-mengusap-telinga" },
+      { title: "9. Membasuh Kedua Kaki Sampai Mata Kaki", href: "#langkah-9-membasuh-kaki" },
+    ],
+  },
+  {
+    title: "Adab Penting dan Sunnah Penyempurna Wudhu",
+    href: "#adab-sunnah-wudhu",
+  },
+  {
+    title: "Doa Setelah Wudhu Lengkap dan Keutamaannya",
+    href: "#doa-setelah-wudhu",
+  },
+  {
+    title: "Tanya Jawab Seputar Wudhu (FAQ)",
+    href: "#faq-seputar-wudhu",
+  },
+];
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -100,9 +135,12 @@ const jsonLd = {
       </ul>
     </section>
 
+    <!-- Table of Contents (Daftar Isi Panduan) -->
+    <TableOfContents items={tocItems} />
+
     <!-- Konten 1: Arti dan Hakikat Wudhu -->
     <section class="space-y-4 text-left">
-      <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
+      <h2 id="arti-hakikat-wudhu" class="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight scroll-mt-24">
         Arti dan Hakikat Wudhu dalam Ibadah Sholat
       </h2>
       <p class="text-base text-gray-700 leading-relaxed">
@@ -128,7 +166,7 @@ const jsonLd = {
     <!-- Konten 2: 9 Tahapan Tata Cara Wudhu -->
     <section class="space-y-8 text-left">
       <div class="space-y-2">
-        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
+        <h2 id="tahapan-tata-cara-wudhu" class="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight scroll-mt-24">
           9 Tahapan Tata Cara Wudhu Sesuai Sunnah dan Doanya
         </h2>
         <p class="text-base text-gray-600 leading-relaxed">
@@ -138,7 +176,7 @@ const jsonLd = {
 
       <!-- Langkah 1: Tasmiyyah -->
       <article class="p-6 sm:p-8 bg-gray-50/80 rounded-3xl space-y-4">
-        <h3 class="text-xl sm:text-2xl font-bold text-gray-900">
+        <h3 id="langkah-1-tasmiyyah" class="text-xl sm:text-2xl font-bold text-gray-900 scroll-mt-24">
           1. Tasmiyyah - Membaca Basmalah Sebelum Wudhu
         </h3>
         <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
@@ -165,7 +203,7 @@ const jsonLd = {
 
       <!-- Langkah 2: Membasuh Telapak Tangan -->
       <article class="p-6 sm:p-8 bg-gray-50/80 rounded-3xl space-y-4">
-        <h3 class="text-xl sm:text-2xl font-bold text-gray-900">
+        <h3 id="langkah-2-telapak-tangan" class="text-xl sm:text-2xl font-bold text-gray-900 scroll-mt-24">
           2. Membasuh Kedua Telapak Tangan
         </h3>
         <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
@@ -196,7 +234,7 @@ const jsonLd = {
 
       <!-- Langkah 3: Berkumur-kumur -->
       <article class="p-6 sm:p-8 bg-gray-50/80 rounded-3xl space-y-4">
-        <h3 class="text-xl sm:text-2xl font-bold text-gray-900">
+        <h3 id="langkah-3-berkumur" class="text-xl sm:text-2xl font-bold text-gray-900 scroll-mt-24">
           3. Berkumur-kumur (Madhmadhoh)
         </h3>
         <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
@@ -224,7 +262,7 @@ const jsonLd = {
 
       <!-- Langkah 4: Mencuci Lubang Hidung -->
       <article class="p-6 sm:p-8 bg-gray-50/80 rounded-3xl space-y-4">
-        <h3 class="text-xl sm:text-2xl font-bold text-gray-900">
+        <h3 id="langkah-4-istinsyaq" class="text-xl sm:text-2xl font-bold text-gray-900 scroll-mt-24">
           4. Menghirup Air ke Lubang Hidung (Istinsyaq & Istintsar)
         </h3>
         <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
@@ -252,7 +290,7 @@ const jsonLd = {
 
       <!-- Langkah 5: Membasuh Wajah & Niat -->
       <article class="p-6 sm:p-8 bg-gray-50/80 rounded-3xl space-y-4">
-        <h3 class="text-xl sm:text-2xl font-bold text-gray-900">
+        <h3 id="langkah-5-wajah-niat" class="text-xl sm:text-2xl font-bold text-gray-900 scroll-mt-24">
           5. Membasuh Seluruh Wajah dan Berniat
         </h3>
         <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
@@ -296,7 +334,7 @@ const jsonLd = {
 
       <!-- Langkah 6: Membasuh Tangan Hingga Siku -->
       <article class="p-6 sm:p-8 bg-gray-50/80 rounded-3xl space-y-4">
-        <h3 class="text-xl sm:text-2xl font-bold text-gray-900">
+        <h3 id="langkah-6-tangan-siku" class="text-xl sm:text-2xl font-bold text-gray-900 scroll-mt-24">
           6. Membasuh Kedua Tangan Hingga Siku
         </h3>
         <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
@@ -337,7 +375,7 @@ const jsonLd = {
 
       <!-- Langkah 7: Mengusap Kepala -->
       <article class="p-6 sm:p-8 bg-gray-50/80 rounded-3xl space-y-4">
-        <h3 class="text-xl sm:text-2xl font-bold text-gray-900">
+        <h3 id="langkah-7-mengusap-kepala" class="text-xl sm:text-2xl font-bold text-gray-900 scroll-mt-24">
           7. Mengusap Sebagian Rambut Kepala
         </h3>
         <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
@@ -370,7 +408,7 @@ const jsonLd = {
 
       <!-- Langkah 8: Mengusap Kedua Telinga -->
       <article class="p-6 sm:p-8 bg-gray-50/80 rounded-3xl space-y-4">
-        <h3 class="text-xl sm:text-2xl font-bold text-gray-900">
+        <h3 id="langkah-8-mengusap-telinga" class="text-xl sm:text-2xl font-bold text-gray-900 scroll-mt-24">
           8. Mengusap Kedua Belah Telinga
         </h3>
         <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
@@ -398,7 +436,7 @@ const jsonLd = {
 
       <!-- Langkah 9: Membasuh Kedua Kaki -->
       <article class="p-6 sm:p-8 bg-gray-50/80 rounded-3xl space-y-4">
-        <h3 class="text-xl sm:text-2xl font-bold text-gray-900">
+        <h3 id="langkah-9-membasuh-kaki" class="text-xl sm:text-2xl font-bold text-gray-900 scroll-mt-24">
           9. Membasuh Kedua Kaki Sampai Mata Kaki
         </h3>
         <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
@@ -440,7 +478,7 @@ const jsonLd = {
 
     <!-- Konten 3: Adab Penting dan Sunnah Penyempurna -->
     <section class="p-8 sm:p-10 bg-emerald-50/70 rounded-3xl space-y-6 text-left">
-      <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
+      <h2 id="adab-sunnah-wudhu" class="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight scroll-mt-24">
         Adab Penting dan Sunnah Penyempurna Wudhu
       </h2>
 
@@ -465,7 +503,7 @@ const jsonLd = {
 
     <!-- Konten 4: Doa Setelah Wudhu -->
     <section class="space-y-4 text-left">
-      <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
+      <h2 id="doa-setelah-wudhu" class="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight scroll-mt-24">
         Doa Setelah Wudhu Lengkap dan Keutamaannya
       </h2>
       <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
@@ -493,7 +531,7 @@ const jsonLd = {
 
     <!-- Konten 5: FAQ Seputar Wudhu -->
     <section class="space-y-6 text-left">
-      <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
+      <h2 id="faq-seputar-wudhu" class="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight scroll-mt-24">
         Tanya Jawab Seputar Wudhu (FAQ)
       </h2>
 

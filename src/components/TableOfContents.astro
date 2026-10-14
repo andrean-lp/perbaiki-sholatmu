@@ -1,0 +1,71 @@
+---
+import { Icon } from "astro-icon/components";
+
+export interface TocItem {
+  title: string;
+  href: string;
+  children?: {
+    title: string;
+    href: string;
+  }[];
+}
+
+interface Props {
+  title?: string;
+  items: TocItem[];
+}
+
+const { title = "Daftar Isi Panduan", items } = Astro.props;
+---
+
+<nav aria-label="Daftar Isi" class="my-6">
+  <details
+    open
+    class="group bg-emerald-50/60 border border-emerald-200/80 rounded-2xl p-5 sm:p-6 transition-all shadow-sm"
+  >
+    <summary class="flex items-center justify-between cursor-pointer list-none select-none">
+      <div class="flex items-center gap-2.5 font-bold text-emerald-950 text-base sm:text-lg">
+        <Icon name="tabler:list-details" class="w-5 h-5 text-emerald-800" aria-hidden="true" />
+        <span>{title}</span>
+      </div>
+      <div class="flex items-center gap-1.5 text-xs text-emerald-800 font-medium bg-emerald-100/70 px-2.5 py-1 rounded-lg group-hover:bg-emerald-200/70 transition-colors">
+        <span class="group-open:hidden">Buka</span>
+        <span class="hidden group-open:inline">Tutup</span>
+        <Icon
+          name="tabler:chevron-down"
+          class="w-4 h-4 transition-transform duration-200 group-open:rotate-180"
+          aria-hidden="true"
+        />
+      </div>
+    </summary>
+
+    <div class="mt-4 pt-4 border-t border-emerald-200/60">
+      <ol class="space-y-2.5 text-sm sm:text-base text-gray-700 list-decimal list-inside marker:text-emerald-700 marker:font-semibold">
+        {items.map((item) => (
+          <li class="leading-relaxed">
+            <a
+              href={item.href}
+              class="font-medium text-gray-800 hover:text-emerald-800 transition-colors inline-block"
+            >
+              {item.title}
+            </a>
+            {item.children && item.children.length > 0 && (
+              <ol class="mt-2 ml-4 space-y-1.5 border-l-2 border-emerald-200 pl-3 text-xs sm:text-sm text-gray-600 list-none">
+                {item.children.map((child) => (
+                  <li class="leading-relaxed">
+                    <a
+                      href={child.href}
+                      class="hover:text-emerald-800 hover:underline transition-colors block py-0.5"
+                    >
+                      {child.title}
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            )}
+          </li>
+        ))}
+      </ol>
+    </div>
+  </details>
+</nav>
