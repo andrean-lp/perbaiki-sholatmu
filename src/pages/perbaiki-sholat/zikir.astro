@@ -1,0 +1,563 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import TableOfContents, { type TocItem } from "../../components/TableOfContents.astro";
+import { Icon } from "astro-icon/components";
+import { SITE } from "../../config/site.mjs";
+
+const pageTitle = "Panduan Zikir Bakda Sholat Sesuai Sunnah - Bab 3 Perbaiki Sholatmu";
+const pageDescription = "Panduan lengkap zikir dan doa setelah sholat fardhu sesuai sunnah Nabi SAW. Dilengkapi bacaan Arab berharakat, 8 adab zikir, Ayat Kursi, dan makna tadabburnya.";
+const pageUrl = `${SITE.url}/perbaiki-sholat/zikir`;
+
+const tocItems: TocItem[] = [
+  {
+    title: "8 Adab Pokok Berzikir kepada Allah",
+    href: "#adab-berzikir",
+  },
+  {
+    title: "11 Rangkaian Zikir dan Doa Bakda Sholat Fardhu",
+    href: "#rangkaian-zikir-bakda-sholat",
+    children: [
+      { title: "1. Istighfar 3 Kali dan Mengakui Kekurangan", href: "#zikir-1-istighfar" },
+      { title: "2. Doa Keselamatan (Allahumma Antas-Salam)", href: "#zikir-2-antas-salam" },
+      { title: "3. Tauhid dan Kepasrahan Mutlak", href: "#zikir-3-tauhid" },
+      { title: "4. Zikir Hauqalah (Tanaman Surga)", href: "#zikir-4-hauqalah" },
+      { title: "5. Ubudiyah I'tiraf (Pengakuan atas Dosa)", href: "#zikir-5-itiraf" },
+      { title: "6. Empat Kalimat Terbaik (Tasbih, Tahmid, Takbir, Tahlil)", href: "#zikir-6-empat-kalimat" },
+      { title: "7. Isti'adzah: Membaca Ayat Kursi", href: "#zikir-7-ayat-kursi" },
+      { title: "8. Al-Mu'awwidzat (Surah Al-Ikhlas, Al-Falaq, An-Nas)", href: "#zikir-8-surah-perlindungan" },
+      { title: "9. Tiga Permintaan untuk Akhirat", href: "#zikir-9-doa-akhirat" },
+      { title: "10. Tiga Permintaan Utama di Dunia (Khusus Ba'da Subuh)", href: "#zikir-10-doa-dunia" },
+      { title: "11. Doa Perlindungan dari Siksa Neraka", href: "#zikir-11-siksa-neraka" },
+    ],
+  },
+  {
+    title: "Tanya Jawab Seputar Zikir Bakda Sholat (FAQ)",
+    href: "#faq-seputar-zikir",
+  },
+];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Panduan Zikir Bakda Sholat Sesuai Sunnah Nabi",
+      "description": pageDescription,
+      "inLanguage": "id-ID",
+      "mainEntityOfPage": pageUrl,
+      "publisher": {
+        "@type": "Organization",
+        "name": "Qata Quran",
+        "logo": {
+          "@type": "ImageObject",
+          "url": `${SITE.url}/uploads/qata-quran-logo.png`
+        }
+      }
+    },
+    {
+      "@type": "HowTo",
+      "name": "Urutan Zikir Bakda Sholat Fardhu",
+      "description": "Panduan urutan zikir setelah sholat fardhu sesuai sunnah Rasulullah SAW.",
+      "step": [
+        { "@type": "HowToStep", "position": 1, "name": "Membaca Istighfar 3 Kali" },
+        { "@type": "HowToStep", "position": 2, "name": "Membaca Doa Allahumma Antas-Salam" },
+        { "@type": "HowToStep", "position": 3, "name": "Membaca Zikir Tauhid dan Kepasrahan" },
+        { "@type": "HowToStep", "position": 4, "name": "Membaca Zikir Hauqalah" },
+        { "@type": "HowToStep", "position": 5, "name": "Membaca Doa I'tiraf Pengakuan Dosa" },
+        { "@type": "HowToStep", "position": 6, "name": "Membaca Tasbih, Tahmid, Takbir 33 Kali" },
+        { "@type": "HowToStep", "position": 7, "name": "Membaca Ayat Kursi" },
+        { "@type": "HowToStep", "position": 8, "name": "Membaca Surah Al-Ikhlas, Al-Falaq, An-Nas" },
+        { "@type": "HowToStep", "position": 9, "name": "Membaca Doa Pertolongan Ibadah" },
+        { "@type": "HowToStep", "position": 10, "name": "Membaca Doa Ilmu, Rezeki, dan Amal (Ba'da Subuh)" },
+        { "@type": "HowToStep", "position": 11, "name": "Membaca Doa Berlindung dari Api Neraka" }
+      ]
+    }
+  ]
+};
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalURL={pageUrl}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <Header />
+
+  <main id="main-content" role="main" class="max-w-4xl mx-auto px-4 py-12 sm:py-16 space-y-12">
+    <!-- Breadcrumb Navigasi -->
+    <nav aria-label="Breadcrumb" class="text-xs sm:text-sm text-gray-500">
+      <ol class="flex items-center gap-2 flex-wrap">
+        <li>
+          <a href="/" class="hover:text-emerald-800 transition-colors">Beranda</a>
+        </li>
+        <li aria-hidden="true">/</li>
+        <li>
+          <span class="text-gray-700">Perbaiki Sholat</span>
+        </li>
+        <li aria-hidden="true">/</li>
+        <li class="font-semibold text-emerald-900" aria-current="page">
+          Bab 3 : Zikir
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Header Artikel & H1 -->
+    <header class="space-y-4 text-left">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-xs font-semibold text-emerald-800 border border-emerald-200">
+        <span>Modul Fikih &bull; Bab 3</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight leading-tight">
+        Panduan Zikir Bakda Sholat Sesuai Sunnah Nabi
+      </h1>
+      <p class="text-base sm:text-lg text-gray-600 leading-relaxed">
+        Menyelami fikih, adab, dan tadabbur untaian zikir setelah sholat fardhu sebagai penyempurna ibadah dan perisai jiwa seorang mukmin.
+      </p>
+    </header>
+
+    <!-- Key Takeaways / TL;DR (GEO & AEO Optimization) -->
+    <section class="p-6 sm:p-8 bg-emerald-50/70 rounded-3xl space-y-4 text-left">
+      <h2 class="text-lg font-bold text-emerald-950 flex items-center gap-2">
+        <Icon name="tabler:sparkles" class="w-5 h-5 text-emerald-800" aria-hidden="true" />
+        <span>Poin Inti Zikir Bakda Sholat (TL;DR)</span>
+      </h2>
+      <ul class="space-y-2 text-sm sm:text-base text-gray-700 leading-relaxed list-disc list-inside">
+        <li><strong>Penyempurna Sholat:</strong> Zikir dimulai dengan istighfar 3 kali sebagai wujud pengakuan hamba bahwa sholat yang baru saja ditunaikan masih diliputi kekurangan dan kekhilafan batin.</li>
+        <li><strong>Adab Utama:</strong> Berzikir dengan suara lirih yang didengar sendiri, penuh penghayatan, menghadirkan rasa takut (khauf) dan harap (raja'), serta lisan yang mengucap secara verbal.</li>
+        <li><strong>Jaminan Surga Ayat Kursi:</strong> Rasulullah SAW menjamin bahwa siapa yang merutinkan membaca Ayat Kursi setiap selesai sholat fardhu, tidak ada yang menghalanginya masuk surga kecuali kematian.</li>
+        <li><strong>Benteng Jiwa:</strong> Membaca 3 Surah Perlindungan (Al-Mu'awwidzat) dan zikir 33 kali tasbih, tahmid, serta takbir menggugurkan dosa-dosa hamba bagaikan buih di lautan.</li>
+      </ul>
+    </section>
+
+    <!-- Table of Contents (Daftar Isi Panduan) -->
+    <TableOfContents items={tocItems} />
+
+    <!-- Bagian 1: 8 Adab Berzikir -->
+    <section class="space-y-4 text-left">
+      <h2 id="adab-berzikir" class="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight scroll-mt-24">
+        8 Adab Pokok Berzikir kepada Allah
+      </h2>
+      <p class="text-base text-gray-700 leading-relaxed">
+        Agar zikir menghasilkan ketenangan jiwa dan diangkat sebagai amalan yang makbul di sisi Allah SWT, ada 8 adab pokok yang wajib dijaga:
+      </p>
+
+      <div class="p-6 sm:p-8 bg-white rounded-3xl border border-emerald-100 shadow-sm space-y-3">
+        <ol class="space-y-2.5 text-sm sm:text-base text-gray-700 list-decimal list-inside leading-relaxed marker:text-emerald-700 marker:font-semibold">
+          <li><strong>Menjaga Keikhlasan:</strong> Senantiasa menata hati dan memfokuskan niat semata-mata mengharapkan ridha Allah SWT.</li>
+          <li><strong>Zikir dari Dalam Hati:</strong> Disertai kesadaran penuh dan penghayatan jiwa, bukan sekadar komat-kamit lisan tanpa pemaknaan.</li>
+          <li><strong>Merendahkan Diri (Tadhadhdhu'):</strong> Sadar akan kelemahan dan dosa diri di hadapan keagungan Allah Yang Maha Kuasa.</li>
+          <li><strong>Khawatir dan Berharap:</strong> Merasa cemas amal ibadahnya belum sempurna, sekaligus penuh harap akan ampunan Allah.</li>
+          <li><strong>Suara Pelan dan Lirih:</strong> Membaca zikir dengan suara lembut yang cukup didengar oleh diri sendiri tanpa berteriak (QS. Al-A'raf: 205).</li>
+          <li><strong>Dilafadzkan Secara Verbal:</strong> Zikir lisan harus digerakkan bibir dan lidahnya, tidak cukup hanya diam membatin.</li>
+          <li><strong>Melazimi Setiap Waktu:</strong> Mengisi waktu dengan zikir, terutama saat waktu pagi, petang, dan seusai sholat fardhu.</li>
+          <li><strong>Menjaga Hati dan Lisan dari Kelalaian:</strong> Tidak berzikir sambil melamunkan urusan duniawi yang melalaikan.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Bagian 2: 11 Rangkaian Zikir Bakda Sholat -->
+    <section class="space-y-8 text-left">
+      <div class="space-y-2">
+        <h2 id="rangkaian-zikir-bakda-sholat" class="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight scroll-mt-24">
+          11 Rangkaian Zikir dan Doa Bakda Sholat Fardhu
+        </h2>
+        <p class="text-base text-gray-600 leading-relaxed">
+          Berikut adalah urutan doa dan zikir ma'tsur yang diajarkan Rasulullah SAW setelah salam sholat fardhu, lengkap dengan teks Arab berharakat dan rahasia tadabburnya.
+        </p>
+      </div>
+
+      <!-- Zikir 1: Istighfar -->
+      <article class="p-6 sm:p-8 bg-gray-50/80 rounded-3xl space-y-4">
+        <h3 id="zikir-1-istighfar" class="text-xl sm:text-2xl font-bold text-gray-900 scroll-mt-24">
+          1. Istighfar 3 Kali dan Mengakui Kekurangan Diri
+        </h3>
+        <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
+          Sahabat Tsauban radhiyallahu 'anhu menceritakan bahwa Rasulullah SAW ketika selesai dari sholatnya, beliau langsung beristighfar sebanyak tiga kali:
+        </p>
+
+        <div class="p-5 bg-white rounded-2xl space-y-2 border border-emerald-100 shadow-sm">
+          <p class="text-xs font-semibold text-emerald-800">Lafadz Istighfar (Dibaca 3 Kali):</p>
+          <p dir="rtl" class="font-arabic text-2xl sm:text-3xl leading-loose text-right text-gray-900">
+            أَسْتَغْفِرُ اللهَ
+          </p>
+          <p class="text-xs sm:text-sm text-gray-600 italic">
+            Astaghfirullâh (3 kali)
+          </p>
+          <p class="text-xs sm:text-sm text-gray-800 font-medium">
+            Artinya: &ldquo;Aku memohon ampunan kepada Allah.&rdquo;
+          </p>
+          <p class="text-xs text-emerald-800 font-semibold">HR. Muslim no. 591</p>
+        </div>
+
+        <div class="p-4 bg-emerald-50/70 rounded-2xl text-xs sm:text-sm text-emerald-950 space-y-1">
+          <p class="font-semibold text-emerald-900">Mengapa Beristighfar Setelah Sholat?</p>
+          <p>
+            Imam Muhammad bin 'Allan menjelaskan: Istighfar setelah sholat adalah wujud kerendahan hati. Seorang hamba menyadari bahwa dirinya belum mampu menunaikan hak sholat secara sempurna, sehingga merasa masih banyak kekurangan, pikiran yang melayang, atau kurangnya kekhusyukan.
+          </p>
+        </div>
+      </article>
+
+      <!-- Zikir 2: Allahumma Antas-Salam -->
+      <article class="p-6 sm:p-8 bg-gray-50/80 rounded-3xl space-y-4">
+        <h3 id="zikir-2-antas-salam" class="text-xl sm:text-2xl font-bold text-gray-900 scroll-mt-24">
+          2. Doa Keselamatan (Allahumma Antas-Salam)
+        </h3>
+        <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
+          Setelah beristighfar, sambunglah dengan menyandarkan kesempurnaan hanya kepada Allah yang memiliki nama As-Salam:
+        </p>
+
+        <div class="p-5 bg-white rounded-2xl space-y-2 border border-emerald-100 shadow-sm">
+          <p class="text-xs font-semibold text-emerald-800">Doa As-Salam:</p>
+          <p dir="rtl" class="font-arabic text-xl sm:text-2xl leading-loose text-right text-gray-900">
+            اللَّهُمَّ أَنْتَ السَّلَامُ وَمِنْكَ السَّلَامُ، تَبَارَكْتَ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ
+          </p>
+          <p class="text-xs sm:text-sm text-gray-600 italic">
+            Allâhumma antas-salâm wa minkas-salâm, tabârakta yâ dzal-jalâli wal-ikrâm.
+          </p>
+          <p class="text-xs sm:text-sm text-gray-800 font-medium">
+            Artinya: &ldquo;Ya Allah, Engkau adalah Dzat yang memberi keselamatan dan dari-Mu lah datangnya segala keselamatan. Maha Suci Engkau, wahai Dzat Pemilik Keagungan dan Kemuliaan.&rdquo;
+          </p>
+          <p class="text-xs text-emerald-800 font-semibold">HR. Muslim no. 591</p>
+        </div>
+
+        <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+          <strong>Tadabbur Makna:</strong> <em>Anta As-Salam</em> bermakna Allah Maha Selamat dari segala cacat dan kekurangan. <em>Wa minkas-salam</em> merupakan pengakuan bahwa diterimanya sholat kita dan dijauhkannya kita dari siksa neraka adalah murni karunia keselamatan dari Allah SWT.
+        </p>
+      </article>
+
+      <!-- Zikir 3: Tauhid dan Kepasrahan -->
+      <article class="p-6 sm:p-8 bg-gray-50/80 rounded-3xl space-y-4">
+        <h3 id="zikir-3-tauhid" class="text-xl sm:text-2xl font-bold text-gray-900 scroll-mt-24">
+          3. Penegasan Tauhid dan Kepasrahan Mutlak
+        </h3>
+        <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
+          Membaca zikir tauhid yang menegaskan bahwa segala wujud kerajaan dan kepemilikan mutlak di alam semesta hanyalah milik Allah semata:
+        </p>
+
+        <div class="p-5 bg-white rounded-2xl space-y-2 border border-emerald-100 shadow-sm">
+          <p class="text-xs font-semibold text-emerald-800">Lafadz Zikir Tauhid dan Takdir:</p>
+          <p dir="rtl" class="font-arabic text-xl sm:text-2xl leading-loose text-right text-gray-900">
+            لَا إِلٰهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ، اللَّهُمَّ لَا مَانِعَ لِمَا أَعْطَيْتَ، وَلَا مُعْطِيَ لِمَا مَنَعْتَ، وَلَا يَنْفَعُ ذَا الْجَدِّ مِنْكَ الْجَدُّ
+          </p>
+          <p class="text-xs sm:text-sm text-gray-600 italic">
+            Lâ ilâha illallâhu wahdahû lâ syarîka lah, lahul-mulku wa lahul-hamdu wa huwa 'alâ kulli syai-in qadîr. Allâhumma lâ mâni'a limâ a'thaita, wa lâ mu'thiya limâ mana'ta, wa lâ yanfa'u dzal-jaddi minkal-jaddu.
+          </p>
+          <p class="text-xs sm:text-sm text-gray-800 font-medium">
+            Artinya: &ldquo;Tiada sesembahan yang berhak disembah selain Allah Yang Maha Esa, tiada sekutu bagi-Nya. Milik-Nya lah segala kerajaan dan milik-Nya lah segala pujian, dan Dia Maha Kuasa atas segala sesuatu. Ya Allah, tiada yang mampu menghalangi apa yang Engkau berikan, dan tiada yang mampu memberi apa yang Engkau halangi, dan tidak bermanfaat kemuliaan serta kekayaan seseorang di hadapan-Mu (karena dari-Mu lah datangnya segala kemuliaan).&rdquo;
+          </p>
+          <p class="text-xs text-emerald-800 font-semibold">HR. Bukhari no. 844 dan Muslim no. 593</p>
+        </div>
+
+        <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+          Ibnu Qayyim Al-Jauziyyah dalam <em>Thariqul Hijratain</em> menerangkan bahwa <em>al-mulku</em> (kerajaan) dan <em>al-hamdu</em> (pujian) tidak dapat dipisahkan. Semua yang Allah takdirkan berjalan dalam kekuasaan-Nya sekaligus mencerminkan sifat terpuji-Nya yang penuh hikmah.
+        </p>
+      </article>
+
+      <!-- Zikir 4: Hauqalah -->
+      <article class="p-6 sm:p-8 bg-gray-50/80 rounded-3xl space-y-4">
+        <h3 id="zikir-4-hauqalah" class="text-xl sm:text-2xl font-bold text-gray-900 scroll-mt-24">
+          4. Zikir Hauqalah (Tanaman Surga dan Pemurni Ibadah)
+        </h3>
+        <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
+          Sahabat Abdullah bin Az-Zubair radhiyallahu 'anhuma melafadzkan kalimat tahlil dan hauqalah ini di setiap akhir sholat setelah salam:
+        </p>
+
+        <div class="p-5 bg-white rounded-2xl space-y-2 border border-emerald-100 shadow-sm">
+          <p class="text-xs font-semibold text-emerald-800">Lafadz Zikir Hauqalah Lengkap:</p>
+          <p dir="rtl" class="font-arabic text-xl sm:text-2xl leading-loose text-right text-gray-900">
+            لَا إِلٰهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ، لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللهِ، لَا إِلٰهَ إِلَّا اللهُ وَلَا نَعْبُدُ إِلَّا إِيَّاهُ، لَهُ النِّعْمَةُ وَلَهُ الْفَضْلُ وَلَهُ الثَّنَاءُ الْحَسَنُ، لَا إِلٰهَ إِلَّا اللهُ مُخْلِصِينَ لَهُ الدِّينَ وَلَوْ كَرِهَ الْكَافِرُونَ
+          </p>
+          <p class="text-xs sm:text-sm text-gray-600 italic">
+            Lâ ilâha illallâhu wahdahû lâ syarîka lah, lahul-mulku wa lahul-hamdu wa huwa 'alâ kulli syai-in qadîr. Lâ haula wa lâ quwwata illâ billâh. Lâ ilâha illallâhu wa lâ na'budu illâ iyyâh, lahun-ni'matu wa lahul-fadhlu wa lahuts-tsanâ-ul-hasan. Lâ ilâha illallâhu mukhlishîna lahud-dîna walau karihal-kâfirûn.
+          </p>
+          <p class="text-xs sm:text-sm text-gray-800 font-medium">
+            Artinya: &ldquo;Tiada sesembahan yang berhak disembah selain Allah Yang Maha Esa, tiada sekutu bagi-Nya. Bagi-Nya segala kerajaan dan pujian, dan Dia Maha Kuasa atas segala sesuatu. Tiada daya dan kekuatan melainkan dengan pertolongan Allah. Tiada sesembahan yang berhak disembah selain Allah, dan kami tidak beribadah melainkan hanya kepada-Nya. Bagi-Nya segala kenikmatan, karunia, dan sanjungan yang indah. Tiada sesembahan selain Allah, kami memurnikan ketaatan beragama hanya untuk-Nya meskipun orang-orang kafir membencinya.&rdquo;
+          </p>
+          <p class="text-xs text-emerald-800 font-semibold">HR. Muslim no. 594</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-gray-700">
+          <div class="p-4 bg-white rounded-2xl border border-gray-100 shadow-sm space-y-1">
+            <span class="font-bold text-emerald-900">Harta Simpanan Surga:</span>
+            <p>Hauqalah adalah harta karun simpanan di bawah Arsy surga (HR. Bukhari & Muslim).</p>
+          </div>
+          <div class="p-4 bg-white rounded-2xl border border-gray-100 shadow-sm space-y-1">
+            <span class="font-bold text-emerald-900">Tanaman Surga:</span>
+            <p>Nabi Ibrahim AS berpesan kepada Nabi SAW agar umatnya memperbanyak tanaman surga ini (HR. Ibnu Hibban).</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Zikir 5: Ubudiyah I'tiraf -->
+      <article class="p-6 sm:p-8 bg-gray-50/80 rounded-3xl space-y-4">
+        <h3 id="zikir-5-itiraf" class="text-xl sm:text-2xl font-bold text-gray-900 scroll-mt-24">
+          5. Ubudiyah I'tiraf (Pengakuan atas Dosa-Dosa)
+        </h3>
+        <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
+          Mengakui kesalahan (<em>i'tiraf</em>) di hadapan Allah SWT adalah pintu pembuka taubat nasuha. Orang yang tulus mengakui kelemahan dirinya akan dijauhkan dari penyakit hati yang bebal dan sombong:
+        </p>
+
+        <div class="p-5 bg-white rounded-2xl space-y-2 border border-emerald-100 shadow-sm">
+          <p class="text-xs font-semibold text-emerald-800">Doa I'tiraf Rasulullah SAW:</p>
+          <p dir="rtl" class="font-arabic text-xl sm:text-2xl leading-loose text-right text-gray-900">
+            اللَّهُمَّ اغْفِرْ لِي مَا قَدَّمْتُ وَمَا أَخَّرْتُ، وَمَا أَسْرَرْتُ وَمَا أَعْلَنْتُ، وَمَا أَسْرَفْتُ، وَمَا أَنْتَ أَعْلَمُ بِهِ مِنِّي، أَنْتَ الْمُقَدِّمُ وَأَنْتَ الْمُؤَخِّرُ، لَا إِلٰهَ إِلَّا أَنْتَ
+          </p>
+          <p class="text-xs sm:text-sm text-gray-600 italic">
+            Allâhummaghfir lî mâ qaddamtu wa mâ akhkhartu, wa mâ asrartu wa mâ a'lantu, wa mâ asraftu, wa mâ anta a'lamu bihî minnî. Antal-muqaddimu wa antal-mu-akhkhiru, lâ ilâha illâ anta.
+          </p>
+          <p class="text-xs sm:text-sm text-gray-800 font-medium">
+            Artinya: &ldquo;Ya Allah, ampunilah dosa-dosaku yang telah lalu dan yang akan datang, apa yang aku rahasiakan dan apa yang aku tampakkan, perbuatanku yang melampaui batas, serta dosa-dosa yang Engkau lebih ketahui daripada diriku sendiri. Engkau Yang Mendahulukan dan Engkau Yang Mengakhirkan, tiada sesembahan yang berhak disembah selain Engkau.&rdquo;
+          </p>
+          <p class="text-xs text-emerald-800 font-semibold">HR. Muslim no. 771</p>
+        </div>
+      </article>
+
+      <!-- Zikir 6: Empat Kalimat Terbaik -->
+      <article class="p-6 sm:p-8 bg-gray-50/80 rounded-3xl space-y-4">
+        <h3 id="zikir-6-empat-kalimat" class="text-xl sm:text-2xl font-bold text-gray-900 scroll-mt-24">
+          6. Empat Kalimat Terbaik (Tasbih, Tahmid, Takbir, dan Tahlil)
+        </h3>
+        <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
+          Rasulullah SAW bersabda: <em>&ldquo;Barang siapa bertasbih 33 kali, bertahmid 33 kali, dan bertakbir 33 kali, lalu menggenapkannya menjadi 100 dengan membaca kalimat tahlil, maka diampuni dosa-dosanya meskipun sebanyak buih di lautan.&rdquo;</em> (HR. Muslim no. 597).
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="p-5 bg-white rounded-2xl border border-emerald-100 shadow-sm space-y-2 text-center">
+            <span class="text-xs font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-800">1. Tasbih (33x)</span>
+            <p dir="rtl" class="font-arabic text-2xl leading-loose text-gray-900">سُبْحَانَ اللهِ</p>
+            <p class="text-xs text-gray-600 italic">Subhânallâh</p>
+            <p class="text-xs text-gray-800 font-medium">Maha Suci Allah</p>
+          </div>
+          <div class="p-5 bg-white rounded-2xl border border-emerald-100 shadow-sm space-y-2 text-center">
+            <span class="text-xs font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-800">2. Tahmid (33x)</span>
+            <p dir="rtl" class="font-arabic text-2xl leading-loose text-gray-900">الْحَمْدُ لِلَّهِ</p>
+            <p class="text-xs text-gray-600 italic">Al-hamdulillâh</p>
+            <p class="text-xs text-gray-800 font-medium">Segala puji bagi Allah</p>
+          </div>
+          <div class="p-5 bg-white rounded-2xl border border-emerald-100 shadow-sm space-y-2 text-center">
+            <span class="text-xs font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-800">3. Takbir (33x)</span>
+            <p dir="rtl" class="font-arabic text-2xl leading-loose text-gray-900">اللهُ أَكْبَرُ</p>
+            <p class="text-xs text-gray-600 italic">Allâhu Akbar</p>
+            <p class="text-xs text-gray-800 font-medium">Allah Maha Besar</p>
+          </div>
+        </div>
+
+        <div class="p-5 bg-white rounded-2xl space-y-2 border border-emerald-100 shadow-sm">
+          <p class="text-xs font-semibold text-emerald-800">Penyempurna Bacaan ke-100 (Tahlil):</p>
+          <p dir="rtl" class="font-arabic text-xl sm:text-2xl leading-loose text-right text-gray-900">
+            لَا إِلٰهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ
+          </p>
+          <p class="text-xs sm:text-sm text-gray-600 italic">
+            Lâ ilâha illallâhu wahdahû lâ syarîka lah, lahul-mulku wa lahul-hamdu wa huwa 'alâ kulli syai-in qadîr.
+          </p>
+        </div>
+      </article>
+
+      <!-- Zikir 7: Ayat Kursi -->
+      <article class="p-6 sm:p-8 bg-gray-50/80 rounded-3xl space-y-4">
+        <h3 id="zikir-7-ayat-kursi" class="text-xl sm:text-2xl font-bold text-gray-900 scroll-mt-24">
+          7. Isti'adzah: Membaca Ayat Kursi
+        </h3>
+        <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
+          Ayat Kursi (QS. Al-Baqarah: 255) adalah ayat paling agung di dalam Al-Qur'an. Rasulullah SAW bersabda: <em>&ldquo;Siapa yang membaca Ayat Kursi setiap selesai sholat fardhu, tidak ada yang menghalanginya masuk surga kecuali kematian.&rdquo;</em> (HR. An-Nasa'i dan Ibnu Hibban, dishahihkan Al-Albani).
+        </p>
+
+        <div class="p-5 bg-white rounded-2xl space-y-3 border border-emerald-100 shadow-sm">
+          <p class="text-xs font-semibold text-emerald-800">Ayat Kursi (QS. Al-Baqarah: 255):</p>
+          <p dir="rtl" class="font-arabic text-xl sm:text-2xl leading-loose text-right text-gray-900">
+            اللَّهُ لَا إِلٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ
+          </p>
+          <p class="text-xs sm:text-sm text-gray-600 italic leading-relaxed">
+            Allâhu lâ ilâha illâ huwal-hayyul-qayyûm, lâ ta'khudzuhû sinatuw-wa lâ na'ûm, lahû mâ fis-samâwâti wa mâ fil-ardh, man dzalladzî yasyfa'u 'indahû illâ bi-idznih, ya'lamu mâ baina aidîhim wa mâ khalfahum, wa lâ yuhîthûna bisyai-im min 'ilmihî illâ bimâ syâ', wasi'a kursiyyuhus-samâwâti wal-ardh, wa lâ ya-ûduhû hifzhuhumâ, wa huwal-'aliyyul-'azhîm.
+          </p>
+          <div class="pt-2 border-t border-emerald-100/70">
+            <p class="text-xs sm:text-sm text-gray-800 font-medium leading-relaxed">
+              Artinya: &ldquo;Allah, tidak ada sesembahan yang berhak disembah melainkan Dia Yang Hidup Kekal lagi terus-menerus mengurus makhluk-Nya; tidak mengantuk dan tidak tidur. Milik-Nya apa yang di langit dan di bumi. Tiada yang dapat memberi syafaat di sisi Allah tanpa izin-Nya. Allah mengetahui apa-apa yang di hadapan mereka dan di belakang mereka, dan mereka tidak mengetahui apa-apa dari ilmu Allah melainkan apa yang dikehendaki-Nya. Kursi Allah meliputi langit dan bumi. Dan Allah tidak merasa berat memelihara keduanya, dan Allah Maha Tinggi lagi Maha Besar.&rdquo;
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Zikir 8: Al-Mu'awwidzat -->
+      <article class="p-6 sm:p-8 bg-gray-50/80 rounded-3xl space-y-4">
+        <h3 id="zikir-8-surah-perlindungan" class="text-xl sm:text-2xl font-bold text-gray-900 scroll-mt-24">
+          8. Membaca Surah Perlindungan (Al-Ikhlas, Al-Falaq, An-Nas)
+        </h3>
+        <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
+          Sahabat 'Uqbah bin 'Amir radhiyallahu 'anhu berkata: <em>&ldquo;Rasulullah SAW memerintahkanku membaca surah-surah perlindungan (Al-Mu'awwidzat) di setiap akhir sholat.&rdquo;</em> (HR. Abu Daud no. 1523 dan At-Tirmidzi no. 2903).
+        </p>
+
+        <!-- Al-Ikhlas -->
+        <div class="p-5 bg-white rounded-2xl space-y-2 border border-emerald-100 shadow-sm">
+          <span class="text-xs font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-800">Surah Al-Ikhlas</span>
+          <p dir="rtl" class="font-arabic text-xl sm:text-2xl leading-loose text-right text-gray-900">
+            قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ
+          </p>
+          <p class="text-xs sm:text-sm text-gray-800 font-medium">
+            Artinya: &ldquo;Katakanlah: Dialah Allah, Yang Maha Esa. Allah tempat bergantung segala sesuatu. Dia tidak beranak dan tidak pula diperanakkan. Dan tidak ada seorang pun yang setara dengan Dia.&rdquo;
+          </p>
+        </div>
+
+        <!-- Al-Falaq -->
+        <div class="p-5 bg-white rounded-2xl space-y-2 border border-emerald-100 shadow-sm">
+          <span class="text-xs font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-800">Surah Al-Falaq</span>
+          <p dir="rtl" class="font-arabic text-xl sm:text-2xl leading-loose text-right text-gray-900">
+            قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ۝ مِنْ شَرِّ مَا خَلَقَ ۝ وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ ۝ وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ۝ وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ
+          </p>
+          <p class="text-xs sm:text-sm text-gray-800 font-medium">
+            Artinya: &ldquo;Katakanlah: Aku berlindung kepada Rabb yang menguasai waktu subuh, dari kejahatan makhluk yang Dia ciptakan, dari kejahatan malam apabila telah gelap gulita, dari kejahatan tukang sihir yang meniup buhul-buhulnya, dan dari kejahatan orang yang dengki apabila ia dengki.&rdquo;
+          </p>
+        </div>
+
+        <!-- An-Nas -->
+        <div class="p-5 bg-white rounded-2xl space-y-2 border border-emerald-100 shadow-sm">
+          <span class="text-xs font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-800">Surah An-Nas</span>
+          <p dir="rtl" class="font-arabic text-xl sm:text-2xl leading-loose text-right text-gray-900">
+            قُلْ أَعُوذُ بِرَبِّ النَّاسِ ۝ مَلِكِ النَّاسِ ۝ إِلَٰهِ النَّاسِ ۝ مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ۝ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ۝ مِنَ الْجِنَّةِ وَالنَّاسِ
+          </p>
+          <p class="text-xs sm:text-sm text-gray-800 font-medium">
+            Artinya: &ldquo;Katakanlah: Aku berlindung kepada Rabb manusia, Raja manusia, Sesembahan manusia, dari kejahatan bisikan setan yang bersembunyi, yang membisikkan kejahatan ke dalam dada manusia, dari golongan jin dan manusia.&rdquo;
+          </p>
+        </div>
+      </article>
+
+      <!-- Zikir 9: Tiga Permintaan untuk Akhirat -->
+      <article class="p-6 sm:p-8 bg-gray-50/80 rounded-3xl space-y-4">
+        <h3 id="zikir-9-doa-akhirat" class="text-xl sm:text-2xl font-bold text-gray-900 scroll-mt-24">
+          9. Tiga Permintaan untuk Akhirat (Bimbingan Ibadah dan Syukur)
+        </h3>
+        <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
+          Rasulullah SAW berpesan khusus kepada Mu'adz bin Jabal RA: <em>&ldquo;Wahai Mu'adz, demi Allah aku mencintaimu. Jangan sekali-kali engkau tinggalkan di setiap akhir sholat untuk mengucapkan doa ini:&rdquo;</em>
+        </p>
+
+        <div class="p-5 bg-white rounded-2xl space-y-2 border border-emerald-100 shadow-sm">
+          <p class="text-xs font-semibold text-emerald-800">Doa Pertolongan Zikir, Syukur, dan Ibadah:</p>
+          <p dir="rtl" class="font-arabic text-xl sm:text-2xl leading-loose text-right text-gray-900">
+            رَبِّ أَعِنِّي عَلَىٰ ذِكْرِكَ وَشُكْرِكَ وَحُسْنِ عِبَادَتِكَ
+          </p>
+          <p class="text-xs sm:text-sm text-gray-600 italic">
+            Rabbi a'innî 'alâ dzikrika wa syukrika wa husni 'ibâdatika.
+          </p>
+          <p class="text-xs sm:text-sm text-gray-800 font-medium">
+            Artinya: &ldquo;Wahai Rabbku, tolonglah aku untuk senantiasa berzikir mengingat-Mu, bersyukur kepada-Mu, dan memperbagus ibadah kepada-Mu.&rdquo;
+          </p>
+          <p class="text-xs text-emerald-800 font-semibold">HR. Abu Daud no. 1522 dan Ibnu Hibban no. 2020</p>
+        </div>
+      </article>
+
+      <!-- Zikir 10: Tiga Permintaan Utama di Dunia (Ba'da Subuh) -->
+      <article class="p-6 sm:p-8 bg-gray-50/80 rounded-3xl space-y-4">
+        <h3 id="zikir-10-doa-dunia" class="text-xl sm:text-2xl font-bold text-gray-900 scroll-mt-24">
+          10. Tiga Permintaan Utama di Dunia (Khusus Ba'da Sholat Subuh)
+        </h3>
+        <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
+          Ummu Salamah radhiyallahu 'anha meriwayatkan bahwa Rasulullah SAW ketika selesai salam dari sholat Subuh membaca doa memohon 3 bekal kehidupan di dunia:
+        </p>
+
+        <div class="p-5 bg-white rounded-2xl space-y-2 border border-emerald-100 shadow-sm">
+          <p class="text-xs font-semibold text-emerald-800">Doa Ba'da Subuh (Ilmu, Rezeki, Amal):</p>
+          <p dir="rtl" class="font-arabic text-xl sm:text-2xl leading-loose text-right text-gray-900">
+            اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا وَرِزْقًا طَيِّبًا وَعَمَلًا مُتَقَبَّلًا
+          </p>
+          <p class="text-xs sm:text-sm text-gray-600 italic">
+            Allâhumma innî as-aluka 'ilman nâfi'â, wa rizqan thayyibâ, wa 'amalan mutaqabbalâ.
+          </p>
+          <p class="text-xs sm:text-sm text-gray-800 font-medium">
+            Artinya: &ldquo;Ya Allah, sesungguhnya aku memohon kepada-Mu ilmu yang bermanfaat, rezeki yang halal lagi baik, dan amal ibadah yang diterima.&rdquo;
+          </p>
+          <p class="text-xs text-emerald-800 font-semibold">HR. Ahmad no. 26521 dan Ibnu Majah no. 925</p>
+        </div>
+      </article>
+
+      <!-- Zikir 11: Doa Perlindungan Siksa Neraka -->
+      <article class="p-6 sm:p-8 bg-gray-50/80 rounded-3xl space-y-4">
+        <h3 id="zikir-11-siksa-neraka" class="text-xl sm:text-2xl font-bold text-gray-900 scroll-mt-24">
+          11. Doa Perlindungan dari Siksa Neraka
+        </h3>
+        <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
+          Rasa takut akan azab neraka adalah dorongan terkuat seorang hamba untuk menjaga keistiqamahan ibadahnya:
+        </p>
+
+        <div class="p-5 bg-white rounded-2xl space-y-2 border border-emerald-100 shadow-sm">
+          <p class="text-xs font-semibold text-emerald-800">Doa Memohon Perlindungan Azab Hari Berbangkit:</p>
+          <p dir="rtl" class="font-arabic text-xl sm:text-2xl leading-loose text-right text-gray-900">
+            رَبِّ قِنِي عَذَابَكَ يَوْمَ تَبْعَثُ عِبَادَكَ
+          </p>
+          <p class="text-xs sm:text-sm text-gray-600 italic">
+            Rabbi qinî 'adzâbaka yauma tab'atsu 'ibâdaka.
+          </p>
+          <p class="text-xs sm:text-sm text-gray-800 font-medium">
+            Artinya: &ldquo;Wahai Rabbku, lindungilah aku dari siksa-Mu pada hari ketika Engkau membangkitkan hamba-hamba-Mu.&rdquo;
+          </p>
+          <p class="text-xs text-emerald-800 font-semibold">HR. Muslim no. 709</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- Bagian 3: FAQ Seputar Zikir -->
+    <section class="space-y-6 text-left">
+      <h2 id="faq-seputar-zikir" class="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight scroll-mt-24">
+        Tanya Jawab Seputar Zikir Bakda Sholat (FAQ)
+      </h2>
+
+      <div class="space-y-4">
+        <div class="p-6 bg-white rounded-2xl border border-gray-100 shadow-sm space-y-2">
+          <h3 class="text-base sm:text-lg font-bold text-gray-900">
+            Apakah berzikir setelah sholat harus dibaca secara bersuara keras atau lirih?
+          </h3>
+          <p class="text-sm text-gray-700 leading-relaxed">
+            Sunnah asalnya adalah dibaca secara lirih (sirr) yang didengar oleh diri sendiri. Namun bagi imam masjid, diperbolehkan sesekali mengeraskan suaranya dengan tujuan mengajarkan lafadz dan urutan zikir kepada makmum.
+          </p>
+        </div>
+
+        <div class="p-6 bg-white rounded-2xl border border-gray-100 shadow-sm space-y-2">
+          <h3 class="text-base sm:text-lg font-bold text-gray-900">
+            Apakah lebih utama menghitung tasbih dengan ruas jari tangan atau tasbih butir?
+          </h3>
+          <p class="text-sm text-gray-700 leading-relaxed">
+            Menghitung tasbih dengan ruas jemari tangan kanan adalah sunnah yang paling utama (afdal) karena jari-jemari kelak akan bersaksi dan berbicara di hari kiamat (HR. Abu Daud & At-Tirmidzi). Menggunakan tasbih butir diperbolehkan sebagai sarana penghitung selama tidak menimbulkan riya'.
+          </p>
+        </div>
+
+        <div class="p-6 bg-white rounded-2xl border border-gray-100 shadow-sm space-y-2">
+          <h3 class="text-base sm:text-lg font-bold text-gray-900">
+            Bolehkah langsung berdiri sholat sunnah bakdiyah tanpa berzikir terlebih dahulu?
+          </h3>
+          <p class="text-sm text-gray-700 leading-relaxed">
+            Boleh dan sholat sunnahnya tetap sah, namun sangat disayangkan karena melewatkan fadhilah agung zikir bakda sholat fardhu (seperti jaminan surga membaca Ayat Kursi dan penghapusan dosa dengan tasbih 33 kali).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigasi Modul Selesai -->
+    <section class="p-8 sm:p-10 bg-emerald-900 text-white rounded-3xl text-left space-y-4">
+      <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">
+        Alhamdulillah, Panduan Lengkap Selesai!
+      </h2>
+      <p class="text-emerald-100 text-sm sm:text-base leading-relaxed max-w-2xl">
+        Kamu telah menyelesaikan seluruh trilogi modul fikih: Bab 1 (Wudhu), Bab 2 (Sholat), dan Bab 3 (Zikir). Mari kita amalkan secara istiqamah agar sholat kita semakin sempurna dan khusyuk.
+      </p>
+      <div class="pt-2 flex flex-wrap items-center gap-4">
+        <a
+          href="/perbaiki-sholat/sholat"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-emerald-800 text-white rounded-xl font-semibold text-sm hover:bg-emerald-700 transition-colors"
+        >
+          <Icon name="tabler:arrow-left" class="w-4 h-4" />
+          <span>Kembali ke Bab 2 : Sholat</span>
+        </a>
+        <a
+          href="/jadwal-sholat"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-amber-400 text-gray-950 rounded-xl font-semibold text-sm hover:bg-amber-300 transition-colors"
+        >
+          <span>Lihat Jadwal Sholat Terkini</span>
+          <Icon name="tabler:arrow-right" class="w-4 h-4" />
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
